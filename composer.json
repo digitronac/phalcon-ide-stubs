@@ -1,0 +1,10 @@
+{
+	"name": "digitronac/phalcon-ide-stubs",
+	"description": "stubs copied from phalcon-devtools, sorted by tags, for easier ide inclusion",
+	"license": "BSD-3-Clause",
+	"config": 
+	{
+		"github-protocols": ["https"],
+		"process-timeout": 600
+	}
+}
