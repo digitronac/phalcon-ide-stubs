@@ -21,7 +21,7 @@ namespace Phalcon\Mvc\Collection {
 	 * </code>
 	 */
 	
-	class Manager implements \Phalcon\DI\InjectionAwareInterface, \Phalcon\Events\EventsAwareInterface {
+	class Manager implements \Phalcon\DI\InjectionAwareInterface, \Phalcon\Events\EventsAwareInterface, \Phalcon\Mvc\Collection\ManagerInterface {
 
 		protected $_dependencyInjector;
 
@@ -143,7 +143,7 @@ namespace Phalcon\Mvc\Collection {
 		 * Returns the connection related to a model
 		 *
 		 * @param \Phalcon\Mvc\CollectionInterface $model
-		 * @return \Phalcon\Db\AdapterInterface
+		 * @return \Phalcon\Db\AdapterInterface(?) MongoDB
 		 */
 		public function getConnection($model){ }
 

@@ -43,7 +43,7 @@ namespace Phalcon\Mvc {
 		 * @param \Phalcon\DiInterface $dependencyInjector
 		 * @param \Phalcon\Mvc\Collection\ManagerInterface $modelsManager
 		 */
-		final public function __construct($dependencyInjector=null, $modelsManager=null){ }
+		final public function __construct($dependencyInjector=null){ }
 
 
 		/**
@@ -83,7 +83,7 @@ namespace Phalcon\Mvc {
 		 *
 		 * @param \Phalcon\Events\ManagerInterface $eventsManager
 		 */
-		protected function setEventsManager(){ }
+		protected function setEventsManager($eventsManager){ }
 
 
 		/**
@@ -379,7 +379,7 @@ namespace Phalcon\Mvc {
 
 
 		/**
-		 * Creates/Updates a collection based on the values in the atributes
+		 * Creates/Updates a collection based on the values in the attributes
 		 *
 		 * @return boolean
 		 */
@@ -542,7 +542,24 @@ namespace Phalcon\Mvc {
 		 *
 		 * @param string $data
 		 */
-		public function unserialize($data){ }
+		public function unserialize($serialized=null){ }
+
+
+		/**
+		 * Runs JavaScript code on the database server.
+		 *
+		 * <code>
+		 *
+		 * $ret = Robots::execute("function() { return 'Hello, world!';}");
+		 * echo $ret['retval'], "\n";
+		 *
+		 * </code>
+		 *
+		 * @param mixed $code
+		 * @param array $args
+		 * @return array
+		 */
+		public static function execute($code, $args=null){ }
 
 	}
 }

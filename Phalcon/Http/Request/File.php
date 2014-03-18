@@ -36,6 +36,8 @@ namespace Phalcon\Http\Request {
 
 		protected $_type;
 
+		protected $_real_type;
+
 		protected $_error;
 
 		protected $_key;
@@ -45,7 +47,7 @@ namespace Phalcon\Http\Request {
 		 *
 		 * @param array $file
 		 */
-		public function __construct($file, $key=null){ }
+		public function __construct($file){ }
 
 
 		/**
@@ -65,7 +67,7 @@ namespace Phalcon\Http\Request {
 
 
 		/**
-		 * Returns the temporal name of the uploaded file
+		 * Returns the temporary name of the uploaded file
 		 *
 		 * @return string
 		 */
@@ -84,7 +86,6 @@ namespace Phalcon\Http\Request {
 		/**
 		 * Gets the real mime type of the upload file using finfo
 		 *
-		 * @todo Not implemented
 		 * @return string
 		 */
 		public function getRealType(){ }
@@ -106,6 +107,11 @@ namespace Phalcon\Http\Request {
 		public function getKey(){ }
 
 
+		/**
+		 * Checks whether the file has been uploaded via Post.
+		 *
+		 * @return boolean
+		 */
 		public function isUploadedFile(){ }
 
 
@@ -118,7 +124,7 @@ namespace Phalcon\Http\Request {
 		public function moveTo($destination){ }
 
 
-		public static function __set_state($file, $key=null){ }
+		public static function __set_state($params){ }
 
 	}
 }

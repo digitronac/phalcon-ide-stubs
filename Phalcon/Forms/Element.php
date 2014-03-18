@@ -8,7 +8,7 @@ namespace Phalcon\Forms {
 	 * This is a base class for form elements
 	 */
 	
-	abstract class Element {
+	abstract class Element implements \Phalcon\Forms\ElementInterface {
 
 		protected $_form;
 
@@ -230,7 +230,7 @@ namespace Phalcon\Forms {
 		 *
 		 * @return string
 		 */
-		public function label(){ }
+		public function label($attributes){ }
 
 
 		/**
@@ -303,7 +303,7 @@ namespace Phalcon\Forms {
 
 
 		/**
-		 * Magic method __toString renders the widget without atttributes
+		 * Magic method __toString renders the widget without attributes
 		 *
 		 * @return string
 		 */

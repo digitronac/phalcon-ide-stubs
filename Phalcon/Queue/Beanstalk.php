@@ -33,6 +33,7 @@ namespace Phalcon\Queue {
 		 *
 		 * @param string $data
 		 * @param array $options
+		 * @return string|boolean
 		 */
 		public function put($data, $options=null){ }
 
@@ -40,7 +41,7 @@ namespace Phalcon\Queue {
 		/**
 		 * Reserves a job in the queue
 		 *
-		 * @return boolean|Phalcon\Queue\Beanstalk\Job
+		 * @return boolean|\Phalcon\Queue\Beanstalk\Job
 		 */
 		public function reserve($timeout=null){ }
 
@@ -66,9 +67,25 @@ namespace Phalcon\Queue {
 		/**
 		 * Inspect the next ready job.
 		 *
-		 * @return boolean|Phalcon\Queue\Beanstalk\Job
+		 * @return boolean|\Phalcon\Queue\Beanstalk\Job
 		 */
 		public function peekReady(){ }
+
+
+		/**
+		 * Return the delayed job with the shortest delay left
+		 *
+		 * @return boolean|Phalcon\Queue\Beanstalk\Job
+		 */
+		public function peekDelayed(){ }
+
+
+		/**
+		 * Return the next job in the list of buried jobs
+		 *
+		 * @return boolean|Phalcon\Queue\Beanstalk\Job
+		 */
+		public function peekBuried(){ }
 
 
 		/**
@@ -104,6 +121,12 @@ namespace Phalcon\Queue {
 		 * @return boolean
 		 */
 		public function disconnect(){ }
+
+
+		public function __sleep(){ }
+
+
+		public function __wakeup(){ }
 
 	}
 }

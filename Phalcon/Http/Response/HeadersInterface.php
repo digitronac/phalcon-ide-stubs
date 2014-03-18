@@ -50,12 +50,11 @@ namespace Phalcon\Http\Response {
 
 
 		/**
-		 * Restore a \Phalcon\Http\Response\Headers object
+		 * Returns the current headers as an array
 		 *
-		 * @param array $data
-		 * @return \Phalcon\Http\Response\HeadersInterface
+		 * @return array
 		 */
-		public static function __set_state($data);
+		public function toArray();
 
 	}
 }

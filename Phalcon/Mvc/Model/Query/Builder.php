@@ -48,6 +48,8 @@ namespace Phalcon\Mvc\Model\Query {
 
 		protected $_bindTypes;
 
+		protected $_distinct;
+
 		protected $_hiddenParamNumber;
 
 		/**
@@ -57,12 +59,20 @@ namespace Phalcon\Mvc\Model\Query {
 		 * $params = array(
 		 *    'models'     => array('Users'),
 		 *    'columns'    => array('id', 'name', 'status'),
-		 *    'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
+		 *    'conditions' => array(
+		 *        array(
+		 *            "created > :min: AND created < :max:",
+		 *            array("min" => '2013-01-01',   'max' => '2014-01-01'),
+		 *            array("min" => PDO::PARAM_STR, 'max' => PDO::PARAM_STR),
+		 *        ),
+		 *    ),
+		 *    // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
 		 *    'group'      => array('id', 'name'),
 		 *    'having'     => "name = 'Kamil'",
 		 *    'order'      => array('name', 'id'),
 		 *    'limit'      => 20,
 		 *    'offset'     => 20,
+		 *    // or 'limit' => array(20, 20),
 		 *);
 		 *$queryBuilder = new \Phalcon\Mvc\Model\Query\Builder($params);
 		 *</code> 
@@ -70,7 +80,24 @@ namespace Phalcon\Mvc\Model\Query {
 		 * @param array $params
 		 * @param \Phalcon\DI $dependencyInjector
 		 */
-		public function __construct($params=null, $dependencyInjector=null){ }
+		public function __construct($params=null){ }
+
+
+		/**
+		 * Sets SELECT DISTINCT / SELECT ALL flag
+		 *
+		 * @param bool|null distinct
+		 * @return \Phalcon\Mvc\Model\Query\BuilderInterface
+		 */
+		public function distinct($distinct){ }
+
+
+		/**
+		 * Returns SELECT DISTINCT / SELECT ALL flag
+		 *
+		 * @return bool
+		 */
+		public function getDistinct(){ }
 
 
 		/**
@@ -163,7 +190,7 @@ namespace Phalcon\Mvc\Model\Query {
 		 * @param string $type
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
-		public function join($model, $conditions=null, $alias=null, $type=null){ }
+		public function join($model, $conditions=null, $alias=null){ }
 
 
 		/**
@@ -179,6 +206,7 @@ namespace Phalcon\Mvc\Model\Query {
 		 * @param string $model
 		 * @param string $conditions
 		 * @param string $alias
+		 * @param string $type
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function innerJoin($model, $conditions=null, $alias=null){ }

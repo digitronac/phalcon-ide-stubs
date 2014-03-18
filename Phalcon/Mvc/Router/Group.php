@@ -53,6 +53,10 @@ namespace Phalcon\Mvc\Router {
 
 		protected $_beforeMatch;
 
+		protected $_converters;
+
+		protected $_name;
+
 		/**
 		 * \Phalcon\Mvc\Router\Group constructor
 		 *
@@ -140,7 +144,7 @@ namespace Phalcon\Mvc\Router {
 		/**
 		 * Adds a route applying the common attributes
 		 *
-		 * @param string $patten
+		 * @param string $pattern
 		 * @param array $paths
 		 * @param array $httpMethods
 		 * @return \Phalcon\Mvc\Router\Route
@@ -237,6 +241,41 @@ namespace Phalcon\Mvc\Router {
 		 * Removes all the pre-defined routes
 		 */
 		public function clear(){ }
+
+
+		/**
+		 * Adds a converter to perform an additional transformation for certain parameter
+		 *
+		 * @param string $name
+		 * @param callable $converter
+		 * @return \Phalcon\Mvc\Router\Group
+		 */
+		public function convert($name, $converter){ }
+
+
+		/**
+		 * Returns the router converter
+		 *
+		 * @return array|null
+		 */
+		public function getConverters(){ }
+
+
+		/**
+		 * Set the name of the group
+		 *
+		 * @param string $hostname
+		 * @return \Phalcon\Mvc\Router\Group
+		 */
+		public function setName($name){ }
+
+
+		/**
+		 * Returns the name of this group
+		 *
+		 * @return string
+		 */
+		public function getName(){ }
 
 	}
 }

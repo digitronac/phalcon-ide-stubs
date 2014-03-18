@@ -72,5 +72,13 @@ namespace Phalcon\Flash {
 		 */
 		public function output($remove=null){ }
 
+
+		/**
+		 * bool \Phalcon\Flash\Session::has(string $type)
+		 *
+		 * @see https://github.com/phalcon/cphalcon/issues/1342
+		 */
+		public function has($type){ }
+
 	}
 }

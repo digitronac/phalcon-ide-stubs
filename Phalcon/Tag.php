@@ -38,6 +38,8 @@ namespace Phalcon {
 
 		protected static $_documentTitle;
 
+		protected static $_documentTitleSeparator;
+
 		protected static $_documentType;
 
 		protected static $_dependencyInjector;
@@ -173,10 +175,14 @@ namespace Phalcon {
 		 *	echo \Phalcon\Tag::linkTo('signup/register', 'Register Here!');
 		 *	echo \Phalcon\Tag::linkTo(array('signup/register', 'Register Here!'));
 		 *	echo \Phalcon\Tag::linkTo(array('signup/register', 'Register Here!', 'class' => 'btn-primary'));
+		 *	echo \Phalcon\Tag::linkTo('http://phalconphp.com/', 'Google', FALSE);
+		 *	echo \Phalcon\Tag::linkTo(array('http://phalconphp.com/', 'Phalcon Home', FALSE));
+		 *	echo \Phalcon\Tag::linkTo(array('http://phalconphp.com/', 'Phalcon Home', 'local' =>FALSE));
 		 *</code>
 		 *
 		 * @param array|string $parameters
-		 * @param   string $text
+		 * @param string $text
+		 * @param boolean $local
 		 * @return string
 		 */
 		public static function linkTo($parameters, $text=null){ }
@@ -201,6 +207,15 @@ namespace Phalcon {
 		 * @return string
 		 */
 		protected static function _inputFieldChecked(){ }
+
+
+		/**
+		 * Builds a HTML input[type="color"] tag
+		 *
+		 * @param array $parameters
+		 * @return string
+		 */
+		public static function colorField($parameters){ }
 
 
 		/**
@@ -230,6 +245,15 @@ namespace Phalcon {
 
 
 		/**
+		 * Builds a HTML input[type="range"] tag
+		 *
+		 * @param array $parameters
+		 * @return string
+		 */
+		public static function rangeField($parameters){ }
+
+
+		/**
 		 * Builds a HTML input[type="email"] tag
 		 *
 		 * <code>
@@ -256,6 +280,51 @@ namespace Phalcon {
 
 
 		/**
+		 * Builds a HTML input[type="datetime"] tag
+		 *
+		 * @param array $parameters
+		 * @return string
+		 */
+		public static function dateTimeField($parameters){ }
+
+
+		/**
+		 * Builds a HTML input[type="datetime-local"] tag
+		 *
+		 * @param array $parameters
+		 * @return string
+		 */
+		public static function dateTimeLocalField($parameters){ }
+
+
+		/**
+		 * Builds a HTML input[type="month"] tag
+		 *
+		 * @param array $parameters
+		 * @return string
+		 */
+		public static function monthField($parameters){ }
+
+
+		/**
+		 * Builds a HTML input[type="time"] tag
+		 *
+		 * @param array $parameters
+		 * @return string
+		 */
+		public static function timeField($parameters){ }
+
+
+		/**
+		 * Builds a HTML input[type="week"] tag
+		 *
+		 * @param array $parameters
+		 * @return string
+		 */
+		public static function weekField($parameters){ }
+
+
+		/**
 		 * Builds a HTML input[type="password"] tag
 		 *
 		 *<code>
@@ -279,6 +348,33 @@ namespace Phalcon {
 		 * @return string
 		 */
 		public static function hiddenField($parameters){ }
+
+
+		/**
+		 * Builds a HTML input[type="search"] tag
+		 *
+		 * @param array $parameters
+		 * @return string
+		 */
+		public static function searchField($parameters){ }
+
+
+		/**
+		 * Builds a HTML input[type="tel"] tag
+		 *
+		 * @param array $parameters
+		 * @return string
+		 */
+		public static function telField($parameters){ }
+
+
+		/**
+		 * Builds a HTML input[type="url"] tag
+		 *
+		 * @param array $parameters
+		 * @return string
+		 */
+		public static function urlField($parameters){ }
 
 
 		/**
@@ -457,6 +553,18 @@ namespace Phalcon {
 
 
 		/**
+		 * Set the title separator of view content
+		 *
+		 *<code>
+		 * \Phalcon\Tag::setTitleSeparator('-');
+		 *</code>
+		 *
+		 * @param string $titleSeparator
+		 */
+		public static function setTitleSeparator($separator){ }
+
+
+		/**
 		 * Appends a text to current document title
 		 *
 		 * @param string $title
@@ -486,6 +594,22 @@ namespace Phalcon {
 		 * @return string
 		 */
 		public static function getTitle($tags=null){ }
+
+
+		/**
+		 * Gets the current document title separator
+		 *
+		 * <code>
+		 * 	echo \Phalcon\Tag::getTitleSeparator();
+		 * </code>
+		 *
+		 * <code>
+		 * 	{{ get_title_separator() }}
+		 * </code>
+		 *
+		 * @return string
+		 */
+		public static function getTitleSeparator(){ }
 
 
 		/**

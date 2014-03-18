@@ -52,15 +52,18 @@ namespace Phalcon\Logger {
 		 * @param string $message
 		 * @param int $type
 		 */
-		public function log($message, $type=null){ }
+		public function log($type, $message, $context=null){ }
 
 
 		/**
-		 * Sends/Writes an emergence message to the log
+		 * Sends/Writes an emergency message to the log
 		 *
 		 * @param string $message
 		 */
-		public function emergence($message){ }
+		public function emergency($message, $context=null){ }
+
+
+		public function emergence($message, $context=null){ }
 
 
 		/**
@@ -69,7 +72,7 @@ namespace Phalcon\Logger {
 		 * @param string $message
 		 * @param ing $type
 		 */
-		public function debug($message){ }
+		public function debug($message, $context=null){ }
 
 
 		/**
@@ -77,7 +80,7 @@ namespace Phalcon\Logger {
 		 *
 		 * @param string $message
 		 */
-		public function error($message){ }
+		public function error($message, $context=null){ }
 
 
 		/**
@@ -85,7 +88,7 @@ namespace Phalcon\Logger {
 		 *
 		 * @param string $message
 		 */
-		public function info($message){ }
+		public function info($message, $context=null){ }
 
 
 		/**
@@ -93,7 +96,7 @@ namespace Phalcon\Logger {
 		 *
 		 * @param string $message
 		 */
-		public function notice($message){ }
+		public function notice($message, $context=null){ }
 
 
 		/**
@@ -101,7 +104,7 @@ namespace Phalcon\Logger {
 		 *
 		 * @param string $message
 		 */
-		public function warning($message){ }
+		public function warning($message, $context=null){ }
 
 
 		/**
@@ -109,7 +112,7 @@ namespace Phalcon\Logger {
 		 *
 		 * @param string $message
 		 */
-		public function alert($message){ }
+		public function alert($message, $context=null){ }
 
 	}
 }

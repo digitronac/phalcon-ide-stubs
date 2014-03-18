@@ -5,7 +5,7 @@ namespace Phalcon\Db\Dialect {
 	/**
 	 * Phalcon\Db\Dialect\Mysql
 	 *
-	 * Generates database specific SQL for the MySQL RBDM
+	 * Generates database specific SQL for the MySQL RBDMS
 	 */
 	
 	class Mysql extends \Phalcon\Db\Dialect implements \Phalcon\Db\DialectInterface {
@@ -28,6 +28,7 @@ namespace Phalcon\Db\Dialect {
 		 * @param string $schemaName
 		 * @param \Phalcon\Db\ColumnInterface $column
 		 * @return string
+		 * @see http://dev.mysql.com/doc/refman/5.5/en/example-auto-increment.html
 		 */
 		public function addColumn($tableName, $schemaName, $column){ }
 
@@ -147,7 +148,7 @@ namespace Phalcon\Db\Dialect {
 		 * @param  boolean $ifExists
 		 * @return string
 		 */
-		public function dropTable($tableName, $schemaName, $ifExists=null){ }
+		public function dropTable($tableName, $schemaName){ }
 
 
 		/**

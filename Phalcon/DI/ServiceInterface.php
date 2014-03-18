@@ -9,25 +9,15 @@ namespace Phalcon\DI {
 	interface ServiceInterface {
 
 		/**
-		 * \Phalcon\DI\ServiceInterface
+		 * Returns the name of the service
 		 *
-		 * @param string $name
-		 * @param mixed $definition
-		 * @param boolean $shared
-		 */
-		public function __construct($name, $definition, $shared=null);
-
-
-		/**
-		 * Returns the service's name
-		 *
-		 * @param string
+		 * @return string
 		 */
 		public function getName();
 
 
 		/**
-		 * Sets if the service is shared or not
+		 * Sets whether the service is shared or not
 		 *
 		 * @param boolean $shared
 		 */
@@ -59,22 +49,21 @@ namespace Phalcon\DI {
 
 
 		/**
+		 * Checks if the service was resolved
+		 *
+		 * @return bool
+		 */
+		public function isResolved();
+
+
+		/**
 		 * Resolves the service
 		 *
 		 * @param array $parameters
 		 * @param \Phalcon\DiInterface $dependencyInjector
-		 * @return mixed
+		 * @return object
 		 */
 		public function resolve($parameters=null, $dependencyInjector=null);
-
-
-		/**
-		 * Restore the interal state of a service
-		 *
-		 * @param array $attributes
-		 * @return \Phalcon\DI\ServiceInterface
-		 */
-		public static function __set_state($attributes);
 
 	}
 }

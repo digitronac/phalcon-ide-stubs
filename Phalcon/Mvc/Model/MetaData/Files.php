@@ -14,7 +14,7 @@ namespace Phalcon\Mvc\Model\MetaData {
 	 *</code>
 	 */
 	
-	class Files extends \Phalcon\Mvc\Model\MetaData implements \Phalcon\DI\InjectionAwareInterface, \Phalcon\Mvc\Model\MetaDataInterface {
+	class Files extends \Phalcon\Mvc\Model\MetaData implements \Phalcon\Mvc\Model\MetaDataInterface, \Phalcon\DI\InjectionAwareInterface {
 
 		const MODELS_ATTRIBUTES = 0;
 
@@ -70,6 +70,9 @@ namespace Phalcon\Mvc\Model\MetaData {
 		 * @param array $data
 		 */
 		public function write($key, $data){ }
+
+
+		public function reset(){ }
 
 	}
 }

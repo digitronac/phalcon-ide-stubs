@@ -39,6 +39,14 @@ namespace Phalcon\Http\Response {
 
 
 		/**
+		 * Removes a header to be sent at the end of the request
+		 *
+		 * @param string $header Header name
+		 */
+		public function remove($header_index){ }
+
+
+		/**
 		 * Sends the headers to the client
 		 *
 		 * @return boolean
@@ -51,6 +59,14 @@ namespace Phalcon\Http\Response {
 		 *
 		 */
 		public function reset(){ }
+
+
+		/**
+		 * Returns the current headers as an array
+		 *
+		 * @return array
+		 */
+		public function toArray(){ }
 
 
 		/**

@@ -19,7 +19,7 @@ namespace Phalcon\Mvc\Model {
 	 *
 	 */
 	
-	abstract class MetaData implements \Phalcon\DI\InjectionAwareInterface {
+	abstract class MetaData implements \Phalcon\DI\InjectionAwareInterface, \Phalcon\Mvc\Model\MetaDataInterface {
 
 		const MODELS_ATTRIBUTES = 0;
 
@@ -175,7 +175,7 @@ namespace Phalcon\Mvc\Model {
 		 *</code>
 		 *
 		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return 	array
+		 * @return array
 		 */
 		public function getAttributes($model){ }
 

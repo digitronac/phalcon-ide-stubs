@@ -29,6 +29,8 @@ namespace Phalcon\Http {
 
 		protected $_rawBody;
 
+		protected $_put;
+
 		/**
 		 * Sets the dependency injector
 		 *
@@ -60,6 +62,8 @@ namespace Phalcon\Http {
 		 * @param string $name
 		 * @param string|array $filters
 		 * @param mixed $defaultValue
+		 * @param boolean $notAllowEmpty
+		 * @param boolean $noRecursive
 		 * @return mixed
 		 */
 		public function get($name=null, $filters=null, $defaultValue=null){ }
@@ -80,9 +84,30 @@ namespace Phalcon\Http {
 		 * @param string $name
 		 * @param string|array $filters
 		 * @param mixed $defaultValue
+		 * @param boolean $notAllowEmpty
+		 * @param boolean $noRecursive
 		 * @return mixed
 		 */
 		public function getPost($name=null, $filters=null, $defaultValue=null){ }
+
+
+		/**
+		 * Gets a variable from put request
+		 *
+		 *<code>
+		 *	$userEmail = $request->getPut("user_email");
+		 *
+		 *	$userEmail = $request->getPut("user_email", "email");
+		 *</code>
+		 *
+		 * @param string $name
+		 * @param string|array $filters
+		 * @param mixed $defaultValue
+		 * @param boolean $notAllowEmpty
+		 * @param boolean $noRecursive
+		 * @return mixed
+		 */
+		public function getPut($name=null, $filters=null, $defaultValue=null){ }
 
 
 		/**
@@ -103,6 +128,8 @@ namespace Phalcon\Http {
 		 * @param string $name
 		 * @param string|array $filters
 		 * @param mixed $defaultValue
+		 * @param boolean $notAllowEmpty
+		 * @param boolean $noRecursive
 		 * @return mixed
 		 */
 		public function getQuery($name=null, $filters=null, $defaultValue=null){ }
@@ -133,6 +160,15 @@ namespace Phalcon\Http {
 		 * @return boolean
 		 */
 		public function hasPost($name){ }
+
+
+		/**
+		 * Checks whether put has certain index
+		 *
+		 * @param string $name
+		 * @return boolean
+		 */
+		public function hasPut($name){ }
 
 
 		/**
@@ -205,6 +241,7 @@ namespace Phalcon\Http {
 		/**
 		 * Gets decoded JSON HTTP raw request body
 		 *
+		 * @param bool $assoc
 		 * @return string
 		 */
 		public function getJsonRawBody(){ }
@@ -249,6 +286,14 @@ namespace Phalcon\Http {
 		 * @return string
 		 */
 		public function getMethod(){ }
+
+
+		/**
+		 * Gets HTTP URI which request has been made
+		 *
+		 * @return string
+		 */
+		public function getURI(){ }
 
 
 		/**
@@ -423,6 +468,22 @@ namespace Phalcon\Http {
 		 * @return string
 		 */
 		public function getBestLanguage(){ }
+
+
+		/**
+		 * Gets auth info accepted by the browser/client from $_SERVER['PHP_AUTH_USER']
+		 *
+		 * @return array
+		 */
+		public function getBasicAuth(){ }
+
+
+		/**
+		 * Gets auth info accepted by the browser/client from $_SERVER['PHP_AUTH_DIGEST']
+		 *
+		 * @return array
+		 */
+		public function getDigestAuth(){ }
 
 	}
 }

@@ -78,7 +78,7 @@ namespace Phalcon {
 
 
 		/**
-		 * Escapes a HTML string. Internally uses htmlspeciarchars
+		 * Escapes a HTML string. Internally uses htmlspecialchars
 		 *
 		 * @param string $text
 		 * @return string
@@ -92,7 +92,7 @@ namespace Phalcon {
 		 * @param string $attribute
 		 * @return string
 		 */
-		public function escapeHtmlAttr($attribute){ }
+		public function escapeHtmlAttr($text){ }
 
 
 		/**

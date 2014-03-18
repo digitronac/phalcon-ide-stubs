@@ -122,5 +122,13 @@ namespace Phalcon\Cache {
 		 */
 		public function exists($keyName=null, $lifetime=null);
 
+
+		/**
+		 * Immediately invalidates all existing items.
+		 * 
+		 * @return boolean
+		 */
+		public function flush();
+
 	}
 }

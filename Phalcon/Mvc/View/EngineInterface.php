@@ -9,15 +9,6 @@ namespace Phalcon\Mvc\View {
 	interface EngineInterface {
 
 		/**
-		 * \Phalcon\Mvc\View\Engine constructor
-		 *
-		 * @param \Phalcon\Mvc\ViewInterface $view
-		 * @param \Phalcon\DiInterface $dependencyInjector
-		 */
-		public function __construct($view, $dependencyInjector=null);
-
-
-		/**
 		 * Returns cached ouput on another view stage
 		 *
 		 * @return array

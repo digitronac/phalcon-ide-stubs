@@ -19,7 +19,8 @@ namespace Phalcon\Mvc\Model {
 	 *        $text = "A robot cannot be named Peter";
 	 *        $field = "name";
 	 *        $type = "InvalidValue";
-	 *        $message = new Message($text, $field, $type);
+	 *        $code = 103;
+	 *        $message = new Message($text, $field, $type, $code);
 	 *        $this->appendMessage($message);
 	 *     }
 	 *   }
@@ -39,6 +40,8 @@ namespace Phalcon\Mvc\Model {
 
 		protected $_model;
 
+		protected $_code;
+
 		/**
 		 * \Phalcon\Mvc\Model\Message constructor
 		 *
@@ -47,7 +50,7 @@ namespace Phalcon\Mvc\Model {
 		 * @param string $type
 		 * @param \Phalcon\Mvc\ModelInterface $model
 		 */
-		public function __construct($message, $field=null, $type=null, $model=null){ }
+		public function __construct($message, $field=null, $type=null){ }
 
 
 		/**
@@ -65,6 +68,23 @@ namespace Phalcon\Mvc\Model {
 		 * @return string
 		 */
 		public function getType(){ }
+
+
+		/**
+		 * Sets message code
+		 *
+		 * @param string $code
+		 * @return \Phalcon\Mvc\Model\Message
+		 */
+		public function setCode($code){ }
+
+
+		/**
+		 * Returns message code
+		 *
+		 * @return string
+		 */
+		public function getCode(){ }
 
 
 		/**
@@ -132,7 +152,7 @@ namespace Phalcon\Mvc\Model {
 		 * @param array $message
 		 * @return \Phalcon\Mvc\Model\Message
 		 */
-		public static function __set_state($message){ }
+		public static function __set_state($properties=null){ }
 
 	}
 }

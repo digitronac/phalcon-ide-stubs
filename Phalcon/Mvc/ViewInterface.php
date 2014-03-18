@@ -65,6 +65,22 @@ namespace Phalcon\Mvc {
 
 
 		/**
+		 * Gets the current render level
+		 *
+		 * @return string
+		 */
+		public function getCurrentRenderLevel();
+
+
+		/**
+		 * Gets the render level for the view
+		 *
+		 * @return string
+		 */
+		public function getRenderLevel();
+
+
+		/**
 		 * Sets the render level for the view
 		 *
 		 * @param string $level
@@ -290,6 +306,14 @@ namespace Phalcon\Mvc {
 		 *
 		 */
 		public function reset();
+
+
+		/**
+		 * Whether the automatic rendering is disabled
+		 *
+		 * @return bool
+		 */
+		public function isDisabled();
 
 	}
 }

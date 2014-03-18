@@ -16,21 +16,24 @@ namespace Phalcon\Validation {
 
 		protected $_field;
 
+		protected $_code;
+
 		/**
 		 * \Phalcon\Validation\Message constructor
 		 *
 		 * @param string $message
 		 * @param string $field
 		 * @param string $type
+		 * @param int    $code
 		 */
-		public function __construct($message, $field=null, $type=null){ }
+		public function __construct($message, $field=null, $type=null, $code=null){ }
 
 
 		/**
 		 * Sets message type
 		 *
 		 * @param string $type
-		 * @return \Phalcon\Mvc\Model\Message
+		 * @return \Phalcon\Validation\Message
 		 */
 		public function setType($type){ }
 
@@ -44,10 +47,27 @@ namespace Phalcon\Validation {
 
 
 		/**
+		 * Sets message code
+		 *
+		 * @param string $code
+		 * @return \Phalcon\Validation\Message
+		 */
+		public function setCode($code){ }
+
+
+		/**
+		 * Returns message code
+		 *
+		 * @return string
+		 */
+		public function getCode(){ }
+
+
+		/**
 		 * Sets verbose message
 		 *
 		 * @param string $message
-		 * @return \Phalcon\Mvc\Model\Message
+		 * @return \Phalcon\Validation\Message
 		 */
 		public function setMessage($message){ }
 
@@ -64,7 +84,7 @@ namespace Phalcon\Validation {
 		 * Sets field name related to message
 		 *
 		 * @param string $field
-		 * @return \Phalcon\Mvc\Model\Message
+		 * @return \Phalcon\Validation\Message
 		 */
 		public function setField($field){ }
 
@@ -89,7 +109,7 @@ namespace Phalcon\Validation {
 		 * Magic __set_state helps to recover messsages from serialization
 		 *
 		 * @param array $message
-		 * @return \Phalcon\Mvc\Model\Message
+		 * @return \Phalcon\Validation\Message
 		 */
 		public static function __set_state($message){ }
 

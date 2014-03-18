@@ -104,6 +104,7 @@ namespace Phalcon\DI {
 		 * Sets the dependency injector
 		 *
 		 * @param \Phalcon\DiInterface $dependencyInjector
+		 * @throw \Phalcon\Di\Exception
 		 */
 		public function setDI($dependencyInjector){ }
 
@@ -137,7 +138,7 @@ namespace Phalcon\DI {
 		 *
 		 * @param string $propertyName
 		 */
-		public function __get($propertyName){ }
+		public function __get($property){ }
 
 	}
 }

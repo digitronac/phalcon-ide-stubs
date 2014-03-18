@@ -8,12 +8,10 @@ namespace Phalcon\Mvc\Model\Query {
 	
 	interface BuilderInterface {
 
-		/**
-		 * \Phalcon\Mvc\Model\Query\Builder
-		 *
-		 * @param array $params
-		 */
-		public function __construct($params=null);
+		public function distinct($distinct);
+
+
+		public function getDistinct();
 
 
 		/**

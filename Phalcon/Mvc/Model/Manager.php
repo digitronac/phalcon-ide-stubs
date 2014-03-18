@@ -154,7 +154,7 @@ namespace Phalcon\Mvc\Model {
 		 * @param  boolean $newInstance
 		 * @return \Phalcon\Mvc\ModelInterface
 		 */
-		public function load($modelName, $newInstance=null){ }
+		public function load($modelName, $newInstance){ }
 
 
 		/**
