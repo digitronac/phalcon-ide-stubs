@@ -9,15 +9,6 @@ namespace Phalcon\Db {
 	interface ColumnInterface {
 
 		/**
-		 * \Phalcon\Db\ColumnInterface constructor
-		 *
-		 * @param string $columnName
-		 * @param array $definition
-		 */
-		public function __construct($columnName, $definition);
-
-
-		/**
 		 * Returns schema's table related to column
 		 *
 		 * @return string
@@ -119,15 +110,6 @@ namespace Phalcon\Db {
 		 * @return int
 		 */
 		public function getBindType();
-
-
-		/**
-		 * Restores the internal state of a \Phalcon\Db\Column object
-		 *
-		 * @param array $data
-		 * @return \Phalcon\Db\ColumnInterface
-		 */
-		public static function __set_state($data);
 
 	}
 }

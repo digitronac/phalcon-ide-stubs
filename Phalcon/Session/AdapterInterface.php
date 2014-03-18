@@ -9,14 +9,6 @@ namespace Phalcon\Session {
 	interface AdapterInterface {
 
 		/**
-		 * \Phalcon\Session construtor
-		 *
-		 * @param array $options
-		 */
-		public function __construct($options=null);
-
-
-		/**
 		 * Starts session, optionally using an adapter
 		 *
 		 * @param array $options
@@ -97,7 +89,7 @@ namespace Phalcon\Session {
 		 *
 		 * @return boolean
 		 */
-		public function destroy();
+		public function destroy($session_id=null);
 
 	}
 }

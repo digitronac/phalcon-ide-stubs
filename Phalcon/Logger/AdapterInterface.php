@@ -43,16 +43,6 @@ namespace Phalcon\Logger {
 
 
 		/**
-		 * Sends/Writes messages to the file log
-		 *
-		 * @param string $message
-		 * @param int $type
-		 * @return \Phalcon\Logger\Adapter
-		 */
-		public function log($message, $type=null);
-
-
-		/**
 		 * Starts a transaction
 		 *
 		 * @return \Phalcon\Logger\Adapter
@@ -85,63 +75,93 @@ namespace Phalcon\Logger {
 
 
 		/**
-		 * Sends/Writes a debug message to the log
+		 * Sends/Writes messages to the file log
 		 *
+		 * @param int|string $type
 		 * @param string $message
-		 * @param ing $type
-		 * @return \Phalcon\Logger\Adapter
+		 * @param array $context
+		 * @return \Phalcon\Logger\AdapterInterface
 		 */
-		public function debug($message);
+		public function log($type, $message, $context=null);
 
 
 		/**
-		 * Sends/Writes an error message to the log
+		 * Sends/Writes a debug message to the log
 		 *
 		 * @param string $message
-		 * @param ing $type
-		 * @return \Phalcon\Logger\Adapter
+		 * @param array $context
+		 * @return \Phalcon\Logger\AdapterInterface
 		 */
-		public function error($message);
+		public function debug($message, $context=null);
 
 
 		/**
 		 * Sends/Writes an info message to the log
 		 *
 		 * @param string $message
-		 * @param ing $type
-		 * @return \Phalcon\Logger\Adapter
+		 * @param array $context
+		 * @return \Phalcon\Logger\AdapterInterface
 		 */
-		public function info($message);
+		public function info($message, $context=null);
 
 
 		/**
 		 * Sends/Writes a notice message to the log
 		 *
 		 * @param string $message
-		 * @param ing $type
-		 * @return \Phalcon\Logger\Adapter
+		 * @return \Phalcon\Logger\AdapterInterface
 		 */
-		public function notice($message);
+		public function notice($message, $context=null);
 
 
 		/**
 		 * Sends/Writes a warning message to the log
 		 *
 		 * @param string $message
-		 * @param ing $type
-		 * @return \Phalcon\Logger\Adapter
+		 * @param array $context
+		 * @return \Phalcon\Logger\AdapterInterface
 		 */
-		public function warning($message);
+		public function warning($message, $context=null);
+
+
+		/**
+		 * Sends/Writes an error message to the log
+		 *
+		 * @param string $message
+		 * @param array $context
+		 * @return \Phalcon\Logger\AdapterInterface
+		 */
+		public function error($message, $context=null);
+
+
+		/**
+		 * Sends/Writes a critical message to the log
+		 *
+		 * @param string $message
+		 * @param array $context
+		 * @return \Phalcon\Logger\AdapterInterface
+		 */
+		public function critical($message, $context=null);
 
 
 		/**
 		 * Sends/Writes an alert message to the log
 		 *
 		 * @param string $message
-		 * @param ing $type
-		 * @return \Phalcon\Logger\Adapter
+		 * @param array $context
+		 * @return \Phalcon\Logger\AdapterInterface
 		 */
-		public function alert($message);
+		public function alert($message, $context=null);
+
+
+		/**
+		 * Sends/Writes an emergency message to the log
+		 *
+		 * @param string $message
+		 * @param array $context
+		 * @return \Phalcon\Logger\AdapterInterface
+		 */
+		public function emergency($message, $context=null);
 
 	}
 }

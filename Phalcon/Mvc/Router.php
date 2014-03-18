@@ -51,6 +51,8 @@ namespace Phalcon\Mvc {
 
 		protected $_routes;
 
+		protected $_routesNameLookup;
+
 		protected $_matchedRoute;
 
 		protected $_matches;
@@ -112,7 +114,7 @@ namespace Phalcon\Mvc {
 		 *	$router->setUriSource(Router::URI_SOURCE_SERVER_REQUEST_URI);
 		 *</code>
 		 *
-		 * @param string $uriSource
+		 * @param int $uriSource
 		 * @return \Phalcon\Mvc\Router
 		 */
 		public function setUriSource($uriSource){ }
@@ -137,12 +139,28 @@ namespace Phalcon\Mvc {
 
 
 		/**
+		 * Returns the name of the default namespace
+		 *
+		 * @return string
+		 */
+		public function getDefaultNamespace(){ }
+
+
+		/**
 		 * Sets the name of the default module
 		 *
 		 * @param string $moduleName
 		 * @return \Phalcon\Mvc\Router
 		 */
 		public function setDefaultModule($moduleName){ }
+
+
+		/**
+		 * Returns the name of the default module
+		 *
+		 * @return string
+		 */
+		public function getDefaultModule(){ }
 
 
 		/**
@@ -155,12 +173,28 @@ namespace Phalcon\Mvc {
 
 
 		/**
+		 * Returns the default controller name
+		 *
+		 * @return string
+		 */
+		public function getDefaultController(){ }
+
+
+		/**
 		 * Sets the default action name
 		 *
 		 * @param string $actionName
 		 * @return \Phalcon\Mvc\Router
 		 */
 		public function setDefaultAction($actionName){ }
+
+
+		/**
+		 * Returns the default action name
+		 *
+		 * @return string
+		 */
+		public function getDefaultAction(){ }
 
 
 		/**
@@ -178,6 +212,14 @@ namespace Phalcon\Mvc {
 		 * @return \Phalcon\Mvc\Router
 		 */
 		public function setDefaults($defaults){ }
+
+
+		/**
+		 * Returns an array of default parameters
+		 *
+		 * @return array
+		 */
+		public function getDefaults(){ }
 
 
 		/**
@@ -293,7 +335,7 @@ namespace Phalcon\Mvc {
 		/**
 		 * Set a group of paths to be returned when none of the defined routes are matched
 		 *
-		 * @param array $paths
+		 * @param array|string $paths
 		 * @return \Phalcon\Mvc\Router
 		 */
 		public function notFound($paths){ }
@@ -381,7 +423,7 @@ namespace Phalcon\Mvc {
 		 * Returns a route object by its id
 		 *
 		 * @param string $id
-		 * @return \Phalcon\Mvc\Router\Route
+		 * @return \Phalcon\Mvc\Router\Route | false
 		 */
 		public function getRouteById($id){ }
 

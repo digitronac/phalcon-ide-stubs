@@ -46,6 +46,8 @@ namespace Phalcon\Mvc {
 
 		protected $_renderLevel;
 
+		protected $_currentRenderLevel;
+
 		protected $_disabledLevels;
 
 		protected $_viewParams;
@@ -165,6 +167,22 @@ namespace Phalcon\Mvc {
 
 
 		/**
+		 * Returns the render level for the view
+		 *
+		 * @return int
+		 */
+		public function getCurrentRenderLevel(){ }
+
+
+		/**
+		 * Returns the render level for the view
+		 *
+		 * @return int
+		 */
+		public function getRenderLevel(){ }
+
+
+		/**
 		 * Sets the render level for the view
 		 *
 		 * <code>
@@ -190,6 +208,14 @@ namespace Phalcon\Mvc {
 		 * @return \Phalcon\Mvc\View
 		 */
 		public function disableLevel($level){ }
+
+
+		/**
+		 * Returns an array with disabled render levels
+		 *
+		 * @return array
+		 */
+		public function getDisabledLevels(){ }
 
 
 		/**
@@ -262,7 +288,7 @@ namespace Phalcon\Mvc {
 
 
 		/**
-		 * Resets any template before layouts
+		 * Resets any template after layouts
 		 *
 		 * @return \Phalcon\Mvc\View
 		 */
@@ -398,6 +424,17 @@ namespace Phalcon\Mvc {
 
 
 		/**
+		 * Returns the registered templating engines
+		 *
+		 * @brief array \Phalcon\Mvc\View::getRegisteredEngines()
+		 */
+		public function getRegisteredEngines(){ }
+
+
+		public function exists($view){ }
+
+
+		/**
 		 * Executes render process from dispatching data
 		 *
 		 *<code>
@@ -452,8 +489,9 @@ namespace Phalcon\Mvc {
 		 *
 		 * @param string $partialPath
 		 * @param array $params
+		 * @param boolean $autorender
 		 */
-		public function partial($partialPath, $params=null){ }
+		public function partial($partialPath){ }
 
 
 		/**
@@ -563,6 +601,14 @@ namespace Phalcon\Mvc {
 
 
 		/**
+		 * Whether automatic rendering is enabled
+		 *
+		 * @return bool
+		 */
+		public function isDisabled(){ }
+
+
+		/**
 		 * Resets the view component to its factory default values
 		 *
 		 * @return \Phalcon\Mvc\View
@@ -580,7 +626,7 @@ namespace Phalcon\Mvc {
 		 * @param string $key
 		 * @param mixed $value
 		 */
-		public function __set($key, $value){ }
+		public function __set($property, $value){ }
 
 
 		/**
@@ -593,7 +639,20 @@ namespace Phalcon\Mvc {
 		 * @param string $key
 		 * @return mixed
 		 */
-		public function __get($key){ }
+		public function __get($property){ }
+
+
+		/**
+		 * Magic method to inaccessible a variable passed to the view
+		 *
+		 *<code>
+		 *	isset($this->view->products)
+		 *</code>
+		 *
+		 * @param string $key
+		 * @return mixed
+		 */
+		public function __isset($property){ }
 
 	}
 }

@@ -26,6 +26,12 @@ namespace Phalcon {
 
 		protected static $_isActive;
 
+		protected static $_charset;
+
+		protected $_beforeContext;
+
+		protected $_afterContext;
+
 		/**
 		 * Change the base URI for static resources
 		 *
@@ -182,6 +188,66 @@ namespace Phalcon {
 		 * @return boolean
 		 */
 		public function onUncaughtException($exception){ }
+
+
+		/**
+		 * Returns the character set used to display the HTML
+		 *
+		 * @brief string \Phalcon\Debug::getCharset(void)
+		 * @return string
+		 */
+		public function getCharset(){ }
+
+
+		/**
+		 * Sets the character set used to display the HTML
+		 *
+		 * @brief \Phalcon\Debug \Phalcon\Debug::setCharset(string $charset)
+		 * @param string $charset
+		 * @return \Phalcon\Debug
+		 */
+		public function setCharset($charset){ }
+
+
+		/**
+		 * Returns the number of lines deplayed before the error line
+		 *
+		 * @brief int \Phalcon\Debug::getLinesBeforeContext(void)
+		 * @return int
+		 */
+		public function getLinesBeforeContext(){ }
+
+
+		/**
+		 * Sets the number of lines deplayed before the error line
+		 *
+		 * @brief \Phalcon\Debug \Phalcon\Debug::setLinesBeforeContext(int $lines)
+		 * @param int $lines
+		 * @return \Phalcon\Debug
+		 */
+		public function setLinesBeforeContext($lines){ }
+
+
+		/**
+		 * Returns the number of lines deplayed after the error line
+		 *
+		 * @brief int \Phalcon\Debug::getLinesAfterContext(void)
+		 * @return int
+		 */
+		public function getLinesAfterContext(){ }
+
+
+		/**
+		 * Sets the number of lines deplayed after the error line
+		 *
+		 * @brief \Phalcon\Debug \Phalcon\Debug::setLinesAfterContext(int $lines)
+		 * @param int $lines
+		 * @return \Phalcon\Debug
+		 */
+		public function setLinesAfterContext($lines){ }
+
+
+		protected function getFileLink($file, $line, $format){ }
 
 	}
 }

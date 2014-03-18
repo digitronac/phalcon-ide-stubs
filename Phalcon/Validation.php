@@ -22,6 +22,10 @@ namespace Phalcon {
 
 		protected $_values;
 
+		protected $_defaultMessages;
+
+		protected $_labels;
+
 		/**
 		 * \Phalcon\Validation constructor
 		 *
@@ -120,6 +124,29 @@ namespace Phalcon {
 		 * @return mixed
 		 */
 		public function getValue($attribute){ }
+
+
+		public function setDefaultMessages($messages=null){ }
+
+
+		public function getDefaultMessage($type){ }
+
+
+		/**
+		 * Adds labels for fields
+		 *
+		 * @param array labels
+		 */
+		public function setLabels($labels){ }
+
+
+		/**
+		 * Get label for field
+		 *
+		 * @param string field
+		 * @return mixed
+		 */
+		public function getLabel($field){ }
 
 	}
 }

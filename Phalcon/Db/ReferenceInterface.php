@@ -9,15 +9,6 @@ namespace Phalcon\Db {
 	interface ReferenceInterface {
 
 		/**
-		 * \Phalcon\Db\ReferenceInterface constructor
-		 *
-		 * @param string $referenceName
-		 * @param array $definition
-		 */
-		public function __construct($referenceName, $definition);
-
-
-		/**
 		 * Gets the index name
 		 *
 		 * @return string
@@ -63,15 +54,6 @@ namespace Phalcon\Db {
 		 * @return array
 		 */
 		public function getReferencedColumns();
-
-
-		/**
-		 * Restore a \Phalcon\Db\Reference object from export
-		 *
-		 * @param array $data
-		 * @return \Phalcon\Db\ReferenceInterface
-		 */
-		public static function __set_state($data);
 
 	}
 }

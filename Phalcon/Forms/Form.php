@@ -139,7 +139,7 @@ namespace Phalcon\Forms {
 		 * Returns the messages generated in the validation
 		 *
 		 * @param boolean $byItemName
-		 * @return array
+		 * @return \Phalcon\Validation\Message\Group
 		 */
 		public function getMessages($byItemName=null){ }
 
@@ -164,9 +164,11 @@ namespace Phalcon\Forms {
 		 * Adds an element to the form
 		 *
 		 * @param \Phalcon\Forms\ElementInterface $element
+		 * @param string $postion
+		 * @param bool $type If $type is TRUE, the element wile add before $postion, else is after
 		 * @return \Phalcon\Forms\Form
 		 */
-		public function add($element){ }
+		public function add($element, $postion=null, $type=null){ }
 
 
 		/**
@@ -194,7 +196,7 @@ namespace Phalcon\Forms {
 		 * @param string $name
 		 * @return string
 		 */
-		public function label($name){ }
+		public function label($name, $attributes=null){ }
 
 
 		/**

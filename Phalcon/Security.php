@@ -22,6 +22,24 @@ namespace Phalcon {
 	
 	class Security implements \Phalcon\DI\InjectionAwareInterface {
 
+		const CRYPT_DEFAULT = 0;
+
+		const CRYPT_STD_DES = 1;
+
+		const CRYPT_EXT_DES = 2;
+
+		const CRYPT_MD5 = 3;
+
+		const CRYPT_BLOWFISH = 4;
+
+		const CRYPT_BLOWFISH_X = 5;
+
+		const CRYPT_BLOWFISH_Y = 6;
+
+		const CRYPT_SHA256 = 7;
+
+		const CRYPT_SHA512 = 8;
+
 		protected $_dependencyInjector;
 
 		protected $_workFactor;
@@ -29,6 +47,8 @@ namespace Phalcon {
 		protected $_numberBytes;
 
 		protected $_csrf;
+
+		protected $_defaultHash;
 
 		/**
 		 * Sets the dependency injector
@@ -151,6 +171,46 @@ namespace Phalcon {
 		 * @return string
 		 */
 		public function getSessionToken(){ }
+
+
+		/**
+		 * string \Phalcon\Security::computeHmac(string $data, string $key, string $algo, bool $raw = false)
+		 *
+		 *
+		 */
+		public static function computeHmac($data, $key, $algo, $raw=null){ }
+
+
+		/**
+		 * Derives a key from the given password (PBKDF2).
+		 *
+		 * @param string $password Source password
+		 * @param string $salt The salt to use for the derivation; this value should be generated randomly.
+		 * @param string $hash Hash function (SHA-512 by default)
+		 * @param int $iterations The number of internal iterations to perform for the derivation, by default 5000
+		 * @param int $size The length of the output string. If 0 is passed (the default), the entire output of the supplied hash algorithm is used
+		 * @return string The derived key
+		 */
+		public static function deriveKey($password, $salt, $hash=null, $iterations=null, $size=null){ }
+
+
+		/**
+		 * @internal
+		 * @brief This method is used only for internal tests, use \Phalcon\Security::deriveKey() instead
+		 */
+		public static function pbkdf2($password, $salt, $hash=null, $iterations=null, $size=null){ }
+
+
+		/**
+		 * Returns the default hash
+		 */
+		public function getDefaultHash(){ }
+
+
+		/**
+		 * Sets the default hash
+		 */
+		public function setDefaultHash($hash){ }
 
 	}
 }

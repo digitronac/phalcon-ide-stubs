@@ -9,15 +9,6 @@ namespace Phalcon\Mvc {
 	interface ModelInterface {
 
 		/**
-		 * \Phalcon\Mvc\Model constructor
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
-		 * @param \Phalcon\Mvc\Model\ManagerInterface $modelsManager
-		 */
-		public function __construct($dependencyInjector=null, $modelsManager=null);
-
-
-		/**
 		 * Sets a transaction related to the Model instance
 		 *
 		 * @param \Phalcon\Mvc\Model\TransactionInterface $transaction
@@ -255,7 +246,7 @@ namespace Phalcon\Mvc {
 		 *
 		 * @return \Phalcon\Mvc\Model\MessageInterface[]
 		 */
-		public function getMessages();
+		public function getMessages($filter=null);
 
 
 		/**

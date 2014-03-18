@@ -13,6 +13,9 @@ namespace Phalcon\Forms {
 
 		protected $_forms;
 
+		public function __construct(){ }
+
+
 		/**
 		 * Creates a form registering it in the forms manager
 		 *
@@ -46,7 +49,7 @@ namespace Phalcon\Forms {
 		 *
 		 * @param string $name
 		 * @param \Phalcon\Forms\Form $form
-		 * @return \Phalcon\Forms\Form
+		 * @return \Phalcon\Forms\Manager
 		 */
 		public function set($name, $form){ }
 

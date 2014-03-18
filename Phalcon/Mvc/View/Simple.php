@@ -77,6 +77,14 @@ namespace Phalcon\Mvc\View {
 
 
 		/**
+		 * Returns the registered templating engines
+		 *
+		 * @brief array \Phalcon\Mvc\View\Simple::getRegisteredEngines()
+		 */
+		public function getRegisteredEngines(){ }
+
+
+		/**
 		 * Loads registered template engines, if none is registered it will use \Phalcon\Mvc\View\Engine\Php
 		 *
 		 * @return array
@@ -215,6 +223,7 @@ namespace Phalcon\Mvc\View {
 		 *
 		 * @param string $key
 		 * @return mixed
+		 * @see __get()
 		 */
 		public function getVar($key){ }
 
