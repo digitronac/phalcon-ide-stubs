@@ -51,24 +51,14 @@ namespace Phalcon\DI {
 		public $response;
 
 		/**
-		 * @var \Phalcon\Flash\Direct
-	 	 */
-		public $flash;
-
-		/**
-		 * @var \Phalcon\Flash\Session
+		 * @var \Rasserbia\Flash\Messenger
 	 	 */
 		public $flashSession;
 
 		/**
-		 * @var \Phalcon\Session\AdapterInterface
+		 * @var \Zend\Session\Container
 	 	 */
 		public $session;
-
-		/**
-		 * @var \Phalcon\Session\Bag
-	 	 */
-		public $persistent;
 
 		/**
 		 * @var \Phalcon\Mvc\Model\ManagerInterface
@@ -91,7 +81,7 @@ namespace Phalcon\DI {
 		public $filter;
 
 		/**
-		 * @var \Phalcon\Security
+		 * @var \Rasserbia\Security
 	 	 */
 		public $security;
 
@@ -99,6 +89,81 @@ namespace Phalcon\DI {
 		 * @var \Phalcon\Annotations\Adapter\Memory
 	 	 */
 		public $annotations;
+
+        /**
+         * @var \Zend\Session\SessionManager
+         */
+        public $sessionManager;
+
+        /**
+         * @var \Phalcon\Debug\Dump
+         */
+        public $debug;
+
+        /**
+         * @var \Phalcon\Db\Adapter\Pdo\Mysql
+         */
+        public $db;
+
+        /**
+         * @var \Phalcon\Db\Adapter\Pdo\Mysql
+         */
+        public $dbSlave;
+
+        /**
+         * @var \Rasserbia\Tag\Tag
+         */
+        public $tag;
+
+        /**
+         * @var \Rasserbia\Assets\Manager
+         */
+        public $assets;
+
+        /**
+         * @var \Symfony\Component\Filesystem\Filesystem
+         */
+        public $fs;
+
+        /**
+         * @var \Zend\Log\Writer\Stream
+         */
+        public $fileLogger;
+
+        /**
+         * @var \Phalcon\Db\Profiler
+         */
+        public $dbProfiler;
+
+        /**
+         * @var \Zend\Log\Logger
+         */
+        public $log;
+
+        /**
+         * @var \Zend\Db\Adapter\Adapter
+         */
+        public $zendDbSlave;
+
+        /**
+         * @var \Zend\Json\Json
+         */
+        public $json;
+
+        /**
+         * @var \Rasserbia\Cache\Backend\Memcache
+         */
+        public $memcache;
+
+        /**
+         * @var \Phalcon\Acl\Adapter\Memory
+         */
+        public $acl;
+
+        /**
+         * @var \Rasserbia\Log\Writer\Memcache
+         */
+        public $memcacheWriter;
 		
 		/**
 		 * Sets the dependency injector
