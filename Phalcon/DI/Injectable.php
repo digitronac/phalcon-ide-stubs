@@ -161,9 +161,37 @@ namespace Phalcon\DI {
         public $acl;
 
         /**
+         * Memcache log writer.
+         *
          * @var \Rasserbia\Log\Writer\Memcache
          */
         public $memcacheWriter;
+
+        /**
+         * Application configuration.
+         *
+         * @var \Phalcon\Config
+         */
+        public $config;
+
+        /**
+         * @var \Rasserbia\User\Visitor
+         */
+        public $visitor;
+
+        /**
+         * Validator translator instance.
+         *
+         * @var \Zend\Mvc\I18n\Translator
+         */
+        public $validatorTranslator;
+
+        /**
+         * @var \Zend\I18n\Translator\Translator
+         */
+        public $translator;
+
+
 		
 		/**
 		 * Sets the dependency injector
