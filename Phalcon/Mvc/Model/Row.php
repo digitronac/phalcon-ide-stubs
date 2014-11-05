@@ -62,10 +62,12 @@ namespace Phalcon\Mvc\Model {
 		public function toArray(){ }
 
 
+		/**
+		 * Counts how many properties were added to the row
+		 *
+		 * @return int
+		 */
 		public function count(){ }
-
-
-		public function __wakeup(){ }
 
 	}
 }

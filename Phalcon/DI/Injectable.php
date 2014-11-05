@@ -51,14 +51,24 @@ namespace Phalcon\DI {
 		public $response;
 
 		/**
-		 * @var \Rasserbia\Flash\Messenger
+		 * @var \Phalcon\Flash\Direct
+	 	 */
+		public $flash;
+
+		/**
+		 * @var \Phalcon\Flash\Session
 	 	 */
 		public $flashSession;
 
 		/**
-		 * @var \Zend\Session\Container
+		 * @var \Phalcon\Session\AdapterInterface
 	 	 */
 		public $session;
+
+		/**
+		 * @var \Phalcon\Session\Bag
+	 	 */
+		public $persistent;
 
 		/**
 		 * @var \Phalcon\Mvc\Model\ManagerInterface
@@ -81,7 +91,7 @@ namespace Phalcon\DI {
 		public $filter;
 
 		/**
-		 * @var \Rasserbia\Security
+		 * @var \Phalcon\Security
 	 	 */
 		public $security;
 
@@ -200,8 +210,6 @@ namespace Phalcon\DI {
          * @var \Redis
          */
         public $redis;
-
-
 		
 		/**
 		 * Sets the dependency injector
