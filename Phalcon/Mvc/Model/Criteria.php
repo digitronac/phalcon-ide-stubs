@@ -382,5 +382,15 @@ namespace Phalcon\Mvc\Model {
 		 */
 		public function execute(){ }
 
+
+		/**
+		 * Sets the cache options in the criteria
+		 * This method replaces all previously set cache options
+		 *
+		 * @param array $options
+		 * @return \Phalcon\Mvc\Model\CriteriaInterface
+		 */
+		public function cache($option){ }
+
 	}
 }

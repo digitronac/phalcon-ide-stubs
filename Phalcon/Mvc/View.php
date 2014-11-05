@@ -489,7 +489,6 @@ namespace Phalcon\Mvc {
 		 *
 		 * @param string $partialPath
 		 * @param array $params
-		 * @param boolean $autorender
 		 */
 		public function partial($partialPath){ }
 

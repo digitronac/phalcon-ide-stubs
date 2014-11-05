@@ -12,8 +12,5 @@ namespace Phalcon {
 
 		public static function preComputeHashKey64($arrKey){ }
 
-
-		public static function testCall(){ }
-
 	}
 }
