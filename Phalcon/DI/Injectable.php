@@ -98,7 +98,7 @@ namespace Phalcon\DI {
 		/**
 		 * @var \Phalcon\Annotations\Adapter\Memory
 	 	 */
-		public $annotations;
+		public $annotations
 
         /**
          * @var \Zend\Session\SessionManager
