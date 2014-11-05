@@ -191,6 +191,16 @@ namespace Phalcon\DI {
          */
         public $translator;
 
+        /**
+         * @var \Rasserbia\Cache\Backend\Redis
+         */
+        public $cache;
+
+        /**
+         * @var \Redis
+         */
+        public $redis;
+
 
 		
 		/**
