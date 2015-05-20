@@ -12,7 +12,7 @@ namespace Phalcon\Mvc {
 	 * <p>A model represents the information (data) of the application and the rules to manipulate that data.
 	 * Models are primarily used for managing the rules of interaction with a corresponding database table.
 	 * In most cases, each table in your database will correspond to one model in your application.
-	 * The bulk of your application’s business logic will be concentrated in the models.</p>
+	 * The bulk of your application's business logic will be concentrated in the models.</p>
 	 *
 	 * <p>Phalcon\Mvc\Model is the first ORM written in C-language for PHP, giving to developers high performance
 	 * when interacting with databases while is also easy to use.</p>
@@ -26,7 +26,7 @@ namespace Phalcon\Mvc {
 	 * if ($robot->save() == false) {
 	 *  echo "Umh, We can store robots: ";
 	 *  foreach ($robot->getMessages() as $message) {
-	 *    echo $message;
+	 *    echo message;
 	 *  }
 	 * } else {
 	 *  echo "Great, a new robot was saved successfully!";
@@ -35,7 +35,7 @@ namespace Phalcon\Mvc {
 	 *
 	 */
 	
-	abstract class Model implements \Phalcon\Mvc\ModelInterface, \Phalcon\Mvc\Model\ResultInterface, \Phalcon\DI\InjectionAwareInterface, \Serializable {
+	abstract class Model implements \Phalcon\Mvc\ModelInterface, \Phalcon\Mvc\Model\ResultInterface, \Phalcon\Di\InjectionAwareInterface, \Serializable {
 
 		const OP_NONE = 0;
 
@@ -79,57 +79,42 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * \Phalcon\Mvc\Model constructor
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
-		 * @param \Phalcon\Mvc\Model\ManagerInterface $modelsManager
 		 */
-		final public function __construct($dependencyInjector=null, $modelsManager=null){ }
+		final public function __construct(\Phalcon\DiInterface $dependencyInjector=null, \Phalcon\Mvc\Model\ManagerInterface $modelsManager=null){ }
 
 
 		/**
 		 * Sets the dependency injection container
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
 		 */
-		public function setDI($dependencyInjector){ }
+		public function setDI(\Phalcon\DiInterface $dependencyInjector){ }
 
 
 		/**
 		 * Returns the dependency injection container
-		 *
-		 * @return \Phalcon\DiInterface
 		 */
 		public function getDI(){ }
 
 
 		/**
 		 * Sets a custom events manager
-		 *
-		 * @param \Phalcon\Events\ManagerInterface $eventsManager
 		 */
-		protected function setEventsManager(){ }
+		protected function setEventsManager(\Phalcon\Events\ManagerInterface $eventsManager){ }
 
 
 		/**
 		 * Returns the custom events manager
-		 *
-		 * @return \Phalcon\Events\ManagerInterface
 		 */
 		protected function getEventsManager(){ }
 
 
 		/**
 		 * Returns the models meta-data service related to the entity instance
-		 *
-		 * @return \Phalcon\Mvc\Model\MetaDataInterface
 		 */
 		public function getModelsMetaData(){ }
 
 
 		/**
 		 * Returns the models manager related to the entity instance
-		 *
-		 * @return \Phalcon\Mvc\Model\ManagerInterface
 		 */
 		public function getModelsManager(){ }
 
@@ -169,119 +154,84 @@ namespace Phalcon\Mvc {
 		 *}
 		 *
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\Model\TransactionInterface $transaction
-		 * @return \Phalcon\Mvc\Model
 		 */
-		public function setTransaction($transaction){ }
+		public function setTransaction(\Phalcon\Mvc\Model\TransactionInterface $transaction){ }
 
 
 		/**
 		 * Sets table name which model should be mapped
-		 *
-		 * @param string $source
-		 * @return \Phalcon\Mvc\Model
 		 */
-		protected function setSource(){ }
+		protected function setSource($source){ }
 
 
 		/**
 		 * Returns table name mapped in the model
-		 *
-		 * @return string
 		 */
 		public function getSource(){ }
 
 
 		/**
 		 * Sets schema name where table mapped is located
-		 *
-		 * @param string $schema
-		 * @return \Phalcon\Mvc\Model
 		 */
-		protected function setSchema(){ }
+		protected function setSchema($schema){ }
 
 
 		/**
 		 * Returns schema name where table mapped is located
-		 *
-		 * @return string
 		 */
 		public function getSchema(){ }
 
 
 		/**
 		 * Sets the DependencyInjection connection service name
-		 *
-		 * @param string $connectionService
-		 * @return \Phalcon\Mvc\Model
 		 */
 		public function setConnectionService($connectionService){ }
 
 
 		/**
 		 * Sets the DependencyInjection connection service name used to read data
-		 *
-		 * @param string $connectionService
-		 * @return \Phalcon\Mvc\Model
 		 */
 		public function setReadConnectionService($connectionService){ }
 
 
 		/**
 		 * Sets the DependencyInjection connection service name used to write data
-		 *
-		 * @param string $connectionService
-		 * @return \Phalcon\Mvc\Model
 		 */
 		public function setWriteConnectionService($connectionService){ }
 
 
 		/**
 		 * Returns the DependencyInjection connection service name used to read data related the model
-		 *
-		 * @return string
 		 */
 		public function getReadConnectionService(){ }
 
 
 		/**
 		 * Returns the DependencyInjection connection service name used to write data related to the model
-		 *
-		 * @return string
 		 */
 		public function getWriteConnectionService(){ }
 
 
 		/**
 		 * Sets the dirty state of the object using one of the DIRTY_STATE_* constants
-		 *
-		 * @param int $dirtyState
-		 * @return \Phalcon\Mvc\Model
 		 */
 		public function setDirtyState($dirtyState){ }
 
 
 		/**
 		 * Returns one of the DIRTY_STATE_* constants telling if the record exists in the database or not
-		 *
-		 * @return int
 		 */
 		public function getDirtyState(){ }
 
 
 		/**
 		 * Gets the connection used to read data for the model
-		 *
-		 * @return \Phalcon\Db\AdapterInterface
 		 */
 		public function getReadConnection(){ }
 
 
 		/**
 		 * Gets the connection used to write data to the model
-		 *
-		 * @return \Phalcon\Db\AdapterInterface
 		 */
 		public function getWriteConnection(){ }
 
@@ -289,20 +239,31 @@ namespace Phalcon\Mvc {
 		/**
 		 * Assigns values to a model from an array
 		 *
-		 *<code>
-		 *$robot->assign(array(
-		 *  'type' => 'mechanical',
-		 *  'name' => 'Astro Boy',
-		 *  'year' => 1952
-		 *));
+		 * <code>
+		 * $robot->assign(array(
+		 *    'type' => 'mechanical',
+		 *    'name' => 'Astro Boy',
+		 *    'year' => 1952
+		 * ));
+		 *
+		 * //assign by db row, column map needed
+		 * $robot->assign($dbRow, array(
+		 *    'db_type' => 'type',
+		 *    'db_name' => 'name',
+		 *    'db_year' => 'year'
+		 * ));
+		 *
+		 * //allow assign only name and year
+		 * $robot->assign($_POST, null, array('name', 'year');
+		 *
 		 *</code>
 		 *
-		 * @param \Phalcon\Mvc\Model $object
-		 * @param array $data
-		 * @param array $columnMap
+		 * @param array data
+		 * @param array dataColumnMap array to transform keys of data to another
+		 * @param array whiteList
 		 * @return \Phalcon\Mvc\Model
 		 */
-		public function assign($data, $columnMap=null){ }
+		public function assign($data, $dataColumnMap=null, $whiteList=null){ }
 
 
 		/**
@@ -316,11 +277,11 @@ namespace Phalcon\Mvc {
 		 *));
 		 *</code>
 		 *
-		 * @param \Phalcon\Mvc\Model $base
-		 * @param array $data
-		 * @param array $columnMap
-		 * @param int $dirtyState
-		 * @param boolean $keepSnapshots
+		 * @param \Phalcon\Mvc\ModelInterface|Phalcon\Mvc\Model\Row base
+		 * @param array data
+		 * @param array columnMap
+		 * @param int dirtyState
+		 * @param boolean keepSnapshots
 		 * @return \Phalcon\Mvc\Model
 		 */
 		public static function cloneResultMap($base, $data, $columnMap, $dirtyState=null, $keepSnapshots=null){ }
@@ -329,9 +290,9 @@ namespace Phalcon\Mvc {
 		/**
 		 * Returns an hydrated result based on the data and the column map
 		 *
-		 * @param array $data
-		 * @param array $columnMap
-		 * @param int $hydrationMode
+		 * @param array data
+		 * @param array columnMap
+		 * @param int hydrationMode
 		 * @return mixed
 		 */
 		public static function cloneResultMapHydrate($data, $columnMap, $hydrationMode){ }
@@ -348,12 +309,12 @@ namespace Phalcon\Mvc {
 		 *));
 		 *</code>
 		 *
-		 * @param \Phalcon\Mvc\Model $base
-		 * @param array $data
-		 * @param int $dirtyState
-		 * @return \Phalcon\Mvc\Model
+		 * @param \Phalcon\Mvc\ModelInterface $base
+		 * @param array data
+		 * @param int dirtyState
+		 * @return \Phalcon\Mvc\ModelInterface
 		 */
-		public static function cloneResult($base, $data, $dirtyState=null){ }
+		public static function cloneResult(\Phalcon\Mvc\ModelInterface $base, $data, $dirtyState=null){ }
 
 
 		/**
@@ -382,7 +343,7 @@ namespace Phalcon\Mvc {
 		 * }
 		 * </code>
 		 *
-		 * @param 	array $parameters
+		 * @param 	array parameters
 		 * @return  \Phalcon\Mvc\Model\ResultsetInterface
 		 */
 		public static function find($parameters=null){ }
@@ -407,7 +368,7 @@ namespace Phalcon\Mvc {
 		 *
 		 * </code>
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return \Phalcon\Mvc\Model
 		 */
 		public static function findFirst($parameters=null){ }
@@ -415,32 +376,30 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * Create a criteria for a specific model
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
-		 * @return \Phalcon\Mvc\Model\Criteria
 		 */
-		public static function query($dependencyInjector=null){ }
+		public static function query(\Phalcon\DiInterface $dependencyInjector=null){ }
 
 
 		/**
 		 * Checks if the current record already exists or not
 		 *
-		 * @param \Phalcon\Mvc\Model\MetadataInterface $metaData
-		 * @param \Phalcon\Db\AdapterInterface $connection
+		 * @param \Phalcon\Mvc\Model\MetadataInterface metaData
+		 * @param \Phalcon\Db\AdapterInterface connection
+		 * @param string|array table
 		 * @return boolean
 		 */
-		protected function _exists(){ }
+		protected function _exists(\Phalcon\Mvc\Model\MetaDataInterface $metaData, \Phalcon\Db\AdapterInterface $connection, $table=null){ }
 
 
 		/**
 		 * Generate a PHQL SELECT statement for an aggregate
 		 *
-		 * @param string $function
-		 * @param string $alias
-		 * @param array $parameters
+		 * @param string function
+		 * @param string alias
+		 * @param array parameters
 		 * @return \Phalcon\Mvc\Model\ResultsetInterface
 		 */
-		protected static function _groupResult(){ }
+		protected static function _groupResult($functionName, $alias, $parameters){ }
 
 
 		/**
@@ -458,8 +417,8 @@ namespace Phalcon\Mvc {
 		 *
 		 * </code>
 		 *
-		 * @param array $parameters
-		 * @return int
+		 * @param array parameters
+		 * @return mixed
 		 */
 		public static function count($parameters=null){ }
 
@@ -479,8 +438,8 @@ namespace Phalcon\Mvc {
 		 *
 		 * </code>
 		 *
-		 * @param array $parameters
-		 * @return double
+		 * @param array parameters
+		 * @return mixed
 		 */
 		public static function sum($parameters=null){ }
 
@@ -500,7 +459,7 @@ namespace Phalcon\Mvc {
 		 *
 		 * </code>
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return mixed
 		 */
 		public static function maximum($parameters=null){ }
@@ -521,7 +480,7 @@ namespace Phalcon\Mvc {
 		 *
 		 * </code>
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return mixed
 		 */
 		public static function minimum($parameters=null){ }
@@ -542,7 +501,7 @@ namespace Phalcon\Mvc {
 		 *
 		 * </code>
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return double
 		 */
 		public static function average($parameters=null){ }
@@ -550,9 +509,6 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * Fires an event, implicitly calls behaviors and listeners in the events manager are notified
-		 *
-		 * @param string $eventName
-		 * @return boolean
 		 */
 		public function fireEvent($eventName){ }
 
@@ -560,17 +516,12 @@ namespace Phalcon\Mvc {
 		/**
 		 * Fires an event, implicitly calls behaviors and listeners in the events manager are notified
 		 * This method stops if one of the callbacks/listeners returns boolean false
-		 *
-		 * @param string $eventName
-		 * @return boolean
 		 */
 		public function fireEventCancel($eventName){ }
 
 
 		/**
 		 * Cancel the current operation
-		 *
-		 * @return boolean
 		 */
 		protected function _cancelOperation(){ }
 
@@ -593,11 +544,8 @@ namespace Phalcon\Mvc {
 		 *   }
 		 * }
 		 * </code>
-		 *
-		 * @param \Phalcon\Mvc\Model\MessageInterface $message
-		 * @return \Phalcon\Mvc\Model
 		 */
-		public function appendMessage($message){ }
+		public function appendMessage(\Phalcon\Mvc\Model\MessageInterface $message){ }
 
 
 		/**
@@ -622,11 +570,8 @@ namespace Phalcon\Mvc {
 		 *
 		 *}
 		 *</code>
-		 *
-		 * @param object $validator
-		 * @return \Phalcon\Mvc\Model
 		 */
-		protected function validate(){ }
+		protected function validate(\Phalcon\Mvc\Model\ValidatorInterface $validator){ }
 
 
 		/**
@@ -651,8 +596,6 @@ namespace Phalcon\Mvc {
 		 *
 		 *}
 		 *</code>
-		 *
-		 * @return boolean
 		 */
 		public function validationHasFailed(){ }
 
@@ -674,8 +617,6 @@ namespace Phalcon\Mvc {
 		 *  	echo "Great, a new robot was saved successfully!";
 		 *	}
 		 * </code>
-		 *
-		 * @return \Phalcon\Mvc\Model\MessageInterface[]
 		 */
 		public function getMessages($filter=null){ }
 
@@ -683,89 +624,80 @@ namespace Phalcon\Mvc {
 		/**
 		 * Reads "belongs to" relations and check the virtual foreign keys when inserting or updating records
 		 * to verify that inserted/updated values are present in the related entity
-		 *
-		 * @return boolean
 		 */
 		protected function _checkForeignKeysRestrict(){ }
 
 
 		/**
-		 * Reads both "hasMany" and "hasOne" relations and checks the virtual foreign keys (restrict) when deleting records
-		 *
-		 * @return boolean
-		 */
-		protected function _checkForeignKeysReverseRestrict(){ }
-
-
-		/**
 		 * Reads both "hasMany" and "hasOne" relations and checks the virtual foreign keys (cascade) when deleting records
-		 *
-		 * @return boolean
 		 */
 		protected function _checkForeignKeysReverseCascade(){ }
 
 
 		/**
+		 * Reads both "hasMany" and "hasOne" relations and checks the virtual foreign keys (restrict) when deleting records
+		 */
+		protected function _checkForeignKeysReverseRestrict(){ }
+
+
+		/**
 		 * Executes internal hooks before save a record
 		 *
-		 * @param \Phalcon\Mvc\Model\MetadataInterface $metaData
-		 * @param boolean $exists
-		 * @param string $identityField
+		 * @param \Phalcon\Mvc\Model\MetadataInterface metaData
+		 * @param boolean exists
+		 * @param string identityField
 		 * @return boolean
 		 */
-		protected function _preSave(){ }
+		protected function _preSave(\Phalcon\Mvc\Model\MetaDataInterface $metaData, $exists, $identityField){ }
 
 
 		/**
 		 * Executes internal events after save a record
-		 *
-		 * @param boolean $success
-		 * @param boolean $exists
-		 * @return boolean
 		 */
-		protected function _postSave(){ }
+		protected function _postSave($success, $exists){ }
 
 
 		/**
 		 * Sends a pre-build INSERT SQL statement to the relational database system
 		 *
-		 * @param \Phalcon\Mvc\Model\MetadataInterface $metaData
-		 * @param \Phalcon\Db\AdapterInterface $connection
-		 * @param string $table
+		 * @param \Phalcon\Mvc\Model\MetadataInterface metaData
+		 * @param \Phalcon\Db\AdapterInterface connection
+		 * @param string|array table
+		 * @param boolean|string identityField
 		 * @return boolean
 		 */
-		protected function _doLowInsert(){ }
+		protected function _doLowInsert(\Phalcon\Mvc\Model\MetaDataInterface $metaData, \Phalcon\Db\AdapterInterface $connection, $table, $identityField){ }
 
 
 		/**
 		 * Sends a pre-build UPDATE SQL statement to the relational database system
 		 *
-		 * @param \Phalcon\Mvc\Model\MetadataInterface $metaData
-		 * @param \Phalcon\Db\AdapterInterface $connection
-		 * @param string|array $table
+		 * @param \Phalcon\Mvc\Model\MetaDataInterface metaData
+		 * @param \Phalcon\Db\AdapterInterface connection
+		 * @param string|array table
 		 * @return boolean
 		 */
-		protected function _doLowUpdate(){ }
+		protected function _doLowUpdate(\Phalcon\Mvc\Model\MetaDataInterface $metaData, \Phalcon\Db\AdapterInterface $connection, $table){ }
 
 
 		/**
 		 * Saves related records that must be stored prior to save the master record
 		 *
-		 * @param \Phalcon\Db\AdapterInterface $connection
-		 * @param \Phalcon\Mvc\ModelInterface[] $related
+		 * @param \Phalcon\Db\AdapterInterface connection
+		 * @param \Phalcon\Mvc\ModelInterface[] related
 		 * @return boolean
 		 */
-		protected function _preSaveRelatedRecords(){ }
+		protected function _preSaveRelatedRecords(\Phalcon\Db\AdapterInterface $connection, $related){ }
 
 
 		/**
 		 * Save the related records assigned in the has-one/has-many relations
 		 *
-		 * @param \Phalcon\Db\AdapterInterface $connection
-		 * @param \Phalcon\Mvc\ModelInterface[] $related
+		 * @param  \Phalcon\Db\AdapterInterface connection
+		 * @param  \Phalcon\Mvc\ModelInterface[] related
 		 * @return boolean
 		 */
-		protected function _postSaveRelatedRecords(){ }
+		protected function _postSaveRelatedRecords(\Phalcon\Db\AdapterInterface $connection, $related){ }
 
 
 		/**
@@ -785,8 +717,8 @@ namespace Phalcon\Mvc {
 		 *	$robot->save();
 		 *</code>
 		 *
-		 * @param array $data
-		 * @param array $whiteList
+		 * @param array data
+		 * @param array whiteList
 		 * @return boolean
 		 */
 		public function save($data=null, $whiteList=null){ }
@@ -813,8 +745,8 @@ namespace Phalcon\Mvc {
 		 *  ));
 		 *</code>
 		 *
-		 * @param array $data
-		 * @param array $whiteList
+		 * @param array data
+		 * @param array whiteList
 		 * @return boolean
 		 */
 		public function create($data=null, $whiteList=null){ }
@@ -831,8 +763,8 @@ namespace Phalcon\Mvc {
 		 *	$robot->update();
 		 *</code>
 		 *
-		 * @param array $data
-		 * @param array $whiteList
+		 * @param array data
+		 * @param array whiteList
 		 * @return boolean
 		 */
 		public function update($data=null, $whiteList=null){ }
@@ -849,8 +781,6 @@ namespace Phalcon\Mvc {
 		 *   $robot->delete();
 		 *}
 		 * </code>
-		 *
-		 * @return boolean
 		 */
 		public function delete(){ }
 
@@ -858,8 +788,6 @@ namespace Phalcon\Mvc {
 		/**
 		 * Returns the type of the latest operation performed by the ORM
 		 * Returns one of the OP_* class constants
-		 *
-		 * @return int
 		 */
 		public function getOperationMade(){ }
 
@@ -872,8 +800,6 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * Skips the current operation forcing a success state
-		 *
-		 * @param boolean $skip
 		 */
 		public function skipOperation($skip){ }
 
@@ -885,7 +811,7 @@ namespace Phalcon\Mvc {
 		 * echo $robot->readAttribute('name');
 		 * </code>
 		 *
-		 * @param string $attribute
+		 * @param string attribute
 		 * @return mixed
 		 */
 		public function readAttribute($attribute){ }
@@ -898,8 +824,8 @@ namespace Phalcon\Mvc {
 		 * 	$robot->writeAttribute('name', 'Rosey');
 		 * </code>
 		 *
-		 * @param string $attribute
-		 * @param mixed $value
+		 * @param string attribute
+		 * @param mixed value
 		 */
 		public function writeAttribute($attribute, $value){ }
 
@@ -909,6 +835,7 @@ namespace Phalcon\Mvc {
 		 * generated INSERT/UPDATE statement
 		 *
 		 *<code>
+		 *<?php
 		 *
 		 *class Robots extends \Phalcon\Mvc\Model
 		 *{
@@ -920,10 +847,8 @@ namespace Phalcon\Mvc {
 		 *
 		 *}
 		 *</code>
-		 *
-		 * @param array $attributes
 		 */
-		protected function skipAttributes(){ }
+		protected function skipAttributes($attributes){ }
 
 
 		/**
@@ -931,6 +856,7 @@ namespace Phalcon\Mvc {
 		 * generated INSERT statement
 		 *
 		 *<code>
+		 *<?php
 		 *
 		 *class Robots extends \Phalcon\Mvc\Model
 		 *{
@@ -942,10 +868,8 @@ namespace Phalcon\Mvc {
 		 *
 		 *}
 		 *</code>
-		 *
-		 * @param array $attributes
 		 */
-		protected function skipAttributesOnCreate(){ }
+		protected function skipAttributesOnCreate($attributes){ }
 
 
 		/**
@@ -953,6 +877,7 @@ namespace Phalcon\Mvc {
 		 * generated UPDATE statement
 		 *
 		 *<code>
+		 *<?php
 		 *
 		 *class Robots extends \Phalcon\Mvc\Model
 		 *{
@@ -964,16 +889,15 @@ namespace Phalcon\Mvc {
 		 *
 		 *}
 		 *</code>
-		 *
-		 * @param array $attributes
 		 */
-		protected function skipAttributesOnUpdate(){ }
+		protected function skipAttributesOnUpdate($attributes){ }
 
 
 		/**
 		 * Setup a 1-1 relation between two models
 		 *
 		 *<code>
+		 *<?php
 		 *
 		 *class Robots extends \Phalcon\Mvc\Model
 		 *{
@@ -986,19 +910,20 @@ namespace Phalcon\Mvc {
 		 *}
 		 *</code>
 		 *
-		 * @param mixed $fields
-		 * @param string $referenceModel
-		 * @param mixed $referencedFields
-		 * @param   array $options
+		 * @param	mixed fields
+		 * @param	string referenceModel
+		 * @param	mixed referencedFields
+		 * @param   array options
 		 * @return  \Phalcon\Mvc\Model\Relation
 		 */
-		public function hasOne(){ }
+		protected function hasOne($fields, $referenceModel, $referencedFields, $options=null){ }
 
 
 		/**
 		 * Setup a relation reverse 1-1  between two models
 		 *
 		 *<code>
+		 *<?php
 		 *
 		 *class RobotsParts extends \Phalcon\Mvc\Model
 		 *{
@@ -1011,19 +936,20 @@ namespace Phalcon\Mvc {
 		 *}
 		 *</code>
 		 *
-		 * @param mixed $fields
-		 * @param string $referenceModel
-		 * @param mixed $referencedFields
-		 * @param   array $options
+		 * @param	mixed fields
+		 * @param	string referenceModel
+		 * @param	mixed referencedFields
+		 * @param   array options
 		 * @return  \Phalcon\Mvc\Model\Relation
 		 */
-		public function belongsTo(){ }
+		protected function belongsTo($fields, $referenceModel, $referencedFields, $options=null){ }
 
 
 		/**
 		 * Setup a relation 1-n between two models
 		 *
 		 *<code>
+		 *<?php
 		 *
 		 *class Robots extends \Phalcon\Mvc\Model
 		 *{
@@ -1036,19 +962,20 @@ namespace Phalcon\Mvc {
 		 *}
 		 *</code>
 		 *
-		 * @param mixed $fields
-		 * @param string $referenceModel
-		 * @param mixed $referencedFields
-		 * @param   array $options
+		 * @param	mixed fields
+		 * @param	string referenceModel
+		 * @param	mixed referencedFields
+		 * @param   array options
 		 * @return  \Phalcon\Mvc\Model\Relation
 		 */
-		public function hasMany(){ }
+		protected function hasMany($fields, $referenceModel, $referencedFields, $options=null){ }
 
 
 		/**
 		 * Setup a relation n-n between two models through an intermediate relation
 		 *
 		 *<code>
+		 *<?php
 		 *
 		 *class Robots extends \Phalcon\Mvc\Model
 		 *{
@@ -1069,22 +996,23 @@ namespace Phalcon\Mvc {
 		 *}
 		 *</code>
 		 *
-		 * @param string $fields
-		 * @param string $intermediateModel
-		 * @param string $intermediateFields
-		 * @param string $intermediateReferencedFields
-		 * @param string $referencedModel
-		 * @param   string $referencedFields
-		 * @param   array $options
+		 * @param	string|array fields
+		 * @param	string intermediateModel
+		 * @param	string|array intermediateFields
+		 * @param	string|array intermediateReferencedFields
+		 * @param	string referencedModel
+		 * @param   string|array referencedFields
+		 * @param   array options
 		 * @return  \Phalcon\Mvc\Model\Relation
 		 */
-		public function hasManyToMany(){ }
+		protected function hasManyToMany($fields, $intermediateModel, $intermediateFields, $intermediateReferencedFields, $referenceModel, $referencedFields, $options=null){ }
 
 
 		/**
 		 * Setups a behavior in a model
 		 *
 		 *<code>
+		 *<?php
 		 *
 		 *use \Phalcon\Mvc\Model\Behavior\Timestampable;
 		 *
@@ -1103,16 +1031,15 @@ namespace Phalcon\Mvc {
 		 *
 		 *}
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\Model\BehaviorInterface $behavior
 		 */
-		public function addBehavior(){ }
+		protected function addBehavior(\Phalcon\Mvc\Model\BehaviorInterface $behavior){ }
 
 
 		/**
 		 * Sets if the model must keep the original record snapshot in memory
 		 *
 		 *<code>
+		 *<?php
 		 *
 		 *class Robots extends \Phalcon\Mvc\Model
 		 *{
@@ -1124,34 +1051,28 @@ namespace Phalcon\Mvc {
 		 *
 		 *}
 		 *</code>
-		 *
-		 * @param boolean $keepSnapshots
 		 */
-		protected function keepSnapshots(){ }
+		protected function keepSnapshots($keepSnapshot){ }
 
 
 		/**
 		 * Sets the record's snapshot data.
 		 * This method is used internally to set snapshot data when the model was set up to keep snapshot data
 		 *
-		 * @param array $data
-		 * @param array $columnMap
+		 * @param array data
+		 * @param array columnMap
 		 */
 		public function setSnapshotData($data, $columnMap=null){ }
 
 
 		/**
 		 * Checks if the object has internal snapshot data
-		 *
-		 * @return boolean
 		 */
 		public function hasSnapshotData(){ }
 
 
 		/**
 		 * Returns the internal snapshot data
-		 *
-		 * @return array
 		 */
 		public function getSnapshotData(){ }
 
@@ -1160,15 +1081,13 @@ namespace Phalcon\Mvc {
 		 * Check if a specific attribute has changed
 		 * This only works if the model is keeping data snapshots
 		 *
-		 * @param boolean $fieldName
+		 * @param string|array fieldName
 		 */
 		public function hasChanged($fieldName=null){ }
 
 
 		/**
 		 * Returns a list of changed values
-		 *
-		 * @return array
 		 */
 		public function getChangedFields(){ }
 
@@ -1177,6 +1096,7 @@ namespace Phalcon\Mvc {
 		 * Sets if a model must use dynamic update instead of the all-field update
 		 *
 		 *<code>
+		 *<?php
 		 *
 		 *class Robots extends \Phalcon\Mvc\Model
 		 *{
@@ -1188,17 +1108,15 @@ namespace Phalcon\Mvc {
 		 *
 		 *}
 		 *</code>
-		 *
-		 * @param boolean $dynamicUpdate
 		 */
-		protected function useDynamicUpdate(){ }
+		protected function useDynamicUpdate($dynamicUpdate){ }
 
 
 		/**
 		 * Returns related records based on defined relations
 		 *
-		 * @param string $alias
-		 * @param array $arguments
+		 * @param string alias
+		 * @param array arguments
 		 * @return \Phalcon\Mvc\Model\ResultsetInterface
 		 */
 		public function getRelated($alias, $arguments=null){ }
@@ -1207,20 +1125,20 @@ namespace Phalcon\Mvc {
 		/**
 		 * Returns related records defined relations depending on the method name
 		 *
-		 * @param string $modelName
-		 * @param string $method
-		 * @param array $arguments
+		 * @param string modelName
+		 * @param string method
+		 * @param array arguments
 		 * @return mixed
 		 */
-		protected function _getRelatedRecords(){ }
+		protected function _getRelatedRecords($modelName, $method, $arguments){ }
 
 
 		/**
 		 * Handles method calls when a method is not implemented
 		 *
-		 * @param string $method
-		 * @param array $arguments
-		 * @return mixed
+		 * @param	string method
+		 * @param	array arguments
+		 * @return	mixed
 		 */
 		public function __call($method, $arguments=null){ }
 
@@ -1228,9 +1146,9 @@ namespace Phalcon\Mvc {
 		/**
 		 * Handles method calls when a static method is not implemented
 		 *
-		 * @param string $method
-		 * @param array $arguments
-		 * @return mixed
+		 * @param	string method
+		 * @param	array arguments
+		 * @return	mixed
 		 */
 		public static function __callStatic($method, $arguments=null){ }
 
@@ -1238,8 +1156,8 @@ namespace Phalcon\Mvc {
 		/**
 		 * Magic method to assign values to the the model
 		 *
-		 * @param string $property
-		 * @param mixed $value
+		 * @param string property
+		 * @param mixed value
 		 */
 		public function __set($property, $value){ }
 
@@ -1247,32 +1165,26 @@ namespace Phalcon\Mvc {
 		/**
 		 * Magic method to get related records using the relation alias as a property
 		 *
-		 * @param string $property
-		 * @return \Phalcon\Mvc\Model\Resultset
+		 * @param string property
+		 * @return \Phalcon\Mvc\Model\Resultset|Phalcon\Mvc\Model
 		 */
 		public function __get($property){ }
 
 
 		/**
 		 * Magic method to check if a property is a valid relation
-		 *
-		 * @param string $property
 		 */
 		public function __isset($property){ }
 
 
 		/**
 		 * Serializes the object ignoring connections, services, related objects or static properties
-		 *
-		 * @return string
 		 */
 		public function serialize(){ }
 
 
 		/**
 		 * Unserializes the object from a serialized string
-		 *
-		 * @param string $data
 		 */
 		public function unserialize($data){ }
 
@@ -1283,8 +1195,6 @@ namespace Phalcon\Mvc {
 		 *<code>
 		 * var_dump($robot->dump());
 		 *</code>
-		 *
-		 * @return array
 		 */
 		public function dump(){ }
 
@@ -1304,17 +1214,14 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * Enables/disables options in the ORM
-		 * Available options:
-		 * events                — Enables/Disables globally the internal events
-		 * virtualForeignKeys    — Enables/Disables virtual foreign keys
-		 * columnRenaming        — Enables/Disables column renaming
-		 * notNullValidations    — Enables/Disables automatic not null validation
-		 * exceptionOnFailedSave — Enables/Disables throws an exception if the saving process fails
-		 * phqlLiterals          — Enables/Disables literals in PHQL this improves the security of applications  
-		 *
-		 * @param array $options
 		 */
 		public static function setup($options){ }
+
+
+		/**
+		 * Reset a model instance data
+		 */
+		public function reset(){ }
 
 	}
 }

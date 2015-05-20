@@ -25,51 +25,40 @@ namespace Phalcon\Logger\Adapter {
 		protected $_options;
 
 		/**
+		 * File Path
+		 */
+		public function getPath(){ }
+
+
+		/**
 		 * \Phalcon\Logger\Adapter\File constructor
 		 *
-		 * @param string $name
-		 * @param array $options
+		 * @param string name
+		 * @param array options
 		 */
 		public function __construct($name, $options=null){ }
 
 
 		/**
 		 * Returns the internal formatter
-		 *
-		 * @return \Phalcon\Logger\Formatter\Line
 		 */
 		public function getFormatter(){ }
 
 
 		/**
 		 * Writes the log to the file itself
-		 *
-		 * @param string $message
-		 * @param int $type
-		 * @param int $time
-		 * @param array $context
 		 */
-		protected function logInternal($message, $type, $time, $context){ }
+		public function logInternal($message, $type, $time, $context){ }
 
 
 		/**
 		 * Closes the logger
-		 *
-		 * @return boolean
 		 */
 		public function close(){ }
 
 
 		/**
-		 * Returns the file path
-		 *
-		 */
-		public function getPath(){ }
-
-
-		/**
 		 * Opens the internal file handler after unserialization
-		 *
 		 */
 		public function __wakeup(){ }
 

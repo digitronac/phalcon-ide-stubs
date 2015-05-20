@@ -12,14 +12,14 @@ namespace Phalcon\Mvc\Model\MetaData {
 	 * You can query the meta-data by printing apc_fetch('$PMM$') or apc_fetch('$PMM$my-app-id')
 	 *
 	 *<code>
-	 *	$metaData = new Phalcon\Mvc\Model\Metadata\Apc(array(
+	 *	$metaData = new \Phalcon\Mvc\Model\Metadata\Apc(array(
 	 *		'prefix' => 'my-app-id',
 	 *		'lifetime' => 86400
 	 *	));
 	 *</code>
 	 */
 	
-	class Apc extends \Phalcon\Mvc\Model\MetaData implements \Phalcon\Mvc\Model\MetaDataInterface, \Phalcon\DI\InjectionAwareInterface {
+	class Apc extends \Phalcon\Mvc\Model\MetaData implements \Phalcon\Di\InjectionAwareInterface, \Phalcon\Mvc\Model\MetaDataInterface {
 
 		const MODELS_ATTRIBUTES = 0;
 
@@ -45,6 +45,8 @@ namespace Phalcon\Mvc\Model\MetaData {
 
 		const MODELS_AUTOMATIC_DEFAULT_UPDATE = 11;
 
+		const MODELS_DEFAULT_VALUES = 12;
+
 		const MODELS_COLUMN_MAP = 0;
 
 		const MODELS_REVERSE_COLUMN_MAP = 1;
@@ -56,30 +58,21 @@ namespace Phalcon\Mvc\Model\MetaData {
 		/**
 		 * \Phalcon\Mvc\Model\MetaData\Apc constructor
 		 *
-		 * @param array $options
+		 * @param array options
 		 */
 		public function __construct($options=null){ }
 
 
 		/**
 		 * Reads meta-data from APC
-		 *
-		 * @param  string $key
-		 * @return array
 		 */
 		public function read($key){ }
 
 
 		/**
 		 * Writes the meta-data to APC
-		 *
-		 * @param string $key
-		 * @param array $data
 		 */
 		public function write($key, $data){ }
-
-
-		public function reset(){ }
 
 	}
 }

@@ -12,14 +12,14 @@ namespace Phalcon\Mvc\Model {
 	 * <p>A standard Phalcon\Mvc\Model\MetaData can be used to query model attributes:</p>
 	 *
 	 * <code>
-	 *	$metaData = new Phalcon\Mvc\Model\MetaData\Memory();
+	 *	$metaData = new \Phalcon\Mvc\Model\MetaData\Memory();
 	 *	$attributes = $metaData->getAttributes(new Robots());
 	 *	print_r($attributes);
 	 * </code>
 	 *
 	 */
 	
-	abstract class MetaData implements \Phalcon\DI\InjectionAwareInterface, \Phalcon\Mvc\Model\MetaDataInterface {
+	abstract class MetaData implements \Phalcon\Di\InjectionAwareInterface {
 
 		const MODELS_ATTRIBUTES = 0;
 
@@ -45,6 +45,8 @@ namespace Phalcon\Mvc\Model {
 
 		const MODELS_AUTOMATIC_DEFAULT_UPDATE = 11;
 
+		const MODELS_DEFAULT_VALUES = 12;
+
 		const MODELS_COLUMN_MAP = 0;
 
 		const MODELS_REVERSE_COLUMN_MAP = 1;
@@ -60,42 +62,34 @@ namespace Phalcon\Mvc\Model {
 		/**
 		 * Initialize the metadata for certain table
 		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @param string $key
-		 * @param string $table
-		 * @param string $schema
+		 * @param \Phalcon\Mvc\ModelInterface model
+		 * @param string|null key
+		 * @param string|null table
+		 * @param string|null schema
 		 */
-		protected function _initialize(){ }
+		final protected function _initialize(\Phalcon\Mvc\ModelInterface $model, $key, $table, $schema){ }
 
 
 		/**
 		 * Sets the DependencyInjector container
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
 		 */
-		public function setDI($dependencyInjector){ }
+		public function setDI(\Phalcon\DiInterface $dependencyInjector){ }
 
 
 		/**
 		 * Returns the DependencyInjector container
-		 *
-		 * @return \Phalcon\DiInterface
 		 */
 		public function getDI(){ }
 
 
 		/**
 		 * Set the meta-data extraction strategy
-		 *
-		 * @param \Phalcon\Mvc\Model\MetaData\Strategy\Introspection $strategy
 		 */
-		public function setStrategy($strategy){ }
+		public function setStrategy(\Phalcon\Mvc\Model\MetaData\StrategyInterface $strategy){ }
 
 
 		/**
 		 * Return the strategy to obtain the meta-data
-		 *
-		 * @return \Phalcon\Mvc\Model\MetaData\Strategy\Introspection
 		 */
 		public function getStrategy(){ }
 
@@ -104,27 +98,27 @@ namespace Phalcon\Mvc\Model {
 		 * Reads the complete meta-data for certain model
 		 *
 		 *<code>
-		 *	print_r($metaData->readMetaData(new Robots()));
+		 *	print_r($metaData->readMetaData(new Robots());
 		 *</code>
 		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
+		 * @param \Phalcon\Mvc\ModelInterface model
 		 * @return array
 		 */
-		public function readMetaData($model){ }
+		final public function readMetaData(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
-		 * Reads meta-data for certain model using a MODEL_* constant
+		 * Reads meta-data for certain model
 		 *
 		 *<code>
-		 *	print_r($metaData->writeColumnMapIndex(new Robots(), MetaData::MODELS_REVERSE_COLUMN_MAP, array('leName' => 'name')));
+		 *	print_r($metaData->readMetaDataIndex(new Robots(), 0);
 		 *</code>
 		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @param int $index
-		 * @return array
+		 * @param \Phalcon\Mvc\ModelInterface model
+		 * @param int index
+		 * @return mixed
 		 */
-		public function readMetaDataIndex($model, $index){ }
+		final public function readMetaDataIndex(\Phalcon\Mvc\ModelInterface $model, $index){ }
 
 
 		/**
@@ -134,11 +128,11 @@ namespace Phalcon\Mvc\Model {
 		 *	print_r($metaData->writeColumnMapIndex(new Robots(), MetaData::MODELS_REVERSE_COLUMN_MAP, array('leName' => 'name')));
 		 *</code>
 		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @param int $index
-		 * @param mixed $data
+		 * @param \Phalcon\Mvc\ModelInterface model
+		 * @param int index
+		 * @param mixed data
 		 */
-		public function writeMetaDataIndex($model, $index, $data, $replace){ }
+		final public function writeMetaDataIndex(\Phalcon\Mvc\ModelInterface $model, $index, $data){ }
 
 
 		/**
@@ -148,10 +142,10 @@ namespace Phalcon\Mvc\Model {
 		 *	print_r($metaData->readColumnMap(new Robots()));
 		 *</code>
 		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
+		 * @param \Phalcon\Mvc\ModelInterface model
 		 * @return array
 		 */
-		public function readColumnMap($model){ }
+		final public function readColumnMap(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -160,11 +154,8 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	print_r($metaData->readColumnMapIndex(new Robots(), MetaData::MODELS_REVERSE_COLUMN_MAP));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @param int $index
 		 */
-		public function readColumnMapIndex($model, $index){ }
+		final public function readColumnMapIndex(\Phalcon\Mvc\ModelInterface $model, $index){ }
 
 
 		/**
@@ -173,11 +164,8 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	print_r($metaData->getAttributes(new Robots()));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return array
 		 */
-		public function getAttributes($model){ }
+		public function getAttributes(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -186,24 +174,18 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	print_r($metaData->getPrimaryKeyAttributes(new Robots()));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return array
 		 */
-		public function getPrimaryKeyAttributes($model){ }
+		public function getPrimaryKeyAttributes(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
-		 * Returns an arrau of fields which are not part of the primary key
+		 * Returns an array of fields which are not part of the primary key
 		 *
 		 *<code>
 		 *	print_r($metaData->getNonPrimaryKeyAttributes(new Robots()));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return 	array
 		 */
-		public function getNonPrimaryKeyAttributes($model){ }
+		public function getNonPrimaryKeyAttributes(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -212,11 +194,8 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	print_r($metaData->getNotNullAttributes(new Robots()));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return array
 		 */
-		public function getNotNullAttributes($model){ }
+		public function getNotNullAttributes(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -225,11 +204,8 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	print_r($metaData->getDataTypes(new Robots()));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return array
 		 */
-		public function getDataTypes($model){ }
+		public function getDataTypes(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -238,11 +214,8 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	print_r($metaData->getDataTypesNumeric(new Robots()));
 		 *</code>
-		 *
-		 * @param  \Phalcon\Mvc\ModelInterface $model
-		 * @return array
 		 */
-		public function getDataTypesNumeric($model){ }
+		public function getDataTypesNumeric(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -252,10 +225,10 @@ namespace Phalcon\Mvc\Model {
 		 *	print_r($metaData->getIdentityField(new Robots()));
 		 *</code>
 		 *
-		 * @param  \Phalcon\Mvc\ModelInterface $model
+		 * @param  \Phalcon\Mvc\ModelInterface model
 		 * @return string
 		 */
-		public function getIdentityField($model){ }
+		public function getIdentityField(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -264,11 +237,8 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	print_r($metaData->getBindTypes(new Robots()));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return array
 		 */
-		public function getBindTypes($model){ }
+		public function getBindTypes(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -277,11 +247,8 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	print_r($metaData->getAutomaticCreateAttributes(new Robots()));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return array
 		 */
-		public function getAutomaticCreateAttributes($model){ }
+		public function getAutomaticCreateAttributes(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -290,11 +257,8 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	print_r($metaData->getAutomaticUpdateAttributes(new Robots()));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return array
 		 */
-		public function getAutomaticUpdateAttributes($model){ }
+		public function getAutomaticUpdateAttributes(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -304,10 +268,10 @@ namespace Phalcon\Mvc\Model {
 		 *	$metaData->setAutomaticCreateAttributes(new Robots(), array('created_at' => true));
 		 *</code>
 		 *
-		 * @param  \Phalcon\Mvc\ModelInterface $model
-		 * @param  array $attributes
+		 * @param  \Phalcon\Mvc\ModelInterface model
+		 * @param  array attributes
 		 */
-		public function setAutomaticCreateAttributes($model, $attributes, $replace){ }
+		public function setAutomaticCreateAttributes(\Phalcon\Mvc\ModelInterface $model, $attributes){ }
 
 
 		/**
@@ -317,10 +281,20 @@ namespace Phalcon\Mvc\Model {
 		 *	$metaData->setAutomaticUpdateAttributes(new Robots(), array('modified_at' => true));
 		 *</code>
 		 *
-		 * @param  \Phalcon\Mvc\ModelInterface $model
-		 * @param  array $attributes
+		 * @param  \Phalcon\Mvc\ModelInterface model
+		 * @param  array attributes
 		 */
-		public function setAutomaticUpdateAttributes($model, $attributes, $replace){ }
+		public function setAutomaticUpdateAttributes(\Phalcon\Mvc\ModelInterface $model, $attributes){ }
+
+
+		/**
+		 * Returns attributes (which have default values) and their default values
+		 *
+		 *<code>
+		 *	print_r($metaData->getDefaultValues(new Robots()));
+		 *</code>
+		 */
+		public function getDefaultValues(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -329,11 +303,8 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	print_r($metaData->getColumnMap(new Robots()));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return array
 		 */
-		public function getColumnMap($model){ }
+		public function getColumnMap(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -342,11 +313,8 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	print_r($metaData->getReverseColumnMap(new Robots()));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return array
 		 */
-		public function getReverseColumnMap($model){ }
+		public function getReverseColumnMap(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
@@ -355,12 +323,8 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	var_dump($metaData->hasAttribute(new Robots(), 'name'));
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @param string $attribute
-		 * @return boolean
 		 */
-		public function hasAttribute($model, $attribute){ }
+		public function hasAttribute(\Phalcon\Mvc\ModelInterface $model, $attribute){ }
 
 
 		/**
@@ -369,8 +333,6 @@ namespace Phalcon\Mvc\Model {
 		 *<code>
 		 *	var_dump($metaData->isEmpty());
 		 *</code>
-		 *
-		 * @return boolean
 		 */
 		public function isEmpty(){ }
 

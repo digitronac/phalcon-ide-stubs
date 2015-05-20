@@ -6,6 +6,8 @@ namespace Phalcon\Validation\Validator {
 	 * Phalcon\Validation\Validator\StringLength
 	 *
 	 * Validates that a string has the specified maximum and minimum constraints
+	 * The test is passed if for a string's length L, min<=L<=max, i.e. L must
+	 * be at least min, and at most max.
 	 *
 	 *<code>
 	 *use Phalcon\Validation\Validator\StringLength as StringLength;
@@ -24,12 +26,8 @@ namespace Phalcon\Validation\Validator {
 
 		/**
 		 * Executes the validation
-		 *
-		 * @param \Phalcon\Validation $validator
-		 * @param string $attribute
-		 * @return boolean
 		 */
-		public function validate($validator, $attribute){ }
+		public function validate(\Phalcon\Validation $validation, $field){ }
 
 	}
 }

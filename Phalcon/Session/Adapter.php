@@ -8,7 +8,7 @@ namespace Phalcon\Session {
 	 * Base class for Phalcon\Session adapters
 	 */
 	
-	abstract class Adapter implements \Phalcon\Session\AdapterInterface, \Countable, \IteratorAggregate, \Traversable, \ArrayAccess {
+	abstract class Adapter {
 
 		protected $_uniqueId;
 
@@ -19,12 +19,9 @@ namespace Phalcon\Session {
 		/**
 		 * \Phalcon\Session\Adapter constructor
 		 *
-		 * @param array $options
+		 * @param array options
 		 */
 		public function __construct($options=null){ }
-
-
-		public function __destruct(){ }
 
 
 		/**
@@ -39,12 +36,12 @@ namespace Phalcon\Session {
 		 * Sets session's options
 		 *
 		 *<code>
-		 *	$session->setOptions(array(
+		 *	session->setOptions(array(
 		 *		'uniqueId' => 'my-private-app'
 		 *	));
 		 *</code>
 		 *
-		 * @param array $options
+		 * @param array options
 		 */
 		public function setOptions($options){ }
 
@@ -60,23 +57,23 @@ namespace Phalcon\Session {
 		/**
 		 * Gets a session variable from an application context
 		 *
-		 * @param string $index
-		 * @param mixed $defaultValue
-		 * @param bool $remove
+		 * @param string index
+		 * @param mixed defaultValue
+		 * @param boolean remove
 		 * @return mixed
 		 */
-		public function get($index, $defaultValue=null){ }
+		public function get($index, $defaultValue=null, $remove=null){ }
 
 
 		/**
 		 * Sets a session variable in an application context
 		 *
 		 *<code>
-		 *	$session->set('auth', 'yes');
+		 *	session->set('auth', 'yes');
 		 *</code>
 		 *
-		 * @param string $index
-		 * @param string $value
+		 * @param string index
+		 * @param string value
 		 */
 		public function set($index, $value){ }
 
@@ -88,8 +85,7 @@ namespace Phalcon\Session {
 		 *	var_dump($session->has('auth'));
 		 *</code>
 		 *
-		 * @param string $index
-		 * @return boolean
+		 * @param string index
 		 */
 		public function has($index){ }
 
@@ -100,8 +96,6 @@ namespace Phalcon\Session {
 		 *<code>
 		 *	$session->remove('auth');
 		 *</code>
-		 *
-		 * @param string $index
 		 */
 		public function remove($index){ }
 
@@ -112,10 +106,20 @@ namespace Phalcon\Session {
 		 *<code>
 		 *	echo $session->getId();
 		 *</code>
-		 *
-		 * @return string
 		 */
 		public function getId(){ }
+
+
+		/**
+		 * Set the current session id
+		 *
+		 *<code>
+		 *	$session->setId($id);
+		 *</code>
+		 *
+		 * @param string id
+		 */
+		public function setId($id){ }
 
 
 		/**
@@ -124,8 +128,6 @@ namespace Phalcon\Session {
 		 *<code>
 		 *	var_dump($session->isStarted());
 		 *</code>
-		 *
-		 * @return boolean
 		 */
 		public function isStarted(){ }
 
@@ -134,42 +136,42 @@ namespace Phalcon\Session {
 		 * Destroys the active session
 		 *
 		 *<code>
-		 *	var_dump($session->destroy());
+		 *	var_dump(session->destroy());
 		 *</code>
-		 *
-		 * @return boolean
 		 */
-		public function destroy($session_id=null){ }
+		public function destroy(){ }
 
 
-		public function __get($property){ }
+		/**
+		 * Alias: Gets a session variable from an application context
+		 *
+		 * @param string index
+		 * @return mixed
+		 */
+		public function __get($index){ }
 
 
-		public function __set($property, $value){ }
+		/**
+		 * Alias: Sets a session variable in an application context
+		 *
+		 * @param string index
+		 * @param string value
+		 */
+		public function __set($index, $value){ }
 
 
-		public function __isset($property){ }
+		/**
+		 * Alias: Check whether a session variable is set in an application context
+		 *
+		 * @param string index
+		 */
+		public function __isset($index){ }
 
 
-		public function __unset($property){ }
-
-
-		public function offsetGet($property){ }
-
-
-		public function offsetSet($property, $value){ }
-
-
-		public function offsetExists($property){ }
-
-
-		public function offsetUnset($property){ }
-
-
-		public function count(){ }
-
-
-		public function getIterator(){ }
+		/**
+		 * Alias: Removes a session variable from an application context
+		 */
+		public function __unset($index){ }
 
 	}
 }

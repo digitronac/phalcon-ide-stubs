@@ -9,7 +9,7 @@ namespace Phalcon\Mvc\Model\MetaData {
 	 *
 	 */
 	
-	class Memory extends \Phalcon\Mvc\Model\MetaData implements \Phalcon\Mvc\Model\MetaDataInterface, \Phalcon\DI\InjectionAwareInterface {
+	class Memory extends \Phalcon\Mvc\Model\MetaData implements \Phalcon\Di\InjectionAwareInterface, \Phalcon\Mvc\Model\MetaDataInterface {
 
 		const MODELS_ATTRIBUTES = 0;
 
@@ -35,6 +35,8 @@ namespace Phalcon\Mvc\Model\MetaData {
 
 		const MODELS_AUTOMATIC_DEFAULT_UPDATE = 11;
 
+		const MODELS_DEFAULT_VALUES = 12;
+
 		const MODELS_COLUMN_MAP = 0;
 
 		const MODELS_REVERSE_COLUMN_MAP = 1;
@@ -42,7 +44,7 @@ namespace Phalcon\Mvc\Model\MetaData {
 		/**
 		 * \Phalcon\Mvc\Model\MetaData\Memory constructor
 		 *
-		 * @param array $options
+		 * @param array options
 		 */
 		public function __construct($options=null){ }
 
@@ -50,7 +52,7 @@ namespace Phalcon\Mvc\Model\MetaData {
 		/**
 		 * Reads the meta-data from temporal memory
 		 *
-		 * @param string $key
+		 * @param string key
 		 * @return array
 		 */
 		public function read($key){ }
@@ -59,8 +61,8 @@ namespace Phalcon\Mvc\Model\MetaData {
 		/**
 		 * Writes the meta-data to temporal memory
 		 *
-		 * @param string $key
-		 * @param array $metaData
+		 * @param string key
+		 * @param array data
 		 */
 		public function write($key, $data){ }
 

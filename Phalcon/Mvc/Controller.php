@@ -12,6 +12,7 @@ namespace Phalcon\Mvc {
 	 * and passing that data on to the views for presentation.
 	 *
 	 *<code>
+	 *<?php
 	 *
 	 *class PeopleController extends \Phalcon\Mvc\Controller
 	 *{
@@ -38,11 +39,10 @@ namespace Phalcon\Mvc {
 	 *</code>
 	 */
 	
-	abstract class Controller extends \Phalcon\DI\Injectable implements \Phalcon\Events\EventsAwareInterface, \Phalcon\DI\InjectionAwareInterface, \Phalcon\Mvc\ControllerInterface {
+	abstract class Controller extends \Phalcon\Di\Injectable implements \Phalcon\Events\EventsAwareInterface, \Phalcon\Di\InjectionAwareInterface {
 
 		/**
 		 * \Phalcon\Mvc\Controller constructor
-		 *
 		 */
 		final public function __construct(){ }
 

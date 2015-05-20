@@ -8,10 +8,9 @@ namespace Phalcon\Logger\Adapter {
 	 * Sends logs to FirePHP
 	 *
 	 *<code>
-	 *	$logger = new \Phalcon\Logger\Adapter\Firephp("");
-	 *	$logger->log("This is a message");
-	 *	$logger->log("This is an error", \Phalcon\Logger::ERROR);
-	 *	$logger->error("This is another error");
+	 * $logger = new \Phalcon\Logger\Adapter\Firephp("");
+	 * $logger->log(\Phalcon\Logger::ERROR, "This is an error");
+	 * $logger->error("This is another error");
 	 *</code>
 	 */
 	
@@ -38,13 +37,11 @@ namespace Phalcon\Logger\Adapter {
 		 * @param array $context
 		 * @see http://www.firephp.org/Wiki/Reference/Protocol
 		 */
-		protected function logInternal($message, $type, $time, $context){ }
+		public function logInternal($message, $type, $time, $context){ }
 
 
 		/**
 		 * Closes the logger
-		 *
-		 * @return boolean
 		 */
 		public function close(){ }
 

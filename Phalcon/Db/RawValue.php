@@ -12,7 +12,7 @@ namespace Phalcon\Db {
 	 *<code>
 	 *	$subscriber = new Subscribers();
 	 *	$subscriber->email = 'andres@phalconphp.com';
-	 *	$subscriber->created_at = new Phalcon\Db\RawValue('now()');
+	 *	$subscriber->createdAt = new \Phalcon\Db\RawValue('now()');
 	 *	$subscriber->save();
 	 *</code>
 	 */
@@ -22,25 +22,25 @@ namespace Phalcon\Db {
 		protected $_value;
 
 		/**
-		 * \Phalcon\Db\RawValue constructor
+		 * Raw value without quoting or formating
 		 *
-		 * @param string $value
-		 */
-		public function __construct($value){ }
-
-
-		/**
-		 * Returns internal raw value without quoting or formating
-		 *
-		 * @return string
+		 * @var string
 		 */
 		public function getValue(){ }
 
 
 		/**
-		 * Magic method __toString returns raw value without quoting or formating
+		 * Raw value without quoting or formating
+		 *
+		 * @var string
 		 */
 		public function __toString(){ }
+
+
+		/**
+		 * \Phalcon\Db\RawValue constructor
+		 */
+		public function __construct($value){ }
 
 	}
 }

@@ -6,7 +6,6 @@ namespace Phalcon\Translate\Adapter {
 	 * Phalcon\Translate\Adapter\NativeArray
 	 *
 	 * Allows to define translation lists using PHP arrays
-	 *
 	 */
 	
 	class NativeArray extends \Phalcon\Translate\Adapter implements \Phalcon\Translate\AdapterInterface, \ArrayAccess {
@@ -15,8 +14,6 @@ namespace Phalcon\Translate\Adapter {
 
 		/**
 		 * \Phalcon\Translate\Adapter\NativeArray constructor
-		 *
-		 * @param array $options
 		 */
 		public function __construct($options){ }
 
@@ -24,8 +21,8 @@ namespace Phalcon\Translate\Adapter {
 		/**
 		 * Returns the translation related to the given key
 		 *
-		 * @param string $index
-		 * @param array $placeholders
+		 * @param string  index
+		 * @param array   placeholders
 		 * @return string
 		 */
 		public function query($index, $placeholders=null){ }
@@ -33,9 +30,6 @@ namespace Phalcon\Translate\Adapter {
 
 		/**
 		 * Check whether is defined a translation key in the internal array
-		 *
-		 * @param string $index
-		 * @return bool
 		 */
 		public function exists($index){ }
 

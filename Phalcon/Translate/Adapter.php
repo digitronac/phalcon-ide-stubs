@@ -8,19 +8,23 @@ namespace Phalcon\Translate {
 	 * Base class for Phalcon\Translate adapters
 	 */
 	
-	abstract class Adapter implements \ArrayAccess, \Phalcon\Translate\AdapterInterface {
-
-		/**
-		 * Class constructore
-		 */
-		public function __construct(){ }
-
+	abstract class Adapter {
 
 		/**
 		 * Returns the translation string of the given key
 		 *
-		 * @param string $translateKey
-		 * @param array $placeholders
+		 * @param string  translateKey
+		 * @param array   placeholders
+		 * @return string
+		 */
+		public function t($translateKey, $placeholders=null){ }
+
+
+		/**
+		 * Returns the translation string of the given key (alias of method 't')
+		 *
+		 * @param string  translateKey
+		 * @param array   placeholders
 		 * @return string
 		 */
 		public function _($translateKey, $placeholders=null){ }
@@ -29,36 +33,39 @@ namespace Phalcon\Translate {
 		/**
 		 * Sets a translation value
 		 *
-		 * @param 	string $offset
-		 * @param 	string $value
+		 * @param string offset
+		 * @param string value
 		 */
-		public function offsetSet($property, $value){ }
+		public function offsetSet($offset, $value){ }
 
 
 		/**
 		 * Check whether a translation key exists
-		 *
-		 * @param string $translateKey
-		 * @return boolean
 		 */
-		public function offsetExists($property){ }
+		public function offsetExists($translateKey){ }
 
 
 		/**
 		 * Unsets a translation from the dictionary
 		 *
-		 * @param string $offset
+		 * @param string offset
 		 */
-		public function offsetUnset($property){ }
+		public function offsetUnset($offset){ }
 
 
 		/**
 		 * Returns the translation related to the given key
 		 *
-		 * @param string $translateKey
+		 * @param  string translateKey
 		 * @return string
 		 */
-		public function offsetGet($property){ }
+		public function offsetGet($translateKey){ }
+
+
+		/**
+		 * Replaces placeholders by the values passed	
+		 */
+		protected function replacePlaceholders($translation, $placeholders=null){ }
 
 	}
 }

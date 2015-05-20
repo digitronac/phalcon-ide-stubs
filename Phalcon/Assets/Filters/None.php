@@ -11,10 +11,7 @@ namespace Phalcon\Assets\Filters {
 	class None implements \Phalcon\Assets\FilterInterface {
 
 		/**
-		 * Returns the content without touching
-		 *
-		 * @param string $content
-		 * @return $content
+		 * Returns the content without be touched
 		 */
 		public function filter($content){ }
 

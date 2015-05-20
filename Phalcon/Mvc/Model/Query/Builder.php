@@ -8,17 +8,29 @@ namespace Phalcon\Mvc\Model\Query {
 	 * Helps to create PHQL queries using an OO interface
 	 *
 	 *<code>
-	 *$resultset = $this->modelsManager->createBuilder()
-	 *   ->from('Robots')
-	 *   ->join('RobotsParts')
-	 *   ->limit(20)
-	 *   ->orderBy('Robots.name')
-	 *   ->getQuery()
-	 *   ->execute();
+	 * $params = array(
+	 *    'models'     => array('Users'),
+	 *    'columns'    => array('id', 'name', 'status'),
+	 *    'conditions' => array(
+	 *        array(
+	 *            "created > :min: AND created < :max:",
+	 *            array("min" => '2013-01-01',   'max' => '2014-01-01'),
+	 *            array("min" => PDO::PARAM_STR, 'max' => PDO::PARAM_STR),
+	 *        ),
+	 *    ),
+	 *    // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
+	 *    'group'      => array('id', 'name'),
+	 *    'having'     => "name = 'Kamil'",
+	 *    'order'      => array('name', 'id'),
+	 *    'limit'      => 20,
+	 *    'offset'     => 20,
+	 *    // or 'limit' => array(20, 20),
+	 *);
+	 *$queryBuilder = new \Phalcon\Mvc\Model\Query\Builder($params);
 	 *</code>
 	 */
 	
-	class Builder implements \Phalcon\Mvc\Model\Query\BuilderInterface, \Phalcon\DI\InjectionAwareInterface {
+	class Builder implements \Phalcon\Mvc\Model\Query\BuilderInterface, \Phalcon\Di\InjectionAwareInterface {
 
 		protected $_dependencyInjector;
 
@@ -55,32 +67,22 @@ namespace Phalcon\Mvc\Model\Query {
 		/**
 		 * \Phalcon\Mvc\Model\Query\Builder constructor
 		 *
-		 *<code>
-		 * $params = array(
-		 *    'models'     => array('Users'),
-		 *    'columns'    => array('id', 'name', 'status'),
-		 *    'conditions' => array(
-		 *        array(
-		 *            "created > :min: AND created < :max:",
-		 *            array("min" => '2013-01-01',   'max' => '2014-01-01'),
-		 *            array("min" => PDO::PARAM_STR, 'max' => PDO::PARAM_STR),
-		 *        ),
-		 *    ),
-		 *    // or 'conditions' => "created > '2013-01-01' AND created < '2014-01-01'",
-		 *    'group'      => array('id', 'name'),
-		 *    'having'     => "name = 'Kamil'",
-		 *    'order'      => array('name', 'id'),
-		 *    'limit'      => 20,
-		 *    'offset'     => 20,
-		 *    // or 'limit' => array(20, 20),
-		 *);
-		 *$queryBuilder = new \Phalcon\Mvc\Model\Query\Builder($params);
-		 *</code> 
-		 *
-		 * @param array $params
-		 * @param \Phalcon\DI $dependencyInjector
+		 * @param array params
+		 * @param \Phalcon\DiInterface dependencyInjector
 		 */
-		public function __construct($params=null){ }
+		public function __construct($params=null, \Phalcon\DiInterface $dependencyInjector=null){ }
+
+
+		/**
+		 * Sets the DependencyInjector container
+		 */
+		public function setDI(\Phalcon\DiInterface $dependencyInjector){ }
+
+
+		/**
+		 * Returns the DependencyInjector container
+		 */
+		public function getDI(){ }
 
 
 		/**
@@ -94,27 +96,8 @@ namespace Phalcon\Mvc\Model\Query {
 
 		/**
 		 * Returns SELECT DISTINCT / SELECT ALL flag
-		 *
-		 * @return bool
 		 */
 		public function getDistinct(){ }
-
-
-		/**
-		 * Sets the DependencyInjector container
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
-		 * @return \Phalcon\Mvc\Model\Query\Builder
-		 */
-		public function setDI($dependencyInjector){ }
-
-
-		/**
-		 * Returns the DependencyInjector container
-		 *
-		 * @return \Phalcon\DiInterface
-		 */
-		public function getDI(){ }
 
 
 		/**
@@ -124,7 +107,7 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->columns(array('id', 'name'));
 		 *</code>
 		 *
-		 * @param string|array $columns
+		 * @param string|array columns
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function columns($columns){ }
@@ -146,7 +129,7 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->from(array('Robots', 'RobotsParts'));
 		 *</code>
 		 *
-		 * @param string|array $models
+		 * @param string|array models
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function from($models){ }
@@ -159,8 +142,8 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->addFrom('Robots', 'r');
 		 *</code>
 		 *
-		 * @param string $model
-		 * @param string $alias
+		 * @param string model
+		 * @param string alias
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function addFrom($model, $alias=null){ }
@@ -181,16 +164,16 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->join('Robots');
 		 *	$builder->join('Robots', 'r.id = RobotsParts.robots_id');
 		 *	$builder->join('Robots', 'r.id = RobotsParts.robots_id', 'r');
-		 *	$builder->join('Robots', 'r.id = RobotsParts.robots_id', 'r', 'LEFT');
+		 *	$builder->join('Robots', 'r.id = RobotsParts.robots_id', 'r', 'INNER');
 		 *</code>
 		 *
-		 * @param string $model
-		 * @param string $conditions
-		 * @param string $alias
-		 * @param string $type
+		 * @param string model
+		 * @param string conditions
+		 * @param string alias
+		 * @param string type
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
-		public function join($model, $conditions=null, $alias=null){ }
+		public function join($model, $conditions=null, $alias=null, $type=null){ }
 
 
 		/**
@@ -200,13 +183,12 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->innerJoin('Robots');
 		 *	$builder->innerJoin('Robots', 'r.id = RobotsParts.robots_id');
 		 *	$builder->innerJoin('Robots', 'r.id = RobotsParts.robots_id', 'r');
-		 *	$builder->innerJoin('Robots', 'r.id = RobotsParts.robots_id', 'r', 'LEFT');
 		 *</code>
 		 *
-		 * @param string $model
-		 * @param string $conditions
-		 * @param string $alias
-		 * @param string $type
+		 * @param string model
+		 * @param string conditions
+		 * @param string alias
+		 * @param string type
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function innerJoin($model, $conditions=null, $alias=null){ }
@@ -219,9 +201,9 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->leftJoin('Robots', 'r.id = RobotsParts.robots_id', 'r');
 		 *</code>
 		 *
-		 * @param string $model
-		 * @param string $conditions
-		 * @param string $alias
+		 * @param string model
+		 * @param string conditions
+		 * @param string alias
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function leftJoin($model, $conditions=null, $alias=null){ }
@@ -234,9 +216,9 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->rightJoin('Robots', 'r.id = RobotsParts.robots_id', 'r');
 		 *</code>
 		 *
-		 * @param string $model
-		 * @param string $conditions
-		 * @param string $alias
+		 * @param string model
+		 * @param string conditions
+		 * @param string alias
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function rightJoin($model, $conditions=null, $alias=null){ }
@@ -246,13 +228,14 @@ namespace Phalcon\Mvc\Model\Query {
 		 * Sets the query conditions
 		 *
 		 *<code>
+		 *	$builder->where(100);
 		 *	$builder->where('name = "Peter"');
 		 *	$builder->where('name = :name: AND id > :id:', array('name' => 'Peter', 'id' => 100));
 		 *</code>
 		 *
-		 * @param string $conditions
-		 * @param array $bindParams
-		 * @param array $bindTypes
+		 * @param mixed conditions
+		 * @param array bindParams
+		 * @param array bindTypes
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function where($conditions, $bindParams=null, $bindTypes=null){ }
@@ -266,9 +249,9 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->andWhere('name = :name: AND id > :id:', array('name' => 'Peter', 'id' => 100));
 		 *</code>
 		 *
-		 * @param string $conditions
-		 * @param array $bindParams
-		 * @param array $bindTypes
+		 * @param string conditions
+		 * @param array bindParams
+		 * @param array bindTypes
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function andWhere($conditions, $bindParams=null, $bindTypes=null){ }
@@ -282,9 +265,9 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->orWhere('name = :name: AND id > :id:', array('name' => 'Peter', 'id' => 100));
 		 *</code>
 		 *
-		 * @param string $conditions
-		 * @param array $bindParams
-		 * @param array $bindTypes
+		 * @param string conditions
+		 * @param array bindParams
+		 * @param array bindTypes
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function orWhere($conditions, $bindParams=null, $bindTypes=null){ }
@@ -297,9 +280,9 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->betweenWhere('price', 100.25, 200.50);
 		 *</code>
 		 *
-		 * @param string $expr
-		 * @param mixed $minimum
-		 * @param mixed $maximum
+		 * @param string expr
+		 * @param mixed minimum
+		 * @param mixed maximum
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function betweenWhere($expr, $minimum, $maximum){ }
@@ -312,9 +295,9 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->notBetweenWhere('price', 100.25, 200.50);
 		 *</code>
 		 *
-		 * @param string $expr
-		 * @param mixed $minimum
-		 * @param mixed $maximum
+		 * @param string expr
+		 * @param mixed minimum
+		 * @param mixed maximum
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function notBetweenWhere($expr, $minimum, $maximum){ }
@@ -326,10 +309,6 @@ namespace Phalcon\Mvc\Model\Query {
 		 *<code>
 		 *	$builder->inWhere('id', [1, 2, 3]);
 		 *</code>
-		 *
-		 * @param string $expr
-		 * @param array $values
-		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function inWhere($expr, $values){ }
 
@@ -340,10 +319,6 @@ namespace Phalcon\Mvc\Model\Query {
 		 *<code>
 		 *	$builder->notInWhere('id', [1, 2, 3]);
 		 *</code>
-		 *
-		 * @param string $expr
-		 * @param array $values
-		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function notInWhere($expr, $values){ }
 
@@ -364,7 +339,7 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->orderBy(array('1', 'Robots.name'));
 		 *</code>
 		 *
-		 * @param string $orderBy
+		 * @param string|array orderBy
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function orderBy($orderBy){ }
@@ -384,9 +359,6 @@ namespace Phalcon\Mvc\Model\Query {
 		 *<code>
 		 *	$builder->having('SUM(Robots.price) > 0');
 		 *</code>
-		 *
-		 * @param string $having
-		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function having($having){ }
 
@@ -406,12 +378,8 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->limit(100);
 		 *	$builder->limit(100, 20);
 		 *</code>
-		 *
-		 * @param int $limit
-		 * @param int $offset
-		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
-		public function limit($limit, $offset=null){ }
+		public function limit($limit=null, $offset=null){ }
 
 
 		/**
@@ -428,10 +396,6 @@ namespace Phalcon\Mvc\Model\Query {
 		 *<code>
 		 *	$builder->offset(30);
 		 *</code>
-		 *
-		 * @param int $limit
-		 * @param int $offset
-		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function offset($offset){ }
 
@@ -451,7 +415,7 @@ namespace Phalcon\Mvc\Model\Query {
 		 *	$builder->groupBy(array('Robots.name'));
 		 *</code>
 		 *
-		 * @param string $group
+		 * @param string|array group
 		 * @return \Phalcon\Mvc\Model\Query\Builder
 		 */
 		public function groupBy($group){ }
@@ -475,8 +439,6 @@ namespace Phalcon\Mvc\Model\Query {
 
 		/**
 		 * Returns the query built
-		 *
-		 * @return \Phalcon\Mvc\Model\Query
 		 */
 		public function getQuery(){ }
 

@@ -23,35 +23,24 @@ namespace Phalcon {
 
 		/**
 		 * \Phalcon\Flash constructor
-		 *
-		 * @param array $cssClasses
 		 */
 		public function __construct($cssClasses=null){ }
 
 
 		/**
-		 * Set whether the output must be implictly flushed to the output or returned as string
-		 *
-		 * @param boolean $implicitFlush
-		 * @return \Phalcon\FlashInterface
+		 * Set whether the output must be implicitly flushed to the output or returned as string
 		 */
 		public function setImplicitFlush($implicitFlush){ }
 
 
 		/**
-		 * Set if the output must be implictily formatted with HTML
-		 *
-		 * @param boolean $automaticHtml
-		 * @return \Phalcon\FlashInterface
+		 * Set if the output must be implicitly formatted with HTML
 		 */
 		public function setAutomaticHtml($automaticHtml){ }
 
 
 		/**
 		 * Set an array with CSS classes to format the messages
-		 *
-		 * @param array $cssClasses
-		 * @return \Phalcon\FlashInterface
 		 */
 		public function setCssClasses($cssClasses){ }
 
@@ -62,9 +51,6 @@ namespace Phalcon {
 		 *<code>
 		 * $flash->error('This is an error');
 		 *</code>
-		 *
-		 * @param string $message
-		 * @return string
 		 */
 		public function error($message){ }
 
@@ -75,9 +61,6 @@ namespace Phalcon {
 		 *<code>
 		 * $flash->notice('This is an information');
 		 *</code>
-		 *
-		 * @param string $message
-		 * @return string
 		 */
 		public function notice($message){ }
 
@@ -88,9 +71,6 @@ namespace Phalcon {
 		 *<code>
 		 * $flash->success('The process was finished successfully');
 		 *</code>
-		 *
-		 * @param string $message
-		 * @return string
 		 */
 		public function success($message){ }
 
@@ -101,9 +81,6 @@ namespace Phalcon {
 		 *<code>
 		 * $flash->warning('Hey, this is important');
 		 *</code>
-		 *
-		 * @param string $message
-		 * @return string
 		 */
 		public function warning($message){ }
 
@@ -112,11 +89,10 @@ namespace Phalcon {
 		 * Outputs a message formatting it with HTML
 		 *
 		 *<code>
-		 * $flash->outputMessage('error', $message);
+		 * $flash->outputMessage('error', message);
 		 *</code>
 		 *
-		 * @param string $type
-		 * @param string $message
+		 * @param string|array message
 		 */
 		public function outputMessage($type, $message){ }
 

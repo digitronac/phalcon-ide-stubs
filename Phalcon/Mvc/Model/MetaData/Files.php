@@ -14,7 +14,7 @@ namespace Phalcon\Mvc\Model\MetaData {
 	 *</code>
 	 */
 	
-	class Files extends \Phalcon\Mvc\Model\MetaData implements \Phalcon\Mvc\Model\MetaDataInterface, \Phalcon\DI\InjectionAwareInterface {
+	class Files extends \Phalcon\Mvc\Model\MetaData implements \Phalcon\Di\InjectionAwareInterface, \Phalcon\Mvc\Model\MetaDataInterface {
 
 		const MODELS_ATTRIBUTES = 0;
 
@@ -40,6 +40,8 @@ namespace Phalcon\Mvc\Model\MetaData {
 
 		const MODELS_AUTOMATIC_DEFAULT_UPDATE = 11;
 
+		const MODELS_DEFAULT_VALUES = 12;
+
 		const MODELS_COLUMN_MAP = 0;
 
 		const MODELS_REVERSE_COLUMN_MAP = 1;
@@ -49,7 +51,7 @@ namespace Phalcon\Mvc\Model\MetaData {
 		/**
 		 * \Phalcon\Mvc\Model\MetaData\Files constructor
 		 *
-		 * @param array $options
+		 * @param array options
 		 */
 		public function __construct($options=null){ }
 
@@ -57,8 +59,8 @@ namespace Phalcon\Mvc\Model\MetaData {
 		/**
 		 * Reads meta-data from files
 		 *
-		 * @param string $key
-		 * @return array
+		 * @param string key
+		 * @return mixed
 		 */
 		public function read($key){ }
 
@@ -66,13 +68,10 @@ namespace Phalcon\Mvc\Model\MetaData {
 		/**
 		 * Writes the meta-data to files
 		 *
-		 * @param string $key
-		 * @param array $data
+		 * @param string key
+		 * @param array data
 		 */
 		public function write($key, $data){ }
-
-
-		public function reset(){ }
 
 	}
 }

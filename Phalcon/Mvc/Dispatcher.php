@@ -11,9 +11,9 @@ namespace Phalcon\Mvc {
 	 *
 	 *<code>
 	 *
-	 *	$di = new Phalcon\DI();
+	 *	$di = new \Phalcon\Di();
 	 *
-	 *	$dispatcher = new Phalcon\Mvc\Dispatcher();
+	 *	$dispatcher = new \Phalcon\Mvc\Dispatcher();
 	 *
 	 *  $dispatcher->setDI($di);
 	 *
@@ -26,7 +26,7 @@ namespace Phalcon\Mvc {
 	 *</code>
 	 */
 	
-	class Dispatcher extends \Phalcon\Dispatcher implements \Phalcon\Events\EventsAwareInterface, \Phalcon\DI\InjectionAwareInterface, \Phalcon\DispatcherInterface, \Phalcon\Mvc\DispatcherInterface {
+	class Dispatcher extends \Phalcon\Dispatcher implements \Phalcon\Events\EventsAwareInterface, \Phalcon\Di\InjectionAwareInterface, \Phalcon\DispatcherInterface, \Phalcon\Mvc\DispatcherInterface {
 
 		const EXCEPTION_NO_DI = 0;
 
@@ -48,94 +48,68 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * Sets the default controller suffix
-		 *
-		 * @param string $controllerSuffix
 		 */
 		public function setControllerSuffix($controllerSuffix){ }
 
 
 		/**
 		 * Sets the default controller name
-		 *
-		 * @param string $controllerName
 		 */
 		public function setDefaultController($controllerName){ }
 
 
 		/**
 		 * Sets the controller name to be dispatched
-		 *
-		 * @param string $controllerName
 		 */
-		public function setControllerName($controllerName, $isExact=null){ }
+		public function setControllerName($controllerName){ }
 
 
 		/**
 		 * Gets last dispatched controller name
-		 *
-		 * @return string
 		 */
 		public function getControllerName(){ }
 
 
 		/**
-		 * Throws an internal exception
-		 *
-		 * @param string $message
-		 * @param int $exceptionCode
+		 * Gets previous dispatched controller name
 		 */
-		protected function _throwDispatchException(){ }
+		public function getPreviousControllerName(){ }
+
+
+		/**
+		 * Gets previous dispatched action name
+		 */
+		public function getPreviousActionName(){ }
+
+
+		/**
+		 * Throws an internal exception
+		 */
+		protected function _throwDispatchException($message, $exceptionCode=null){ }
 
 
 		/**
 		 * Handles a user exception
-		 *
-		 * @param \Exception $exception
-		 *
-		 * @warning If any additional logic is to be implemented here, please check
-		 * phalcon_dispatcher_fire_event() first
 		 */
-		protected function _handleException(){ }
+		protected function _handleException(\Exception $exception){ }
 
 
 		/**
 		 * Possible controller class name that will be located to dispatch the request
-		 *
-		 * @return string
 		 */
 		public function getControllerClass(){ }
 
 
 		/**
 		 * Returns the lastest dispatched controller
-		 *
-		 * @return \Phalcon\Mvc\ControllerInterface
 		 */
 		public function getLastController(){ }
 
 
 		/**
 		 * Returns the active controller in the dispatcher
-		 *
-		 * @return \Phalcon\Mvc\ControllerInterface
 		 */
 		public function getActiveController(){ }
-
-
-		/**
-		 * Returns the previous controller in the dispatcher
-		 *
-		 * @return string
-		 */
-		public function getPreviousControllerName(){ }
-
-
-		/**
-		 * Returns the previous action in the dispatcher
-		 *
-		 * @return string
-		 */
-		public function getPreviousActionName(){ }
 
 	}
 }

@@ -24,25 +24,30 @@ namespace Phalcon\Events {
 		/**
 		 * Attach a listener to the events manager
 		 *
-		 * @param string $eventType
-		 * @param object|callable $handler
-		 * @param int $priority
+		 * @param string eventType
+		 * @param object|callable handler
+		 * @param int priority
 		 */
-		public function attach($eventType, $handler){ }
+		public function attach($eventType, $handler, $priority=null){ }
+
+
+		/**
+		 * Detach the listener from the events manager
+		 *
+		 * @param string eventType
+		 * @param object handler
+		 */
+		public function detach($eventType, $handler){ }
 
 
 		/**
 		 * Set if priorities are enabled in the EventsManager
-		 *
-		 * @param boolean $enablePriorities
 		 */
 		public function enablePriorities($enablePriorities){ }
 
 
 		/**
 		 * Returns if priorities are enabled
-		 *
-		 * @return boolean
 		 */
 		public function arePrioritiesEnabled(){ }
 
@@ -50,8 +55,6 @@ namespace Phalcon\Events {
 		/**
 		 * Tells the event manager if it needs to collect all the responses returned by every
 		 * registered listener in a single fire
-		 *
-		 * @param boolean $collect
 		 */
 		public function collectResponses($collect){ }
 
@@ -73,20 +76,24 @@ namespace Phalcon\Events {
 
 		/**
 		 * Removes all events from the EventsManager
-		 *
-		 * @param string $type
 		 */
 		public function detachAll($type=null){ }
 
 
 		/**
+		 * Alias of detachAll
+		 */
+		public function dettachAll($type=null){ }
+
+
+		/**
 		 * Internal handler to call a queue of events
 		 *
-		 * @param \SplPriorityQueue $queue
-		 * @param \Phalcon\Events\Event $event
+		 * @param \SplPriorityQueue|array queue
+		 * @param \Phalcon\Events\Event event
 		 * @return mixed
 		 */
-		public function fireQueue($queue, $event){ }
+		final public function fireQueue($queue, \Phalcon\Events\Event $event){ }
 
 
 		/**
@@ -95,35 +102,20 @@ namespace Phalcon\Events {
 		 *<code>
 		 *	$eventsManager->fire('db', $connection);
 		 *</code>
-		 *
-		 * @param string $eventType
-		 * @param object $source
-		 * @param mixed  $data
-		 * @param int $cancelable
-		 * @return mixed
 		 */
-		public function fire($eventType, $source, $data=null){ }
+		public function fire($eventType, $source, $data=null, $cancelable=null){ }
 
 
 		/**
 		 * Check whether certain type of event has listeners
-		 *
-		 * @param string $type
-		 * @return boolean
 		 */
 		public function hasListeners($type){ }
 
 
 		/**
-		 * Returns all the attached listeners of a certain type
-		 *
-		 * @param string $type
-		 * @return array
+		 * Returns all the attached listeners of a certain type	 	 
 		 */
 		public function getListeners($type){ }
-
-
-		public function dettachAll($type=null){ }
 
 	}
 }

@@ -13,8 +13,8 @@ namespace Phalcon\Tag {
 		/**
 		 * Generates a SELECT tag
 		 *
-		 * @param array $parameters
-		 * @param array $data
+		 * @param array parameters
+		 * @param array data
 		 */
 		public static function selectField($parameters, $data=null){ }
 
@@ -22,23 +22,22 @@ namespace Phalcon\Tag {
 		/**
 		 * Generate the OPTION tags based on a resulset
 		 *
-		 * @param \Phalcon\Mvc\Model $resultset
-		 * @param array $using
+		 * @param \Phalcon\Mvc\Model\Resultset resultset
+		 * @param array using
 		 * @param mixed value
-		 * @param string $closeOption
+		 * @param string closeOption
 		 */
-		protected static function _optionsFromResultset(){ }
+		private static function _optionsFromResultset($resultset, $using, $value, $closeOption){ }
 
 
 		/**
 		 * Generate the OPTION tags based on an array
 		 *
-		 * @param \Phalcon\Mvc\ModelInterface $resultset
-		 * @param array $using
+		 * @param array data
 		 * @param mixed value
-		 * @param string $closeOption
+		 * @param string closeOption
 		 */
-		protected static function _optionsFromArray(){ }
+		private static function _optionsFromArray($data, $value, $closeOption){ }
 
 	}
 }

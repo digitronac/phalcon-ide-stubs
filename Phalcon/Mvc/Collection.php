@@ -9,7 +9,7 @@ namespace Phalcon\Mvc {
 	 * works with documents
 	 */
 	
-	class Collection implements \Phalcon\Mvc\CollectionInterface, \Phalcon\DI\InjectionAwareInterface, \Serializable {
+	abstract class Collection implements \Phalcon\Mvc\CollectionInterface, \Phalcon\Di\InjectionAwareInterface, \Serializable {
 
 		const OP_NONE = 0;
 
@@ -38,18 +38,15 @@ namespace Phalcon\Mvc {
 		protected static $_disableEvents;
 
 		/**
-		 * \Phalcon\Mvc\Model constructor
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
-		 * @param \Phalcon\Mvc\Collection\ManagerInterface $modelsManager
+		 * \Phalcon\Mvc\Collection constructor
 		 */
-		final public function __construct($dependencyInjector=null){ }
+		final public function __construct(\Phalcon\DiInterface $dependencyInjector=null, \Phalcon\Mvc\Collection\ManagerInterface $modelsManager=null){ }
 
 
 		/**
 		 * Sets a value for the _id property, creates a MongoId object if needed
 		 *
-		 * @param mixed $id
+		 * @param mixed id
 		 */
 		public function setId($id){ }
 
@@ -64,90 +61,66 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * Sets the dependency injection container
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
 		 */
-		public function setDI($dependencyInjector){ }
+		public function setDI(\Phalcon\DiInterface $dependencyInjector){ }
 
 
 		/**
 		 * Returns the dependency injection container
-		 *
-		 * @return \Phalcon\DiInterface
 		 */
 		public function getDI(){ }
 
 
 		/**
 		 * Sets a custom events manager
-		 *
-		 * @param \Phalcon\Events\ManagerInterface $eventsManager
 		 */
-		protected function setEventsManager($eventsManager){ }
+		protected function setEventsManager(\Phalcon\Mvc\Collection\ManagerInterface $eventsManager){ }
 
 
 		/**
 		 * Returns the custom events manager
-		 *
-		 * @return \Phalcon\Events\ManagerInterface
 		 */
 		protected function getEventsManager(){ }
 
 
 		/**
 		 * Returns the models manager related to the entity instance
-		 *
-		 * @return \Phalcon\Mvc\Model\ManagerInterface
 		 */
-		public function getModelsManager(){ }
+		public function getCollectionManager(){ }
 
 
 		/**
 		 * Returns an array with reserved properties that cannot be part of the insert/update
-		 *
-		 * @return array
 		 */
 		public function getReservedAttributes(){ }
 
 
 		/**
 		 * Sets if a model must use implicit objects ids
-		 *
-		 * @param boolean $useImplicitObjectIds
 		 */
-		protected function useImplicitObjectIds(){ }
+		protected function useImplicitObjectIds($useImplicitObjectIds){ }
 
 
 		/**
 		 * Sets collection name which model should be mapped
-		 *
-		 * @param string $source
-		 * @return \Phalcon\Mvc\Collection
 		 */
-		protected function setSource(){ }
+		protected function setSource($source){ }
 
 
 		/**
 		 * Returns collection name mapped in the model
-		 *
-		 * @return string
 		 */
 		public function getSource(){ }
 
 
 		/**
 		 * Sets the DependencyInjection connection service name
-		 *
-		 * @param string $connectionService
-		 * @return \Phalcon\Mvc\Model
 		 */
 		public function setConnectionService($connectionService){ }
 
 
 		/**
 		 * Returns DependencyInjection connection service
-		 *
-		 * @return string
 		 */
 		public function getConnectionService(){ }
 
@@ -164,10 +137,10 @@ namespace Phalcon\Mvc {
 		 * Reads an attribute value by its name
 		 *
 		 *<code>
-		 *	echo $robot->readAttribute('name');
+		 *	echo robot->readAttribute('name');
 		 *</code>
 		 *
-		 * @param string $attribute
+		 * @param string attribute
 		 * @return mixed
 		 */
 		public function readAttribute($attribute){ }
@@ -177,68 +150,59 @@ namespace Phalcon\Mvc {
 		 * Writes an attribute value by its name
 		 *
 		 *<code>
-		 *	$robot->writeAttribute('name', 'Rosey');
+		 *	robot->writeAttribute('name', 'Rosey');
 		 *</code>
 		 *
-		 * @param string $attribute
-		 * @param mixed $value
+		 * @param string attribute
+		 * @param mixed value
 		 */
 		public function writeAttribute($attribute, $value){ }
 
 
 		/**
 		 * Returns a cloned collection
-		 *
-		 * @param \Phalcon\Mvc\Collection $collection
-		 * @param array $document
-		 * @return \Phalcon\Mvc\Collection
 		 */
-		public static function cloneResult($collection, $document){ }
+		public static function cloneResult(\Phalcon\Mvc\CollectionInterface $collection, $document){ }
 
 
 		/**
 		 * Returns a collection resultset
 		 *
-		 * @param array $params
-		 * @param \Phalcon\Mvc\Collection $collection
-		 * @param \MongoDb $connection
-		 * @param boolean $unique
+		 * @param array params
+		 * @param \Phalcon\Mvc\Collection collection
+		 * @param \MongoDb connection
+		 * @param boolean unique
 		 * @return array
 		 */
-		protected static function _getResultset(){ }
+		protected static function _getResultset($params, \Phalcon\Mvc\CollectionInterface $collection, $connection, $unique){ }
 
 
 		/**
 		 * Perform a count over a resultset
 		 *
-		 * @param array $params
-		 * @param \Phalcon\Mvc\Collection $collection
-		 * @param \MongoDb $connection
+		 * @param array params
+		 * @param \Phalcon\Mvc\Collection collection
+		 * @param \MongoDb connection
 		 * @return int
 		 */
-		protected static function _getGroupResultset(){ }
+		protected static function _getGroupResultset($params, \Phalcon\Mvc\Collection $collection, $connection){ }
 
 
 		/**
 		 * Executes internal hooks before save a document
 		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
-		 * @param boolean $disableEvents
-		 * @param boolean $exists
+		 * @param \Phalcon\DiInterface dependencyInjector
+		 * @param boolean disableEvents
+		 * @param boolean exists
 		 * @return boolean
 		 */
-		protected function _preSave(){ }
+		final protected function _preSave($dependencyInjector, $disableEvents, $exists){ }
 
 
 		/**
 		 * Executes internal events after save a document
-		 *
-		 * @param boolean $disableEvents
-		 * @param boolean $success
-		 * @param boolean $exists
-		 * @return boolean
 		 */
-		protected function _postSave(){ }
+		final protected function _postSave($disableEvents, $success, $exists){ }
 
 
 		/**
@@ -252,21 +216,19 @@ namespace Phalcon\Mvc {
 		 *
 		 *	public function validation()
 		 *	{
-		 *		$this->validate(new ExclusionIn(array(
+		 *		this->validate(new ExclusionIn(array(
 		 *			'field' => 'status',
 		 *			'domain' => array('A', 'I')
 		 *		)));
-		 *		if ($this->validationHasFailed() == true) {
+		 *		if (this->validationHasFailed() == true) {
 		 *			return false;
 		 *		}
 		 *	}
 		 *
 		 *}
 		 *</code>
-		 *
-		 * @param object $validator
 		 */
-		protected function validate(){ }
+		protected function validate(\Phalcon\Mvc\Model\ValidatorInterface $validator){ }
 
 
 		/**
@@ -280,76 +242,65 @@ namespace Phalcon\Mvc {
 		 *
 		 *	public function validation()
 		 *	{
-		 *		$this->validate(new ExclusionIn(array(
+		 *		this->validate(new ExclusionIn(array(
 		 *			'field' => 'status',
 		 *			'domain' => array('A', 'I')
 		 *		)));
-		 *		if ($this->validationHasFailed() == true) {
+		 *		if (this->validationHasFailed() == true) {
 		 *			return false;
 		 *		}
 		 *	}
 		 *
 		 *}
 		 *</code>
-		 *
-		 * @return boolean
 		 */
 		public function validationHasFailed(){ }
 
 
 		/**
 		 * Fires an internal event
-		 *
-		 * @param string $eventName
-		 * @return boolean
 		 */
 		public function fireEvent($eventName){ }
 
 
 		/**
 		 * Fires an internal event that cancels the operation
-		 *
-		 * @param string $eventName
-		 * @return boolean
 		 */
 		public function fireEventCancel($eventName){ }
 
 
 		/**
 		 * Cancel the current operation
-		 *
-		 * @return boolean
 		 */
-		protected function _cancelOperation(){ }
+		protected function _cancelOperation($disableEvents){ }
 
 
 		/**
 		 * Checks if the document exists in the collection
 		 *
-		 * @param \MongoCollection $collection
+		 * @param \MongoCollection collection
+		 * @return boolean
 		 */
-		protected function _exists(){ }
+		protected function _exists($collection){ }
 
 
 		/**
 		 * Returns all the validation messages
 		 *
 		 * <code>
-		 *$robot = new Robots();
-		 *$robot->type = 'mechanical';
-		 *$robot->name = 'Astro Boy';
-		 *$robot->year = 1952;
-		 *if ($robot->save() == false) {
+		 *robot = new Robots();
+		 *robot->type = 'mechanical';
+		 *robot->name = 'Astro Boy';
+		 *robot->year = 1952;
+		 *if (robot->save() == false) {
 		 *	echo "Umh, We can't store robots right now ";
-		 *	foreach ($robot->getMessages() as $message) {
-		 *		echo $message;
+		 *	foreach (robot->getMessages() as message) {
+		 *		echo message;
 		 *	}
 		 *} else {
 		 *	echo "Great, a new robot was saved successfully!";
 		 *}
 		 * </code>
-		 *
-		 * @return \Phalcon\Mvc\Model\MessageInterface[]
 		 */
 		public function getMessages(){ }
 
@@ -365,23 +316,19 @@ namespace Phalcon\Mvc {
 		 *
 		 *		public function beforeSave()
 		 *		{
-		 *			if ($this->name == 'Peter') {
-		 *				$message = new Message("Sorry, but a robot cannot be named Peter");
-		 *				$this->appendMessage($message);
+		 *			if (this->name == 'Peter') {
+		 *				message = new Message("Sorry, but a robot cannot be named Peter");
+		 *				this->appendMessage(message);
 		 *			}
 		 *		}
 		 *	}
 		 *</code>
-		 *
-		 * @param \Phalcon\Mvc\Model\MessageInterface $message
 		 */
-		public function appendMessage($message){ }
+		public function appendMessage(\Phalcon\Mvc\Model\MessageInterface $message){ }
 
 
 		/**
-		 * Creates/Updates a collection based on the values in the attributes
-		 *
-		 * @return boolean
+		 * Creates/Updates a collection based on the values in the atributes
 		 */
 		public function save(){ }
 
@@ -389,7 +336,7 @@ namespace Phalcon\Mvc {
 		/**
 		 * Find a document by its id (_id)
 		 *
-		 * @param string|\MongoId $id
+		 * @param string|\MongoId id
 		 * @return \Phalcon\Mvc\Collection
 		 */
 		public static function findById($id){ }
@@ -401,26 +348,23 @@ namespace Phalcon\Mvc {
 		 * <code>
 		 *
 		 * //What's the first robot in the robots table?
-		 * $robot = Robots::findFirst();
-		 * echo "The robot name is ", $robot->name, "\n";
+		 * robot = Robots::findFirst();
+		 * echo "The robot name is ", robot->name, "\n";
 		 *
 		 * //What's the first mechanical robot in robots table?
-		 * $robot = Robots::findFirst(array(
+		 * robot = Robots::findFirst(array(
 		 *     array("type" => "mechanical")
 		 * ));
-		 * echo "The first mechanical robot name is ", $robot->name, "\n";
+		 * echo "The first mechanical robot name is ", robot->name, "\n";
 		 *
 		 * //Get first virtual robot ordered by name
-		 * $robot = Robots::findFirst(array(
+		 * robot = Robots::findFirst(array(
 		 *     array("type" => "mechanical"),
 		 *     "order" => array("name" => 1)
 		 * ));
-		 * echo "The first virtual robot name is ", $robot->name, "\n";
+		 * echo "The first virtual robot name is ", robot->name, "\n";
 		 *
 		 * </code>
-		 *
-		 * @param array $parameters
-		 * @return array
 		 */
 		public static function findFirst($parameters=null){ }
 
@@ -431,37 +375,34 @@ namespace Phalcon\Mvc {
 		 * <code>
 		 *
 		 * //How many robots are there?
-		 * $robots = Robots::find();
-		 * echo "There are ", count($robots), "\n";
+		 * robots = Robots::find();
+		 * echo "There are ", count(robots), "\n";
 		 *
 		 * //How many mechanical robots are there?
-		 * $robots = Robots::find(array(
+		 * robots = Robots::find(array(
 		 *     array("type" => "mechanical")
 		 * ));
-		 * echo "There are ", count($robots), "\n";
+		 * echo "There are ", count(robots), "\n";
 		 *
 		 * //Get and print virtual robots ordered by name
-		 * $robots = Robots::findFirst(array(
+		 * robots = Robots::findFirst(array(
 		 *     array("type" => "virtual"),
 		 *     "order" => array("name" => 1)
 		 * ));
-		 * foreach ($robots as $robot) {
-		 *	   echo $robot->name, "\n";
+		 * foreach (robots as robot) {
+		 *	   echo robot->name, "\n";
 		 * }
 		 *
 		 * //Get first 100 virtual robots ordered by name
-		 * $robots = Robots::find(array(
+		 * robots = Robots::find(array(
 		 *     array("type" => "virtual"),
 		 *     "order" => array("name" => 1),
 		 *     "limit" => 100
 		 * ));
-		 * foreach ($robots as $robot) {
-		 *	   echo $robot->name, "\n";
+		 * foreach (robots as robot) {
+		 *	   echo robot->name, "\n";
 		 * }
 		 * </code>
-		 *
-		 * @param 	array $parameters
-		 * @return  array
 		 */
 		public static function find($parameters=null){ }
 
@@ -472,28 +413,22 @@ namespace Phalcon\Mvc {
 		 *<code>
 		 * echo 'There are ', Robots::count(), ' robots';
 		 *</code>
-		 *
-		 * @param array $parameters
-		 * @return array
 		 */
 		public static function count($parameters=null){ }
 
 
 		/**
 		 * Perform an aggregation using the Mongo aggregation framework
-		 *
-		 * @param array $parameters
-		 * @return array
 		 */
-		public static function aggregate($parameters){ }
+		public static function aggregate($parameters=null){ }
 
 
 		/**
 		 * Allows to perform a summatory group for a column in the collection
 		 *
-		 * @param string $field
-		 * @param array $conditions
-		 * @param string $finalize
+		 * @param string field
+		 * @param array conditions
+		 * @param string finalize
 		 * @return array
 		 */
 		public static function summatory($field, $conditions=null, $finalize=null){ }
@@ -504,15 +439,13 @@ namespace Phalcon\Mvc {
 		 *
 		 * <code>
 		 *
-		 *	$robot = Robots::findFirst();
-		 *	$robot->delete();
+		 *	robot = Robots::findFirst();
+		 *	robot->delete();
 		 *
-		 *	foreach (Robots::find() as $robot) {
-		 *		$robot->delete();
+		 *	foreach (Robots::find() as robot) {
+		 *		robot->delete();
 		 *	}
 		 * </code>
-		 *
-		 * @return boolean
 		 */
 		public function delete(){ }
 
@@ -521,45 +454,22 @@ namespace Phalcon\Mvc {
 		 * Returns the instance as an array representation
 		 *
 		 *<code>
-		 * print_r($robot->toArray());
+		 * print_r(robot->to[]);
 		 *</code>
-		 *
-		 * @return array
 		 */
 		public function toArray(){ }
 
 
 		/**
 		 * Serializes the object ignoring connections or protected properties
-		 *
-		 * @return string
 		 */
 		public function serialize(){ }
 
 
 		/**
 		 * Unserializes the object from a serialized string
-		 *
-		 * @param string $data
 		 */
-		public function unserialize($serialized=null){ }
-
-
-		/**
-		 * Runs JavaScript code on the database server.
-		 *
-		 * <code>
-		 *
-		 * $ret = Robots::execute("function() { return 'Hello, world!';}");
-		 * echo $ret['retval'], "\n";
-		 *
-		 * </code>
-		 *
-		 * @param mixed $code
-		 * @param array $args
-		 * @return array
-		 */
-		public static function execute($code, $args=null){ }
+		public function unserialize($data){ }
 
 	}
 }

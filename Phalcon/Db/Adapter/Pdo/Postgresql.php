@@ -15,7 +15,7 @@ namespace Phalcon\Db\Adapter\Pdo {
 	 *  "password" => ""
 	 * );
 	 *
-	 * $connection = new Phalcon\Db\Adapter\Pdo\Postgresql($config);
+	 * $connection = new \Phalcon\Db\Adapter\Pdo\Postgresql($config);
 	 *
 	 * </code>
 	 */
@@ -30,8 +30,6 @@ namespace Phalcon\Db\Adapter\Pdo {
 		 * This method is automatically called in \Phalcon\Db\Adapter\Pdo constructor.
 		 * Call it when you need to restore a database connection.
 		 *
-		 * Support set search_path after connectted if schema is specified in config.
-		 *
 		 * @param array $descriptor
 		 * @return boolean
 		 */
@@ -41,35 +39,36 @@ namespace Phalcon\Db\Adapter\Pdo {
 		/**
 		 * Returns an array of \Phalcon\Db\Column objects describing a table
 		 *
-		 * <code>print_r($connection->describeColumns("posts")); ?></code>
-		 *
-		 * @param string $table
-		 * @param string $schema
-		 * @return \Phalcon\Db\Column[]
+		 * <code>
+		 * print_r($connection->describeColumns("posts"));
+		 * </code>
 		 */
 		public function describeColumns($table, $schema=null){ }
 
 
 		/**
 		 * Check whether the database system requires an explicit value for identity columns
-		 *
-		 * @return boolean
 		 */
 		public function useExplicitIdValue(){ }
 
 
 		/**
-		 * Return the default identity value to insert in an identity column
+		 * Returns the default identity value to be inserted in an identity column
 		 *
-		 * @return \Phalcon\Db\RawValue
+		 *<code>
+		 * //Inserting a new robot with a valid default value for the column 'id'
+		 * $success = $connection->insert(
+		 *     "robots",
+		 *     array($connection->getDefaultIdValue(), "Astro Boy", 1952),
+		 *     array("id", "name", "year")
+		 * );
+		 *</code>
 		 */
 		public function getDefaultIdValue(){ }
 
 
 		/**
 		 * Check whether the database system requires a sequence to produce auto-numeric values
-		 *
-		 * @return boolean
 		 */
 		public function supportSequences(){ }
 

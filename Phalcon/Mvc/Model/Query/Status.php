@@ -19,10 +19,10 @@ namespace Phalcon\Mvc\Model\Query {
 	 *   'year' => 1959
 	 *));
 	 *
-	 * //Check if the update was successful
-	 * if ($status->success() == true) {
+	 *\//Check if the update was successful
+	 *if ($status->success() == true) {
 	 *   echo 'OK';
-	 * }
+	 *}
 	 *</code>
 	 */
 	
@@ -34,23 +34,18 @@ namespace Phalcon\Mvc\Model\Query {
 
 		/**
 		 * \Phalcon\Mvc\Model\Query\Status
-		 *
-		 * @param boolean $success
-		 * @param \Phalcon\Mvc\ModelInterface $model
 		 */
-		public function __construct($success, $model){ }
+		public function __construct($success, \Phalcon\Mvc\ModelInterface $model=null){ }
 
 
 		/**
 		 * Returns the model that executed the action
-		 *
-		 * @return \Phalcon\Mvc\ModelInterface
 		 */
 		public function getModel(){ }
 
 
 		/**
-		 * Returns the messages produced by a failed operation
+		 * Returns the messages produced because of a failed operation
 		 *
 		 * @return \Phalcon\Mvc\Model\MessageInterface[]
 		 */
@@ -59,8 +54,6 @@ namespace Phalcon\Mvc\Model\Query {
 
 		/**
 		 * Allows to check if the executed operation was successful
-		 *
-		 * @return boolean
 		 */
 		public function success(){ }
 

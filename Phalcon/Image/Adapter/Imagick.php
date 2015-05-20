@@ -8,11 +8,11 @@ namespace Phalcon\Image\Adapter {
 	 * Image manipulation support. Allows images to be resized, cropped, etc.
 	 *
 	 *<code>
-	 *	$image = new Phalcon\Image\Adapter\Imagick("upload/test.jpg");
-	 *	$image->resize(200, 200)->rotate(90)->crop(100, 100);
-	 *	if ($image->save()) {
-	 *		echo 'success';
-	 *	}
+	 * $image = new Phalcon\Image\Adapter\Imagick("upload/test.jpg");
+	 * $image->resize(200, 200)->rotate(90)->crop(100, 100);
+	 * if ($image->save()) {
+	 *     echo 'success';
+	 * }
 	 *</code>
 	 */
 	
@@ -24,25 +24,18 @@ namespace Phalcon\Image\Adapter {
 
 		/**
 		 * Checks if Imagick is enabled
-		 *
-		 * @return  boolean
 		 */
 		public static function check(){ }
 
 
 		/**
-		 * \Phalcon\Image\Imagick constructor
-		 *
-		 * @param string $file
+		 * \Phalcon\Image\Adapter\Imagick constructor
 		 */
 		public function __construct($file, $width=null, $height=null){ }
 
 
 		/**
 		 * Execute a resize.
-		 *
-		 * @param int $width
-		 * @param int $height
 		 */
 		protected function _resize($width, $height){ }
 
@@ -52,99 +45,64 @@ namespace Phalcon\Image\Adapter {
 		 *
 		 * @param int $width   new width
 		 * @param int $height  new height
-		 * @param int $delta_x How much the seam can traverse on x-axis. Passing 0 causes the seams to be straight. 
+		 * @param int $deltaX How much the seam can traverse on x-axis. Passing 0 causes the seams to be straight.
 		 * @param int $rigidity Introduces a bias for non-straight seams. This parameter is typically 0.
 		 */
-		protected function _liquidRescale($width, $height, $delta_x, $regidity){ }
+		protected function _liquidRescale($width, $height, $deltaX, $rigidity){ }
 
 
 		/**
 		 * Execute a crop.
-		 *
-		 * @param int $width
-		 * @param int $height
-		 * @param int $offset_x
-		 * @param int $offset_y
 		 */
-		protected function _crop($width, $height, $offset_x, $offset_y){ }
+		protected function _crop($width, $height, $offsetX, $offsetY){ }
 
 
 		/**
 		 * Execute a rotation.
-		 *
-		 * @param int $degrees
 		 */
 		protected function _rotate($degrees){ }
 
 
 		/**
 		 * Execute a flip.
-		 *
-		 * @param int $direction
 		 */
 		protected function _flip($direction){ }
 
 
 		/**
 		 * Execute a sharpen.
-		 *
-		 * @param int $amount
 		 */
 		protected function _sharpen($amount){ }
 
 
 		/**
 		 * Execute a reflection.
-		 *
-		 * @param int $height
-		 * @param int $opacity
-		 * @param boolean $fade_in
 		 */
-		protected function _reflection($height, $opacity, $fade_in){ }
+		protected function _reflection($height, $opacity, $fadeIn){ }
 
 
 		/**
 		 * Execute a watermarking.
-		 *
-		 * @param \Phalcon\Image\Adapter $watermark
-		 * @param int $offset_x
-		 * @param int $offset_y
-		 * @param int $opacity
 		 */
-		protected function _watermark($watermark, $offset_x, $offset_y, $opacity){ }
+		protected function _watermark(\Phalcon\Image\Adapter $image, $offsetX, $offsetY, $opacity){ }
 
 
 		/**
 		 * Execute a text
-		 *
-		 * @param string text
-		 * @param int $offset_x
-		 * @param int $offset_y
-		 * @param int $opacity
-		 * @param int $r
-		 * @param int $g
-		 * @param int $b
-		 * @param int $size
-		 * @param string $fontfile
 		 */
-		protected function _text($text, $offset_x, $offset_y, $opacity, $r, $g, $b, $size, $fontfile){ }
+		protected function _text($text, $offsetX, $offsetY, $opacity, $r, $g, $b, $size, $fontfile){ }
 
 
 		/**
 		 * Composite one image onto another
 		 *
-		 * @param \Phalcon\Image\Adapter $mask  mask Image instance
+		 * @param Adapter $mask mask Image instance
 		 */
-		protected function _mask($mask){ }
+		protected function _mask(\Phalcon\Image\Adapter $image){ }
 
 
 		/**
 		 * Execute a background.
-		 *
-		 * @param int $r
-		 * @param int $g
-		 * @param int $b
-		 * @param int $opacity
 		 */
 		protected function _background($r, $g, $b, $opacity){ }
 
@@ -167,22 +125,14 @@ namespace Phalcon\Image\Adapter {
 
 		/**
 		 * Execute a save.
-		 *
-		 * @param string $file
-		 * @param int $quality
-		 * @return boolean
 		 */
 		protected function _save($file, $quality){ }
 
 
 		/**
 		 * Execute a render.
-		 *
-		 * @param string $type
-		 * @param int $quality
-		 * @return string
 		 */
-		protected function _render($type, $quality){ }
+		protected function _render($extension, $quality){ }
 
 
 		/**
@@ -191,10 +141,18 @@ namespace Phalcon\Image\Adapter {
 		public function __destruct(){ }
 
 
+		/**
+		 * Get instance
+		 */
 		public function getInternalImInstance(){ }
 
 
-		public static function setResourceLimit($resource, $limit){ }
+		/**
+		 * Sets the limit for a particular resource in megabytes
+		 * @param int type Refer to the list of resourcetype constants (@see http://php.net/manual/ru/imagick.constants.php#imagick.constants.resourcetypes.)
+		 * @param int limit The resource limit. The unit depends on the type of the resource being limited.
+		 */
+		public function setResourceLimit($type, $limit){ }
 
 	}
 }

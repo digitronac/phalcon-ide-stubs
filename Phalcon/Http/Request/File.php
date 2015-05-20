@@ -36,40 +36,43 @@ namespace Phalcon\Http\Request {
 
 		protected $_type;
 
-		protected $_real_type;
+		protected $_realType;
 
 		protected $_error;
 
 		protected $_key;
 
+		protected $_extension;
+
+		public function getError(){ }
+
+
+		public function getKey(){ }
+
+
+		public function getExtension(){ }
+
+
 		/**
 		 * \Phalcon\Http\Request\File constructor
-		 *
-		 * @param array $file
 		 */
-		public function __construct($file){ }
+		public function __construct($file, $key=null){ }
 
 
 		/**
 		 * Returns the file size of the uploaded file
-		 *
-		 * @return int
 		 */
 		public function getSize(){ }
 
 
 		/**
 		 * Returns the real name of the uploaded file
-		 *
-		 * @return string
 		 */
 		public function getName(){ }
 
 
 		/**
-		 * Returns the temporary name of the uploaded file
-		 *
-		 * @return string
+		 * Returns the temporal name of the uploaded file
 		 */
 		public function getTempName(){ }
 
@@ -77,54 +80,26 @@ namespace Phalcon\Http\Request {
 		/**
 		 * Returns the mime type reported by the browser
 		 * This mime type is not completely secure, use getRealType() instead
-		 *
-		 * @return string
 		 */
 		public function getType(){ }
 
 
 		/**
 		 * Gets the real mime type of the upload file using finfo
-		 *
-		 * @return string
 		 */
 		public function getRealType(){ }
 
 
 		/**
-		 * Returns the error code
-		 *
-		 * @return string
-		 */
-		public function getError(){ }
-
-
-		/**
-		 * Returns the file key
-		 *
-		 * @return string
-		 */
-		public function getKey(){ }
-
-
-		/**
 		 * Checks whether the file has been uploaded via Post.
-		 *
-		 * @return boolean
 		 */
 		public function isUploadedFile(){ }
 
 
 		/**
 		 * Moves the temporary file to a destination within the application
-		 *
-		 * @param string $destination
-		 * @return boolean
 		 */
 		public function moveTo($destination){ }
-
-
-		public static function __set_state($params){ }
 
 	}
 }

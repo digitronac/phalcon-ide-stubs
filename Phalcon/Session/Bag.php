@@ -15,7 +15,7 @@ namespace Phalcon\Session {
 	 *</code>
 	 */
 	
-	class Bag implements \Phalcon\DI\InjectionAwareInterface, \Phalcon\Session\BagInterface, \IteratorAggregate, \Traversable, \ArrayAccess, \Countable {
+	class Bag implements \Phalcon\Di\InjectionAwareInterface, \Phalcon\Session\BagInterface, \IteratorAggregate, \Traversable, \ArrayAccess, \Countable {
 
 		protected $_dependencyInjector;
 
@@ -30,7 +30,7 @@ namespace Phalcon\Session {
 		/**
 		 * \Phalcon\Session\Bag constructor
 		 *
-		 * @param string $name
+		 * @param string name
 		 */
 		public function __construct($name){ }
 
@@ -38,9 +38,9 @@ namespace Phalcon\Session {
 		/**
 		 * Sets the DependencyInjector container
 		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
+		 * @param \Phalcon\DiInterface dependencyInjector
 		 */
-		public function setDI($dependencyInjector){ }
+		public function setDI(\Phalcon\DiInterface $dependencyInjector){ }
 
 
 		/**
@@ -58,7 +58,7 @@ namespace Phalcon\Session {
 
 
 		/**
-		 * Destroys the session bag
+		 * Destroyes the session bag
 		 *
 		 *<code>
 		 * $user->destroy();
@@ -74,10 +74,23 @@ namespace Phalcon\Session {
 		 * $user->set('name', 'Kimbra');
 		 *</code>
 		 *
-		 * @param string $property
-		 * @param string $value
+		 * @param string property
+		 * @param string value
 		 */
 		public function set($property, $value){ }
+
+
+		/**
+		 * Magic setter to assign values to the session bag
+		 *
+		 *<code>
+		 * $user->name = "Kimbra";
+		 *</code>
+		 *
+		 * @param string property
+		 * @param string value
+		 */
+		public function __set($property, $value){ }
 
 
 		/**
@@ -87,11 +100,24 @@ namespace Phalcon\Session {
 		 * echo $user->get('name', 'Kimbra');
 		 *</code>
 		 *
-		 * @param string $property
-		 * @param string $defaultValue
+		 * @param string property
+		 * @param string defaultValue
 		 * @return mixed
 		 */
 		public function get($property, $defaultValue=null){ }
+
+
+		/**
+		 * Magic getter to obtain values from the session bag
+		 *
+		 *<code>
+		 * echo $user->name;
+		 *</code>
+		 *
+		 * @param string property
+		 * @return mixed
+		 */
+		public function __get($property){ }
 
 
 		/**
@@ -101,10 +127,23 @@ namespace Phalcon\Session {
 		 * var_dump($user->has('name'));
 		 *</code>
 		 *
-		 * @param string $property
+		 * @param string property
 		 * @return boolean
 		 */
 		public function has($property){ }
+
+
+		/**
+		 * Magic isset to check whether a property is defined in the bag
+		 *
+		 *<code>
+		 * var_dump(isset($user['name']));
+		 *</code>
+		 *
+		 * @param string property
+		 * @return boolean
+		 */
+		public function __isset($property){ }
 
 
 		/**
@@ -114,83 +153,50 @@ namespace Phalcon\Session {
 		 * $user->remove('name');
 		 *</code>
 		 *
-		 * @param string $property
+		 * @param string property
 		 * @return boolean
 		 */
 		public function remove($property){ }
 
 
-		public function getIterator(){ }
-
-
 		/**
-		 * Magic getter to obtain values from the session bag.
-		 *
-		 *<code>
-		 * echo $user->name;
-		 *</code>
-		 *
-		 * @param string $property
-		 * @return string
-		 */
-		public function __get($property){ }
-
-
-		/**
-		 * Magic setter to assign values to the session bag.
-		 * Alias for \Phalcon\Session\Bag::set()
-		 *
-		 *<code>
-		 * $user->name = "Kimbra";
-		 *</code>
-		 *
-		 * @param string $property
-		 * @param string $value
-		 */
-		public function __set($property, $value){ }
-
-
-		/**
-		 * Magic isset to check whether a property is defined in the bag.
-		 * Alias for \Phalcon\Session\Bag::has()
-		 *
-		 *<code>
-		 * var_dump(isset($user['name']));
-		 *</code>
-		 *
-		 * @param string $property
-		 * @return boolean
-		 */
-		public function __isset($property){ }
-
-
-		/**
-		 * Magic unset to remove items using the property syntax.
-		 * Alias for \Phalcon\Session\Bag::remove()
+		 * Magic unset to remove items using the array syntax
 		 *
 		 *<code>
 		 * unset($user['name']);
 		 *</code>
 		 *
-		 * @param string $property
+		 * @param string property
 		 * @return boolean
 		 */
 		public function __unset($property){ }
 
 
-		public function offsetGet($property){ }
+		/**
+		 * Return length of bag
+		 *
+		 *<code>
+		 * echo $user->count();
+		 *</code>
+		 *
+		 * @return int
+		 */
+		final public function count(){ }
 
 
-		public function offsetSet($property, $value){ }
+		final public function getIterator(){ }
 
 
-		public function offsetExists($property){ }
+		final public function offsetSet($property, $value){ }
 
 
-		public function offsetUnset($property){ }
+		final public function offsetExists($property){ }
 
 
-		public function count(){ }
+		final public function offsetUnset($property){ }
+
+
+		final public function offsetGet($property){ }
 
 	}
 }

@@ -9,12 +9,10 @@ namespace Phalcon\Mvc\Model {
 	 * This objects implements the ArrayAccess interface to allow access the object as object->x or array[x].
 	 */
 	
-	class Row implements \ArrayAccess, \Countable, \Phalcon\Mvc\Model\ResultInterface {
+	class Row implements \ArrayAccess, \Phalcon\Mvc\Model\ResultInterface {
 
 		/**
 		 * Set the current object's state
-		 *
-		 * @param int $dirtyState
 		 */
 		public function setDirtyState($dirtyState){ }
 
@@ -22,7 +20,7 @@ namespace Phalcon\Mvc\Model {
 		/**
 		 * Checks whether offset exists in the row
 		 *
-		 * @param int $index
+		 * @param string|int $index
 		 * @return boolean
 		 */
 		public function offsetExists($index){ }
@@ -31,8 +29,8 @@ namespace Phalcon\Mvc\Model {
 		/**
 		 * Gets a record in a specific position of the row
 		 *
-		 * @param int $index
-		 * @return string|\Phalcon\Mvc\ModelInterface
+		 * @param string|int index
+		 * @return string|Phalcon\Mvc\ModelInterface
 		 */
 		public function offsetGet($index){ }
 
@@ -40,8 +38,8 @@ namespace Phalcon\Mvc\Model {
 		/**
 		 * Rows cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
 		 *
-		 * @param int $index
-		 * @param \Phalcon\Mvc\ModelInterface $value
+		 * @param string|int index
+		 * @param \Phalcon\Mvc\ModelInterface value
 		 */
 		public function offsetSet($index, $value){ }
 
@@ -49,7 +47,7 @@ namespace Phalcon\Mvc\Model {
 		/**
 		 * Rows cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
 		 *
-		 * @param int $offset
+		 * @param string|int offset
 		 */
 		public function offsetUnset($offset){ }
 
@@ -60,12 +58,6 @@ namespace Phalcon\Mvc\Model {
 		 * @return array
 		 */
 		public function toArray(){ }
-
-
-		public function count(){ }
-
-
-		public function __wakeup(){ }
 
 	}
 }

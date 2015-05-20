@@ -12,7 +12,7 @@ namespace Phalcon\Db\Adapter\Pdo {
 	 *  "dbname" => "/tmp/test.sqlite"
 	 * );
 	 *
-	 * $connection = new Phalcon\Db\Adapter\Pdo\Sqlite($config);
+	 * $connection = new \Phalcon\Db\Adapter\Pdo\Sqlite($config);
 	 *
 	 * </code>
 	 */
@@ -37,12 +37,8 @@ namespace Phalcon\Db\Adapter\Pdo {
 		 * Returns an array of \Phalcon\Db\Column objects describing a table
 		 *
 		 * <code>
-		 * print_r($connection->describeColumns("posts")); ?>
+		 * print_r($connection->describeColumns("posts"));
 		 * </code>
-		 *
-		 * @param string $table
-		 * @param string $schema
-		 * @return \Phalcon\Db\Column[]
 		 */
 		public function describeColumns($table, $schema=null){ }
 
@@ -50,9 +46,9 @@ namespace Phalcon\Db\Adapter\Pdo {
 		/**
 		 * Lists table indexes
 		 *
-		 * @param string $table
-		 * @param string $schema
-		 * @return \Phalcon\Db\Index[]
+		 * @param	string table
+		 * @param	string schema
+		 * @return	Phalcon\Db\IndexInterface[]
 		 */
 		public function describeIndexes($table, $schema=null){ }
 
@@ -60,17 +56,15 @@ namespace Phalcon\Db\Adapter\Pdo {
 		/**
 		 * Lists table references
 		 *
-		 * @param string $table
-		 * @param string $schema
-		 * @return \Phalcon\Db\Reference[]
+		 * @param	string table
+		 * @param	string schema
+		 * @return	Phalcon\Db\ReferenceInterface[]
 		 */
 		public function describeReferences($table, $schema=null){ }
 
 
 		/**
 		 * Check whether the database system requires an explicit value for identity columns
-		 *
-		 * @return boolean
 		 */
 		public function useExplicitIdValue(){ }
 

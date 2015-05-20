@@ -14,8 +14,8 @@ namespace Phalcon\Mvc\Model {
 	 *
 	 * //Using a standard foreach
 	 * $robots = Robots::find(array("type='virtual'", "order" => "name"));
-	 * foreach ($robots as $robot) {
-	 *  echo $robot->name, "\n";
+	 * foreach ($robots as robot) {
+	 *  echo robot->name, "\n";
 	 * }
 	 *
 	 * //Using a while
@@ -27,7 +27,6 @@ namespace Phalcon\Mvc\Model {
 	 *  $robots->next();
 	 * }
 	 * </code>
-	 *
 	 */
 	
 	abstract class Resultset implements \Phalcon\Mvc\Model\ResultsetInterface, \Iterator, \Traversable, \SeekableIterator, \Countable, \ArrayAccess, \Serializable {
@@ -58,172 +57,143 @@ namespace Phalcon\Mvc\Model {
 
 		protected $_rows;
 
+		protected $_row;
+
 		protected $_errorMessages;
 
 		protected $_hydrateMode;
 
 		/**
 		 * Moves cursor to next row in the resultset
-		 *
 		 */
 		public function next(){ }
 
 
 		/**
+		 * Check whether internal resource has rows to fetch
+		 */
+		public function valid(){ }
+
+
+		/**
 		 * Gets pointer number of active row in the resultset
-		 *
-		 * @return int
 		 */
 		public function key(){ }
 
 
 		/**
 		 * Rewinds resultset to its beginning
-		 *
 		 */
-		public function rewind(){ }
+		final public function rewind(){ }
 
 
 		/**
 		 * Changes internal pointer to a specific position in the resultset
-		 *
-		 * @param int $position
 		 */
-		public function seek($position){ }
+		final public function seek($position){ }
 
 
 		/**
 		 * Counts how many rows are in the resultset
-		 *
-		 * @return int
 		 */
-		public function count(){ }
+		final public function count(){ }
 
 
 		/**
 		 * Checks whether offset exists in the resultset
-		 *
-		 * @param int $index
-		 * @return boolean
 		 */
-		public function offsetExists($property){ }
+		public function offsetExists($index){ }
 
 
 		/**
 		 * Gets row in a specific position of the resultset
-		 *
-		 * @param int $index
-		 * @return \Phalcon\Mvc\ModelInterface
 		 */
-		public function offsetGet($property){ }
+		public function offsetGet($index){ }
 
 
 		/**
-		 * Resultsets cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
+		 * Resulsets cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
 		 *
-		 * @param int $index
-		 * @param \Phalcon\Mvc\ModelInterface $value
+		 * @param int index
+		 * @param \Phalcon\Mvc\ModelInterface value
 		 */
-		public function offsetSet($property, $value){ }
+		public function offsetSet($index, $value){ }
 
 
 		/**
-		 * Resultsets cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
-		 *
-		 * @param int $offset
+		 * Resulsets cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
 		 */
-		public function offsetUnset($property){ }
+		public function offsetUnset($offset){ }
 
 
 		/**
 		 * Returns the internal type of data retrieval that the resultset is using
-		 *
-		 * @return int
 		 */
 		public function getType(){ }
 
 
 		/**
 		 * Get first row in the resultset
-		 *
-		 * @return \Phalcon\Mvc\ModelInterface
 		 */
 		public function getFirst(){ }
 
 
 		/**
 		 * Get last row in the resultset
-		 *
-		 * @return \Phalcon\Mvc\ModelInterface
 		 */
 		public function getLast(){ }
 
 
 		/**
 		 * Set if the resultset is fresh or an old one cached
-		 *
-		 * @param boolean $isFresh
-		 * @return \Phalcon\Mvc\Model\Resultset
 		 */
 		public function setIsFresh($isFresh){ }
 
 
 		/**
 		 * Tell if the resultset if fresh or an old one cached
-		 *
-		 * @return boolean
 		 */
 		public function isFresh(){ }
 
 
 		/**
 		 * Sets the hydration mode in the resultset
-		 *
-		 * @param int $hydrateMode
-		 * @return \Phalcon\Mvc\Model\Resultset
 		 */
 		public function setHydrateMode($hydrateMode){ }
 
 
 		/**
 		 * Returns the current hydration mode
-		 *
-		 * @return int
 		 */
 		public function getHydrateMode(){ }
 
 
 		/**
 		 * Returns the associated cache for the resultset
-		 *
-		 * @return \Phalcon\Cache\BackendInterface
 		 */
 		public function getCache(){ }
 
 
 		/**
-		 * Returns current row in the resultset
-		 *
-		 * @return \Phalcon\Mvc\ModelInterface
-		 */
-		public function current(){ }
-
-
-		/**
 		 * Returns the error messages produced by a batch operation
-		 *
-		 * @return \Phalcon\Mvc\Model\MessageInterface[]
 		 */
 		public function getMessages(){ }
 
 
 		/**
-		 * Deletes every record in the resultset
+		 * Updates every record in the resultset
 		 *
-		 * @param Closure $conditionCallback
+		 * @param array data
+		 * @param Closure conditionCallback
 		 * @return boolean
 		 */
-		public function delete($conditionCallback=null){ }
+		public function update($data, \Closure $conditionCallback=null){ }
+
+
+		/**
+		 * Deletes every record in the resultset
+		 */
+		public function delete(\Closure $conditionCallback=null){ }
 
 
 		/**
@@ -237,7 +207,7 @@ namespace Phalcon\Mvc\Model {
 		 *	});
 		 *</code>
 		 *
-		 * @param callback $filter
+		 * @param callback filter
 		 * @return \Phalcon\Mvc\Model[]
 		 */
 		public function filter($filter){ }

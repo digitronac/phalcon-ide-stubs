@@ -10,33 +10,29 @@ namespace Phalcon\Mvc\Model\Validator {
 	 *<code>
 	 *use Phalcon\Mvc\Model\Validator\Url as UrlValidator;
 	 *
-	 *class Posts extends Phalcon\Mvc\Model
+	 *class Posts extends \Phalcon\Mvc\Model
 	 *{
 	 *
 	 *  public function validation()
 	 *  {
-	 *      $this->validate(new UrlValidator(array(
+	 *      this->validate(new UrlValidator(array(
 	 *          'field' => 'source_url'
 	 *      )));
-	 *      if ($this->validationHasFailed() == true) {
+	 *      if (this->validationHasFailed() == true) {
 	 *          return false;
 	 *      }
 	 *  }
 	 *
 	 *}
 	 *</code>
-	 *
 	 */
 	
 	class Url extends \Phalcon\Mvc\Model\Validator implements \Phalcon\Mvc\Model\ValidatorInterface {
 
 		/**
 		 * Executes the validator
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $record
-		 * @return boolean
 		 */
-		public function validate($record){ }
+		public function validate(\Phalcon\Mvc\ModelInterface $record){ }
 
 	}
 }

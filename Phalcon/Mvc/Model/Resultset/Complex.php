@@ -26,26 +26,22 @@ namespace Phalcon\Mvc\Model\Resultset {
 		/**
 		 * \Phalcon\Mvc\Model\Resultset\Complex constructor
 		 *
-		 * @param array $columnsTypes
-		 * @param \Phalcon\Db\ResultInterface $result
-		 * @param \Phalcon\Cache\BackendInterface $cache
+		 * @param array columnTypes
+		 * @param \Phalcon\Db\ResultInterface result
+		 * @param \Phalcon\Cache\BackendInterface cache
 		 */
-		public function __construct($columnsTypes, $result, $cache=null){ }
+		public function __construct($columnTypes, $result, \Phalcon\Cache\BackendInterface $cache=null){ }
 
 
 		/**
-		 * Check whether internal resource has rows to fetch
-		 *
-		 * @return boolean
+		 * Returns current row in the resultset
 		 */
-		public function valid(){ }
+		final public function current(){ }
 
 
 		/**
 		 * Returns a complete resultset as an array, if the resultset has a big number of rows
 		 * it could consume more memory than currently it does.
-		 *
-		 * @return array
 		 */
 		public function toArray(){ }
 
@@ -60,10 +56,8 @@ namespace Phalcon\Mvc\Model\Resultset {
 
 		/**
 		 * Unserializing a resultset will allow to only works on the rows present in the saved state
-		 *
-		 * @param string $data
 		 */
-		public function unserialize($serialized=null){ }
+		public function unserialize($data){ }
 
 	}
 }

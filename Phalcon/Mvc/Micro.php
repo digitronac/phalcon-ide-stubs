@@ -11,7 +11,7 @@ namespace Phalcon\Mvc {
 	 *
 	 *<code>
 	 *
-	 * $app = new Phalcon\Mvc\Micro();
+	 * $app = new \Phalcon\Mvc\Micro();
 	 *
 	 * $app->get('/say/welcome/{name}', function ($name) {
 	 *    echo "<h1>Welcome $name!</h1>";
@@ -22,7 +22,7 @@ namespace Phalcon\Mvc {
 	 *</code>
 	 */
 	
-	class Micro extends \Phalcon\DI\Injectable implements \Phalcon\Events\EventsAwareInterface, \Phalcon\DI\InjectionAwareInterface, \ArrayAccess {
+	class Micro extends \Phalcon\Di\Injectable implements \Phalcon\Events\EventsAwareInterface, \Phalcon\Di\InjectionAwareInterface, \ArrayAccess {
 
 		protected $_dependencyInjector;
 
@@ -33,6 +33,8 @@ namespace Phalcon\Mvc {
 		protected $_stopped;
 
 		protected $_notFoundHandler;
+
+		protected $_errorHandler;
 
 		protected $_activeHandler;
 
@@ -46,25 +48,21 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * \Phalcon\Mvc\Micro constructor
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
 		 */
-		public function __construct($dependencyInjector=null){ }
+		public function __construct(\Phalcon\DiInterface $dependencyInjector=null){ }
 
 
 		/**
 		 * Sets the DependencyInjector container
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
 		 */
-		public function setDI($dependencyInjector){ }
+		public function setDI(\Phalcon\DiInterface $dependencyInjector){ }
 
 
 		/**
 		 * Maps a route to a handler without any HTTP method constraint
 		 *
-		 * @param string $routePattern
-		 * @param callable $handler
+		 * @param string routePattern
+		 * @param callable handler
 		 * @return \Phalcon\Mvc\Router\RouteInterface
 		 */
 		public function map($routePattern, $handler){ }
@@ -73,8 +71,8 @@ namespace Phalcon\Mvc {
 		/**
 		 * Maps a route to a handler that only matches if the HTTP method is GET
 		 *
-		 * @param string $routePattern
-		 * @param callable $handler
+		 * @param string routePattern
+		 * @param callable handler
 		 * @return \Phalcon\Mvc\Router\RouteInterface
 		 */
 		public function get($routePattern, $handler){ }
@@ -83,8 +81,8 @@ namespace Phalcon\Mvc {
 		/**
 		 * Maps a route to a handler that only matches if the HTTP method is POST
 		 *
-		 * @param string $routePattern
-		 * @param callable $handler
+		 * @param string routePattern
+		 * @param callable handler
 		 * @return \Phalcon\Mvc\Router\RouteInterface
 		 */
 		public function post($routePattern, $handler){ }
@@ -113,8 +111,8 @@ namespace Phalcon\Mvc {
 		/**
 		 * Maps a route to a handler that only matches if the HTTP method is HEAD
 		 *
-		 * @param string $routePattern
-		 * @param callable $handler
+		 * @param string routePattern
+		 * @param callable handler
 		 * @return \Phalcon\Mvc\Router\RouteInterface
 		 */
 		public function head($routePattern, $handler){ }
@@ -123,8 +121,8 @@ namespace Phalcon\Mvc {
 		/**
 		 * Maps a route to a handler that only matches if the HTTP method is DELETE
 		 *
-		 * @param string $routePattern
-		 * @param callable $handler
+		 * @param string routePattern
+		 * @param callable handler
 		 * @return \Phalcon\Mvc\Router\RouteInterface
 		 */
 		public function delete($routePattern, $handler){ }
@@ -133,8 +131,8 @@ namespace Phalcon\Mvc {
 		/**
 		 * Maps a route to a handler that only matches if the HTTP method is OPTIONS
 		 *
-		 * @param string $routePattern
-		 * @param callable $handler
+		 * @param string routePattern
+		 * @param callable handler
 		 * @return \Phalcon\Mvc\Router\RouteInterface
 		 */
 		public function options($routePattern, $handler){ }
@@ -142,26 +140,30 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * Mounts a collection of handlers
-		 *
-		 * @param \Phalcon\Mvc\Collection $collection
-		 * @return \Phalcon\Mvc\Micro
 		 */
-		public function mount($collection){ }
+		public function mount(\Phalcon\Mvc\Micro\CollectionInterface $collection){ }
 
 
 		/**
 		 * Sets a handler that will be called when the router doesn't match any of the defined routes
 		 *
-		 * @param callable $handler
+		 * @param callable handler
 		 * @return \Phalcon\Mvc\Micro
 		 */
 		public function notFound($handler){ }
 
 
 		/**
-		 * Returns the internal router used by the application
+		 * Sets a handler that will be called when an exception is thrown handling the route
 		 *
-		 * @return \Phalcon\Mvc\RouterInterface
+		 * @param callable handler
+		 * @return \Phalcon\Mvc\Micro
+		 */
+		public function error($handler){ }
+
+
+		/**
+		 * Returns the internal router used by the application
 		 */
 		public function getRouter(){ }
 
@@ -169,9 +171,9 @@ namespace Phalcon\Mvc {
 		/**
 		 * Sets a service from the DI
 		 *
-		 * @param string $serviceName
-		 * @param mixed $definition
-		 * @param boolean $shared
+		 * @param string  serviceName
+		 * @param mixed   definition
+		 * @param boolean shared
 		 * @return \Phalcon\DI\ServiceInterface
 		 */
 		public function setService($serviceName, $definition, $shared=null){ }
@@ -179,9 +181,6 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * Checks if a service is registered in the DI
-		 *
-		 * @param string $serviceName
-		 * @return boolean
 		 */
 		public function hasService($serviceName){ }
 
@@ -189,7 +188,7 @@ namespace Phalcon\Mvc {
 		/**
 		 * Obtains a service from the DI
 		 *
-		 * @param string $serviceName
+		 * @param string serviceName
 		 * @return object
 		 */
 		public function getService($serviceName){ }
@@ -198,7 +197,7 @@ namespace Phalcon\Mvc {
 		/**
 		 * Obtains a shared service from the DI
 		 *
-		 * @param string $serviceName
+		 * @param string serviceName
 		 * @return mixed
 		 */
 		public function getSharedService($serviceName){ }
@@ -207,7 +206,7 @@ namespace Phalcon\Mvc {
 		/**
 		 * Handle the whole request
 		 *
-		 * @param string $uri
+		 * @param string uri
 		 * @return mixed
 		 */
 		public function handle($uri=null){ }
@@ -222,7 +221,7 @@ namespace Phalcon\Mvc {
 		/**
 		 * Sets externally the handler that must be called by the matched route
 		 *
-		 * @param callable $activeHandler
+		 * @param callable activeHandler
 		 */
 		public function setActiveHandler($activeHandler){ }
 
@@ -244,48 +243,44 @@ namespace Phalcon\Mvc {
 
 
 		/**
-		 * Check if a service is registered in the internal services container using the array syntax.
-		 * Alias for \Phalcon\Mvc\Micro::hasService()
+		 * Check if a service is registered in the internal services container using the array syntax
 		 *
-		 * @param string $alias
+		 * @param string alias
 		 * @return boolean
 		 */
-		public function offsetExists($serviceName){ }
+		public function offsetExists($alias){ }
 
 
 		/**
-		 * Allows to register a shared service in the internal services container using the array syntax.
-		 * Alias for \Phalcon\Mvc\Micro::setService()
+		 * Allows to register a shared service in the internal services container using the array syntax
 		 *
 		 *<code>
 		 *	$app['request'] = new \Phalcon\Http\Request();
 		 *</code>
 		 *
-		 * @param string $alias
-		 * @param mixed $definition
+		 * @param string alias
+		 * @param mixed definition
 		 */
-		public function offsetSet($serviceName, $definition, $shared=null){ }
+		public function offsetSet($alias, $definition){ }
 
 
 		/**
-		 * Allows to obtain a shared service in the internal services container using the array syntax.
-		 * Alias for \Phalcon\Mvc\Micro::getService()
+		 * Allows to obtain a shared service in the internal services container using the array syntax
 		 *
 		 *<code>
-		 *	var_dump($app['request']);
+		 *	var_dump($di['request']);
 		 *</code>
 		 *
-		 * @param string $alias
+		 * @param string alias
 		 * @return mixed
 		 */
-		public function offsetGet($serviceName){ }
+		public function offsetGet($alias){ }
 
 
 		/**
 		 * Removes a service from the internal services container using the array syntax
 		 *
-		 * @param string $alias
-		 * @todo Not implemented
+		 * @param string alias
 		 */
 		public function offsetUnset($alias){ }
 
@@ -293,7 +288,7 @@ namespace Phalcon\Mvc {
 		/**
 		 * Appends a before middleware to be called before execute the route
 		 *
-		 * @param callable $handler
+		 * @param callable handler
 		 * @return \Phalcon\Mvc\Micro
 		 */
 		public function before($handler){ }
@@ -302,7 +297,7 @@ namespace Phalcon\Mvc {
 		/**
 		 * Appends an 'after' middleware to be called after execute the route
 		 *
-		 * @param callable $handler
+		 * @param callable handler
 		 * @return \Phalcon\Mvc\Micro
 		 */
 		public function after($handler){ }
@@ -311,7 +306,7 @@ namespace Phalcon\Mvc {
 		/**
 		 * Appends a 'finish' middleware to be called when the request is finished
 		 *
-		 * @param callable $handler
+		 * @param callable handler
 		 * @return \Phalcon\Mvc\Micro
 		 */
 		public function finish($handler){ }

@@ -34,19 +34,12 @@ namespace Phalcon\Mvc\Router {
 
 		/**
 		 * \Phalcon\Mvc\Router\Route constructor
-		 *
-		 * @param string $pattern
-		 * @param array $paths
-		 * @param array|string $httpMethods
 		 */
 		public function __construct($pattern, $paths=null, $httpMethods=null){ }
 
 
 		/**
 		 * Replaces placeholders from pattern returning a valid PCRE regular expression
-		 *
-		 * @param string $pattern
-		 * @return string
 		 */
 		public function compilePattern($pattern){ }
 
@@ -58,26 +51,24 @@ namespace Phalcon\Mvc\Router {
 		 * $route->via('GET');
 		 * $route->via(array('GET', 'POST'));
 		 *</code>
-		 *
-		 * @param string|array $httpMethods
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function via($httpMethods){ }
 
 
 		/**
+		 * Extracts parameters from a string
+		 */
+		public function extractNamedParams($pattern){ }
+
+
+		/**
 		 * Reconfigure the route adding a new pattern and a set of paths
-		 *
-		 * @param string $pattern
-		 * @param array $paths
 		 */
 		public function reConfigure($pattern, $paths=null){ }
 
 
 		/**
 		 * Returns the route's name
-		 *
-		 * @return string
 		 */
 		public function getName(){ }
 
@@ -90,9 +81,6 @@ namespace Phalcon\Mvc\Router {
 		 *     'controller' => 'about'
 		 * ))->setName('about');
 		 *</code>
-		 *
-		 * @param string $name
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function setName($name){ }
 
@@ -100,58 +88,43 @@ namespace Phalcon\Mvc\Router {
 		/**
 		 * Sets a callback that is called if the route is matched.
 		 * The developer can implement any arbitrary conditions here
-		 * If the callback returns false the route is treaded as not matched
-		 *
-		 * @param callback $callback
-		 * @return \Phalcon\Mvc\Router\Route
+		 * If the callback returns false the route is treated as not matched
 		 */
 		public function beforeMatch($callback){ }
 
 
 		/**
 		 * Returns the 'before match' callback if any
-		 *
-		 * @return mixed
 		 */
 		public function getBeforeMatch(){ }
 
 
 		/**
 		 * Returns the route's id
-		 *
-		 * @return string
 		 */
 		public function getRouteId(){ }
 
 
 		/**
 		 * Returns the route's pattern
-		 *
-		 * @return string
 		 */
 		public function getPattern(){ }
 
 
 		/**
 		 * Returns the route's compiled pattern
-		 *
-		 * @return string
 		 */
 		public function getCompiledPattern(){ }
 
 
 		/**
 		 * Returns the paths
-		 *
-		 * @return array
 		 */
 		public function getPaths(){ }
 
 
 		/**
 		 * Returns the paths using positions as keys and names as values
-		 *
-		 * @return array
 		 */
 		public function getReversedPaths(){ }
 
@@ -163,17 +136,12 @@ namespace Phalcon\Mvc\Router {
 		 * $route->setHttpMethods('GET');
 		 * $route->setHttpMethods(array('GET', 'POST'));
 		 *</code>
-		 *
-		 * @param string|array $httpMethods
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function setHttpMethods($httpMethods){ }
 
 
 		/**
 		 * Returns the HTTP methods that constraint matching the route
-		 *
-		 * @return string|array
 		 */
 		public function getHttpMethods(){ }
 
@@ -184,52 +152,36 @@ namespace Phalcon\Mvc\Router {
 		 *<code>
 		 * $route->setHostname('localhost');
 		 *</code>
-		 *
-		 * @param string|array $httpMethods
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function setHostname($hostname){ }
 
 
 		/**
 		 * Returns the hostname restriction if any
-		 *
-		 * @return string
 		 */
 		public function getHostname(){ }
 
 
 		/**
 		 * Sets the group associated with the route
-		 *
-		 * @param \Phalcon\Mvc\Router\Group $group
-		 * @return \Phalcon\Mvc\RouteInterface
 		 */
-		public function setGroup($group){ }
+		public function setGroup(\Phalcon\Mvc\Router\GroupInterface $group){ }
 
 
 		/**
 		 * Returns the group associated with the route
-		 *
-		 * @return \Phalcon\Mvc\Router\Group|null
 		 */
 		public function getGroup(){ }
 
 
 		/**
 		 * Adds a converter to perform an additional transformation for certain parameter
-		 *
-		 * @param string $name
-		 * @param callable $converter
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function convert($name, $converter){ }
 
 
 		/**
 		 * Returns the router converter
-		 *
-		 * @return array
 		 */
 		public function getConverters(){ }
 

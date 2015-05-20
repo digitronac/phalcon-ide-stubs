@@ -14,38 +14,42 @@ namespace Phalcon\Validation {
 
 		/**
 		 * \Phalcon\Validation\Validator constructor
-		 *
-		 * @param array $options
 		 */
 		public function __construct($options=null){ }
 
 
 		/**
 		 * Checks if an option is defined
-		 *
-		 * @param string $key
-		 * @return mixed
+		
+		 * @deprecated since 2.1.0
+		 * @see \Phalcon\Validation\Validator::hasOption()
 		 */
 		public function isSetOption($key){ }
 
 
 		/**
-		 * Returns an option in the validator's options
-		 * Returns null if the option hasn't been set
-		 *
-		 * @param string $key
-		 * @return mixed
+		 * Checks if an option is defined
 		 */
-		public function getOption($key){ }
+		public function hasOption($key){ }
+
+
+		/**
+		 * Returns an option in the validator's options
+		 * Returns null if the option hasn't set
+		 */
+		public function getOption($key, $defaultValue=null){ }
 
 
 		/**
 		 * Sets an option in the validator
-		 *
-		 * @param string $key
-		 * @param mixed $value
 		 */
 		public function setOption($key, $value){ }
+
+
+		/**
+		 * Executes the validation
+		 */
+		abstract public function validate(\Phalcon\Validation $validation, $attribute);
 
 	}
 }

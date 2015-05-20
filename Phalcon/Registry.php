@@ -9,7 +9,7 @@ namespace Phalcon {
 	 * By storing the value in a registry, the same object is always available throughout
 	 * your application.
 	 *
-	 * <code>
+	 *<code>
 	 * 	$registry = new \Phalcon\Registry();
 	 *
 	 * 	// Set value
@@ -31,7 +31,7 @@ namespace Phalcon {
 	 * 	unset($registry->something);
 	 * 	// or
 	 * 	unset($registry['something']);
-	 * </code>
+	 *</code>
 	 *
 	 * In addition to ArrayAccess, Phalcon\Registry also implements Countable
 	 * (count($registry) will return the number of elements in the registry),
@@ -53,63 +53,92 @@ namespace Phalcon {
 	 * to bypass relatively slow method calls.
 	 */
 	
-	final class Registry implements \ArrayAccess, \Iterator, \Traversable, \Serializable, \Countable, \JsonSerializable {
+	final class Registry implements \ArrayAccess, \Countable, \Iterator, \Traversable {
 
-		public function __get($property){ }
+		protected $_data;
 
-
-		public function __set($property, $value){ }
-
-
-		public function __isset($property){ }
-
-
-		public function __unset($property){ }
+		/**
+		 * Registry constructor
+		 */
+		final public function __construct(){ }
 
 
-		public function __call($method, $arguments=null){ }
+		/**
+		 * Checks if the element is present in the registry
+		 */
+		final public function offsetExists($offset){ }
 
 
-		public function count(){ }
+		/**
+		 * Returns an index in the registry
+		 */
+		final public function offsetGet($offset){ }
 
 
-		public function offsetGet($property){ }
+		/**
+		 * Sets an element in the registry
+		 */
+		final public function offsetSet($offset, $value){ }
 
 
-		public function offsetSet($property, $value){ }
+		/**
+		 * Unsets an element in the registry
+		 */
+		final public function offsetUnset($offset){ }
 
 
-		public function offsetUnset($property){ }
+		/**
+		 * Checks how many elements are in the register
+		 */
+		final public function count(){ }
 
 
-		public function offsetExists($property){ }
+		/**
+		 * Moves cursor to next row in the registry
+		 */
+		final public function next(){ }
 
 
-		public function current(){ }
+		/**
+		 * Gets pointer number of active row in the registry
+		 */
+		final public function key(){ }
 
 
-		public function key(){ }
+		/**
+		 * Rewinds the registry cursor to its beginning
+		 */
+		final public function rewind(){ }
 
 
-		public function next(){ }
-
-
-		public function rewind(){ }
-
-
+		/**
+		 * Checks if the iterator is valid
+		 */
 		public function valid(){ }
 
 
-		public function jsonSerialize(){ }
+		/**
+		 * Obtains the current value in the internal iterator
+		 */
+		public function current(){ }
 
 
-		public function serialize(){ }
+		/**
+		 * Sets an element in the registry
+		 */
+		final public function __set($key, $value){ }
 
 
-		public function unserialize($serialized=null){ }
+		/**
+		 * Returns an index in the registry
+		 */
+		final public function __get($key){ }
 
 
-		private function __wakeup(){ }
+		final public function __isset($key){ }
+
+
+		final public function __unset($key){ }
 
 	}
 }

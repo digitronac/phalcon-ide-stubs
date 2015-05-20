@@ -20,12 +20,8 @@ namespace Phalcon\Validation\Validator {
 
 		/**
 		 * Executes the validation
-		 *
-		 * @param \Phalcon\Validation $validator
-		 * @param string $attribute
-		 * @return boolean
 		 */
-		public function validate($validator, $attribute){ }
+		public function validate(\Phalcon\Validation $validation, $field){ }
 
 	}
 }

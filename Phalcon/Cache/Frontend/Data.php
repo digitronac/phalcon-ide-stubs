@@ -8,16 +8,17 @@ namespace Phalcon\Cache\Frontend {
 	 * Allows to cache native PHP data in a serialized form
 	 *
 	 *<code>
+	 *<?php
 	 *
 	 *	// Cache the files for 2 days using a Data frontend
-	 *	$frontCache = new Phalcon\Cache\Frontend\Data(array(
+	 *	$frontCache = new \Phalcon\Cache\Frontend\Data(array(
 	 *		"lifetime" => 172800
 	 *	));
 	 *
 	 *	// Create the component that will cache "Data" to a "File" backend
 	 *	// Set the cache file directory - important to keep the "/" at the end of
 	 *	// of the value for the folder
-	 *	$cache = new Phalcon\Cache\Backend\File($frontCache, array(
+	 *	$cache = new \Phalcon\Cache\Backend\File($frontCache, array(
 	 *		"cacheDir" => "../app/cache/"
 	 *	));
 	 *
@@ -48,23 +49,19 @@ namespace Phalcon\Cache\Frontend {
 		/**
 		 * \Phalcon\Cache\Frontend\Data constructor
 		 *
-		 * @param array $frontendOptions
+		 * @param array frontendOptions
 		 */
 		public function __construct($frontendOptions=null){ }
 
 
 		/**
-		 * Returns cache lifetime
-		 *
-		 * @return int
+		 * Returns the cache lifetime
 		 */
 		public function getLifetime(){ }
 
 
 		/**
 		 * Check whether if frontend is buffering output
-		 *
-		 * @return boolean
 		 */
 		public function isBuffering(){ }
 
@@ -92,7 +89,7 @@ namespace Phalcon\Cache\Frontend {
 		/**
 		 * Serializes data before storing them
 		 *
-		 * @param mixed $data
+		 * @param mixed data
 		 * @return string
 		 */
 		public function beforeStore($data){ }
@@ -101,7 +98,7 @@ namespace Phalcon\Cache\Frontend {
 		/**
 		 * Unserializes data after retrieval
 		 *
-		 * @param mixed $data
+		 * @param mixed data
 		 * @return mixed
 		 */
 		public function afterRetrieve($data){ }

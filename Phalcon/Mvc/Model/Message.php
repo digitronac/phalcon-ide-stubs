@@ -10,18 +10,17 @@ namespace Phalcon\Mvc\Model {
 	 *<code>
 	 *	use Phalcon\Mvc\Model\Message as Message;
 	 *
-	 *  class Robots extends Phalcon\Mvc\Model
+	 *  class Robots extends \Phalcon\Mvc\Model
 	 *  {
 	 *
 	 *    public function beforeSave()
 	 *    {
-	 *      if ($this->name == 'Peter') {
-	 *        $text = "A robot cannot be named Peter";
-	 *        $field = "name";
-	 *        $type = "InvalidValue";
-	 *        $code = 103;
-	 *        $message = new Message($text, $field, $type, $code);
-	 *        $this->appendMessage($message);
+	 *      if (this->name == 'Peter') {
+	 *        text = "A robot cannot be named Peter";
+	 *        field = "name";
+	 *        type = "InvalidValue";
+	 *        message = new Message(text, field, type);
+	 *        this->appendMessage(message);
 	 *     }
 	 *   }
 	 *
@@ -40,119 +39,75 @@ namespace Phalcon\Mvc\Model {
 
 		protected $_model;
 
-		protected $_code;
-
 		/**
 		 * \Phalcon\Mvc\Model\Message constructor
 		 *
-		 * @param string $message
-		 * @param string $field
-		 * @param string $type
-		 * @param \Phalcon\Mvc\ModelInterface $model
+		 * @param string message
+		 * @param string field
+		 * @param string type
+		 * @param \Phalcon\Mvc\ModelInterface model
 		 */
-		public function __construct($message, $field=null, $type=null){ }
+		public function __construct($message, $field=null, $type=null, $model=null){ }
 
 
 		/**
 		 * Sets message type
-		 *
-		 * @param string $type
-		 * @return \Phalcon\Mvc\Model\Message
 		 */
 		public function setType($type){ }
 
 
 		/**
 		 * Returns message type
-		 *
-		 * @return string
 		 */
 		public function getType(){ }
 
 
 		/**
-		 * Sets message code
-		 *
-		 * @param string $code
-		 * @return \Phalcon\Mvc\Model\Message
-		 */
-		public function setCode($code){ }
-
-
-		/**
-		 * Returns message code
-		 *
-		 * @return string
-		 */
-		public function getCode(){ }
-
-
-		/**
 		 * Sets verbose message
-		 *
-		 * @param string $message
-		 * @return \Phalcon\Mvc\Model\Message
 		 */
 		public function setMessage($message){ }
 
 
 		/**
 		 * Returns verbose message
-		 *
-		 * @return string
 		 */
 		public function getMessage(){ }
 
 
 		/**
 		 * Sets field name related to message
-		 *
-		 * @param string $field
-		 * @return \Phalcon\Mvc\Model\Message
 		 */
 		public function setField($field){ }
 
 
 		/**
 		 * Returns field name related to message
-		 *
-		 * @return string
 		 */
 		public function getField(){ }
 
 
 		/**
 		 * Set the model who generates the message
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @return \Phalcon\Mvc\Model\Message
 		 */
-		public function setModel($model){ }
+		public function setModel(\Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
 		 * Returns the model that produced the message
-		 *
-		 * @return \Phalcon\Mvc\ModelInterface
 		 */
 		public function getModel(){ }
 
 
 		/**
 		 * Magic __toString method returns verbose message
-		 *
-		 * @return string
 		 */
 		public function __toString(){ }
 
 
 		/**
 		 * Magic __set_state helps to re-build messages variable exporting
-		 *
-		 * @param array $message
-		 * @return \Phalcon\Mvc\Model\Message
 		 */
-		public static function __set_state($properties=null){ }
+		public static function __set_state($message){ }
 
 	}
 }

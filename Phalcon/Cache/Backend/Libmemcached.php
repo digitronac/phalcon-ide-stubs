@@ -12,18 +12,18 @@ namespace Phalcon\Cache\Backend {
 	 *<code>
 	 *
 	 * // Cache data for 2 days
-	 * $frontCache = new Phalcon\Cache\Frontend\Data(array(
+	 * $frontCache = new \Phalcon\Cache\Frontend\Data(array(
 	 *    "lifetime" => 172800
 	 * ));
 	 *
 	 * //Create the Cache setting memcached connection options
-	 * $cache = new Phalcon\Cache\Backend\Libmemcached($frontCache, array(
-	 *     'servers' => array(
+	 * $cache = new \Phalcon\Cache\Backend\Libmemcached($frontCache, array(
+	 *     "servers" => array(
 	 *         array('host' => 'localhost',
 	 *               'port' => 11211,
 	 *               'weight' => 1),
 	 *     ),
-	 *     'client' => array(
+	 *     "client" => array(
 	 *         Memcached::OPT_HASH => Memcached::HASH_MD5,
 	 *         Memcached::OPT_PREFIX_KEY => 'prefix.',
 	 *     )
@@ -43,37 +43,37 @@ namespace Phalcon\Cache\Backend {
 		protected $_memcache;
 
 		/**
-		 * \Phalcon\Cache\Backend\Libmemcached constructor
+		 * \Phalcon\Cache\Backend\Memcache constructor
 		 *
-		 * @param \Phalcon\Cache\FrontendInterface $frontend
-		 * @param array $options
+		 * @param	Phalcon\Cache\FrontendInterface frontend
+		 * @param	array options
 		 */
-		public function __construct($frontend, $options=null){ }
+		public function __construct(\Phalcon\Cache\FrontendInterface $frontend, $options=null){ }
 
 
 		/**
 		 * Create internal connection to memcached
 		 */
-		protected function _connect(){ }
+		public function _connect(){ }
 
 
 		/**
 		 * Returns a cached content
 		 *
-		 * @param int|string $keyName
-		 * @param   long $lifetime
+		 * @param int|string keyName
+		 * @param   long lifetime
 		 * @return  mixed
 		 */
 		public function get($keyName, $lifetime=null){ }
 
 
 		/**
-		 * Stores cached content into the Memcached backend and stops the frontend
+		 * Stores cached content into the file backend and stops the frontend
 		 *
-		 * @param int|string $keyName
-		 * @param string $content
-		 * @param long $lifetime
-		 * @param boolean $stopBuffer
+		 * @param int|string keyName
+		 * @param string content
+		 * @param long lifetime
+		 * @param boolean stopBuffer
 		 */
 		public function save($keyName=null, $content=null, $lifetime=null, $stopBuffer=null){ }
 
@@ -81,7 +81,7 @@ namespace Phalcon\Cache\Backend {
 		/**
 		 * Deletes a value from the cache by its key
 		 *
-		 * @param int|string $keyName
+		 * @param int|string keyName
 		 * @return boolean
 		 */
 		public function delete($keyName){ }
@@ -90,54 +90,46 @@ namespace Phalcon\Cache\Backend {
 		/**
 		 * Query the existing cached keys
 		 *
-		 * @param string $prefix
+		 * @param string prefix
 		 * @return array
 		 */
 		public function queryKeys($prefix=null){ }
 
 
 		/**
-		 * Checks if cache exists and it hasn't expired
+		 * Checks if cache exists and it isn't expired
 		 *
-		 * @param  string $keyName
-		 * @param  long $lifetime
+		 * @param string keyName
+		 * @param   long lifetime
 		 * @return boolean
 		 */
 		public function exists($keyName=null, $lifetime=null){ }
 
 
 		/**
-		 * Increment of a given key, by number $value
-		 * 
-		 * @param  string $keyName
-		 * @param  long $value
-		 * @return mixed
+		 * Increment of given $keyName by $value
+		 *
+		 * @param  string keyName
+		 * @param  long lifetime
+		 * @return long
 		 */
-		public function increment($key_name=null, $value=null){ }
+		public function increment($keyName=null, $value=null){ }
 
 
 		/**
-		 * Decrement of a given key, by number $value
-		 * 
-		 * @param  string $keyName
-		 * @param  long $value
-		 * @return mixed
+		 * Decrement of $keyName by given $value
+		 *
+		 * @param  string keyName
+		 * @param  long value
+		 * @return long
 		 */
-		public function decrement($key_name=null, $value=null){ }
+		public function decrement($keyName=null, $value=null){ }
 
 
 		/**
 		 * Immediately invalidates all existing items.
-		 * 
-		 * @return boolean
 		 */
 		public function flush(){ }
-
-
-		public function getTrackingKey(){ }
-
-
-		public function setTrackingKey($key){ }
 
 	}
 }

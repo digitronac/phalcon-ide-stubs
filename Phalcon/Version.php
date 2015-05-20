@@ -10,6 +10,16 @@ namespace Phalcon {
 	
 	class Version {
 
+		const VERSION_MAJOR = 0;
+
+		const VERSION_MEDIUM = 1;
+
+		const VERSION_MINOR = 2;
+
+		const VERSION_SPECIAL = 3;
+
+		const VERSION_SPECIAL_NUMBER = 4;
+
 		/**
 		 * Area where the version number is set. The format is as follows:
 		 * ABBCCDE
@@ -24,13 +34,19 @@ namespace Phalcon {
 
 
 		/**
+		 * Translates a number to a special release
+		 *
+		 * If Special release = 1 this function will return ALPHA
+		 */
+		final protected static function _getSpecial($special){ }
+
+
+		/**
 		 * Returns the active version (string)
 		 *
 		 * <code>
 		 * echo \Phalcon\Version::get();
 		 * </code>
-		 *
-		 * @return string
 		 */
 		public static function get(){ }
 
@@ -41,10 +57,19 @@ namespace Phalcon {
 		 * <code>
 		 * echo \Phalcon\Version::getId();
 		 * </code>
-		 *
-		 * @return int
 		 */
 		public static function getId(){ }
+
+
+		/**
+		 * Returns a specific part of the version. If the wrong parameter is passed
+		 * it will return the full version
+		 *
+		 * <code>
+		 * echo \Phalcon\Version::getPart(Phalcon\Version::VERSION_MAJOR);
+		 * </code>
+		 */
+		public static function getPart($part){ }
 
 	}
 }

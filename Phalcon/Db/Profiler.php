@@ -12,7 +12,7 @@ namespace Phalcon\Db {
 	 *
 	 *<code>
 	 *
-	 *	$profiler = new Phalcon\Db\Profiler();
+	 *	$profiler = new \Phalcon\Db\Profiler();
 	 *
 	 *	//Set the connection profiler
 	 *	$connection->setProfiler($profiler);
@@ -47,9 +47,7 @@ namespace Phalcon\Db {
 		/**
 		 * Starts the profile of a SQL sentence
 		 *
-		 * @param string $sqlStatement
-		 * @param $sqlVariables
-		 * @param $sqlBindTypes
+		 * @param string sqlStatement
 		 * @return \Phalcon\Db\Profiler
 		 */
 		public function startProfile($sqlStatement, $sqlVariables=null, $sqlBindTypes=null){ }
@@ -57,48 +55,36 @@ namespace Phalcon\Db {
 
 		/**
 		 * Stops the active profile
-		 *
-		 * @return \Phalcon\Db\Profiler
 		 */
 		public function stopProfile(){ }
 
 
 		/**
 		 * Returns the total number of SQL statements processed
-		 *
-		 * @return integer
 		 */
 		public function getNumberTotalStatements(){ }
 
 
 		/**
 		 * Returns the total time in seconds spent by the profiles
-		 *
-		 * @return double
 		 */
 		public function getTotalElapsedSeconds(){ }
 
 
 		/**
 		 * Returns all the processed profiles
-		 *
-		 * @return \Phalcon\Db\Profiler\Item[]
 		 */
 		public function getProfiles(){ }
 
 
 		/**
 		 * Resets the profiler, cleaning up all the profiles
-		 *
-		 * @return \Phalcon\Db\Profiler
 		 */
 		public function reset(){ }
 
 
 		/**
 		 * Returns the last profile executed in the profiler
-		 *
-		 * @return \Phalcon\Db\Profiler\Item
 		 */
 		public function getLastProfile(){ }
 

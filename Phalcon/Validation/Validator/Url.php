@@ -5,13 +5,13 @@ namespace Phalcon\Validation\Validator {
 	/**
 	 * Phalcon\Validation\Validator\Url
 	 *
-	 * Checks if a value has a correct URL format
+	 * Checks if a value has a url format
 	 *
 	 *<code>
 	 *use Phalcon\Validation\Validator\Url as UrlValidator;
 	 *
 	 *$validator->add('url', new UrlValidator(array(
-	 *   'message' => 'The url is not valid'
+	 *   'message' => ':field must be a url'
 	 *)));
 	 *</code>
 	 */
@@ -20,12 +20,8 @@ namespace Phalcon\Validation\Validator {
 
 		/**
 		 * Executes the validation
-		 *
-		 * @param \Phalcon\Validation $validator
-		 * @param string $attribute
-		 * @return boolean
 		 */
-		public function validate($validator, $attribute){ }
+		public function validate(\Phalcon\Validation $validation, $field){ }
 
 	}
 }

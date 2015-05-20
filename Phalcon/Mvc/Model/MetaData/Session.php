@@ -11,13 +11,13 @@ namespace Phalcon\Mvc\Model\MetaData {
 	 * You can query the meta-data by printing $_SESSION['$PMM$']
 	 *
 	 *<code>
-	 * $metaData = new Phalcon\Mvc\Model\Metadata\Session(array(
+	 * $metaData = new \Phalcon\Mvc\Model\Metadata\Session(array(
 	 *    'prefix' => 'my-app-id'
 	 * ));
 	 *</code>
 	 */
 	
-	class Session extends \Phalcon\Mvc\Model\MetaData implements \Phalcon\Mvc\Model\MetaDataInterface, \Phalcon\DI\InjectionAwareInterface {
+	class Session extends \Phalcon\Mvc\Model\MetaData implements \Phalcon\Di\InjectionAwareInterface, \Phalcon\Mvc\Model\MetaDataInterface {
 
 		const MODELS_ATTRIBUTES = 0;
 
@@ -43,6 +43,8 @@ namespace Phalcon\Mvc\Model\MetaData {
 
 		const MODELS_AUTOMATIC_DEFAULT_UPDATE = 11;
 
+		const MODELS_DEFAULT_VALUES = 12;
+
 		const MODELS_COLUMN_MAP = 0;
 
 		const MODELS_REVERSE_COLUMN_MAP = 1;
@@ -52,7 +54,7 @@ namespace Phalcon\Mvc\Model\MetaData {
 		/**
 		 * \Phalcon\Mvc\Model\MetaData\Session constructor
 		 *
-		 * @param array $options
+		 * @param array options
 		 */
 		public function __construct($options=null){ }
 
@@ -60,7 +62,7 @@ namespace Phalcon\Mvc\Model\MetaData {
 		/**
 		 * Reads meta-data from $_SESSION
 		 *
-		 * @param string $key
+		 * @param string key
 		 * @return array
 		 */
 		public function read($key){ }
@@ -69,13 +71,10 @@ namespace Phalcon\Mvc\Model\MetaData {
 		/**
 		 * Writes the meta-data to $_SESSION
 		 *
-		 * @param string $key
-		 * @param array $data
+		 * @param string key
+		 * @param array data
 		 */
 		public function write($key, $data){ }
-
-
-		public function reset(){ }
 
 	}
 }

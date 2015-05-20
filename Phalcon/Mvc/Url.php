@@ -18,7 +18,7 @@ namespace Phalcon\Mvc {
 	 *</code>
 	 */
 	
-	class Url implements \Phalcon\Mvc\UrlInterface, \Phalcon\DI\InjectionAwareInterface {
+	class Url implements \Phalcon\Mvc\UrlInterface, \Phalcon\Di\InjectionAwareInterface {
 
 		protected $_dependencyInjector;
 
@@ -32,16 +32,12 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * Sets the DependencyInjector container
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
 		 */
-		public function setDI($dependencyInjector){ }
+		public function setDI(\Phalcon\DiInterface $dependencyInjector){ }
 
 
 		/**
 		 * Returns the DependencyInjector container
-		 *
-		 * @return \Phalcon\DiInterface
 		 */
 		public function getDI(){ }
 
@@ -53,9 +49,6 @@ namespace Phalcon\Mvc {
 		 *	$url->setBaseUri('/invo/');
 		 *	$url->setBaseUri('/invo/index.php/');
 		 *</code>
-		 *
-		 * @param string $baseUri
-		 * @return \Phalcon\Mvc\Url
 		 */
 		public function setBaseUri($baseUri){ }
 
@@ -66,25 +59,18 @@ namespace Phalcon\Mvc {
 		 *<code>
 		 *	$url->setStaticBaseUri('/invo/');
 		 *</code>
-		 *
-		 * @param string $staticBaseUri
-		 * @return \Phalcon\Mvc\Url
 		 */
 		public function setStaticBaseUri($staticBaseUri){ }
 
 
 		/**
 		 * Returns the prefix for all the generated urls. By default /
-		 *
-		 * @return string
 		 */
 		public function getBaseUri(){ }
 
 
 		/**
 		 * Returns the prefix for all the generated static urls. By default /
-		 *
-		 * @return string
 		 */
 		public function getStaticBaseUri(){ }
 
@@ -95,17 +81,12 @@ namespace Phalcon\Mvc {
 		 *<code>
 		 *	$url->setBasePath('/var/www/htdocs/');
 		 *</code>
-		 *
-		 * @param string $basePath
-		 * @return \Phalcon\Mvc\Url
 		 */
 		public function setBasePath($basePath){ }
 
 
 		/**
 		 * Returns the base path
-		 *
-		 * @return string
 		 */
 		public function getBasePath(){ }
 
@@ -123,17 +104,18 @@ namespace Phalcon\Mvc {
 		 *
 		 *</code>
 		 *
-		 * @param string|array $uri
+		 * @param string|array uri
 		 * @param array|object args Optional arguments to be appended to the query string
+		 * @param bool $local
 		 * @return string
 		 */
-		public function get($uri=null, $args=null){ }
+		public function get($uri=null, $args=null, $local=null){ }
 
 
 		/**
 		 * Generates a URL for a static resource
 		 *
-		 * @param string|array $uri
+		 * @param string|array uri
 		 * @return string
 		 */
 		public function getStatic($uri=null){ }
@@ -142,7 +124,7 @@ namespace Phalcon\Mvc {
 		/**
 		 * Generates a local path
 		 *
-		 * @param string $path
+		 * @param string path
 		 * @return string
 		 */
 		public function path($path=null){ }

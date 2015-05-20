@@ -10,16 +10,16 @@ namespace Phalcon\Mvc\Model\Validator {
 	 *<code>
 	 *	use Phalcon\Mvc\Model\Validator\InclusionIn as InclusionInValidator;
 	 *
-	 *	class Subscriptors extends Phalcon\Mvc\Model
+	 *	class Subscriptors extends \Phalcon\Mvc\Model
 	 *	{
 	 *
 	 *		public function validation()
 	 *		{
-	 *			$this->validate(new InclusionInValidator(array(
-	 *				'field' => 'status',
+	 *			this->validate(new InclusionInValidator(array(
+	 *				"field" => 'status',
 	 *				'domain' => array('A', 'I')
 	 *			)));
-	 *			if ($this->validationHasFailed() == true) {
+	 *			if (this->validationHasFailed() == true) {
 	 *				return false;
 	 *			}
 	 *		}
@@ -32,11 +32,8 @@ namespace Phalcon\Mvc\Model\Validator {
 
 		/**
 		 * Executes validator
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $record
-		 * @return boolean
 		 */
-		public function validate($record){ }
+		public function validate(\Phalcon\Mvc\ModelInterface $record){ }
 
 	}
 }

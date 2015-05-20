@@ -16,7 +16,7 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 	 *</code>
 	 */
 	
-	class Compiler implements \Phalcon\DI\InjectionAwareInterface {
+	class Compiler implements \Phalcon\Di\InjectionAwareInterface {
 
 		protected $_dependencyInjector;
 
@@ -64,32 +64,24 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 
 		/**
 		 * \Phalcon\Mvc\View\Engine\Volt\Compiler
-		 *
-		 * @param \Phalcon\Mvc\ViewInterface $view
 		 */
-		public function __construct($view=null){ }
+		public function __construct(\Phalcon\Mvc\ViewBaseInterface $view=null){ }
 
 
 		/**
 		 * Sets the dependency injector
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
 		 */
-		public function setDI($dependencyInjector){ }
+		public function setDI(\Phalcon\DiInterface $dependencyInjector){ }
 
 
 		/**
 		 * Returns the internal dependency injector
-		 *
-		 * @return \Phalcon\DiInterface
 		 */
 		public function getDI(){ }
 
 
 		/**
 		 * Sets the compiler options
-		 *
-		 * @param array $options
 		 */
 		public function setOptions($options){ }
 
@@ -97,8 +89,8 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 		/**
 		 * Sets a single compiler option
 		 *
-		 * @param string $option
-		 * @param string $value
+		 * @param string option
+		 * @param mixed value
 		 */
 		public function setOption($option, $value){ }
 
@@ -106,7 +98,7 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 		/**
 		 * Returns a compiler's option
 		 *
-		 * @param string $option
+		 * @param string option
 		 * @return string
 		 */
 		public function getOption($option){ }
@@ -114,8 +106,6 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 
 		/**
 		 * Returns the compiler options
-		 *
-		 * @return array
 		 */
 		public function getOptions(){ }
 
@@ -123,17 +113,17 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 		/**
 		 * Fires an event to registered extensions
 		 *
-		 * @param string $name
-		 * @param array $arguments
+		 * @param string name
+		 * @param array arguments
 		 * @return mixed
 		 */
-		public function fireExtensionEvent($name, $arguments=null){ }
+		final public function fireExtensionEvent($name, $arguments=null){ }
 
 
 		/**
 		 * Registers a Volt's extension
 		 *
-		 * @param object $extension
+		 * @param object extension
 		 * @return \Phalcon\Mvc\View\Engine\Volt\Compiler
 		 */
 		public function addExtension($extension){ }
@@ -141,8 +131,6 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 
 		/**
 		 * Returns the list of extensions registered in Volt
-		 *
-		 * @return array
 		 */
 		public function getExtensions(){ }
 
@@ -150,8 +138,8 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 		/**
 		 * Register a new function in the compiler
 		 *
-		 * @param string $name
-		 * @param Closure|string $definition
+		 * @param string name
+		 * @param Closure|string definition
 		 * @return \Phalcon\Mvc\View\Engine\Volt\Compiler
 		 */
 		public function addFunction($name, $definition){ }
@@ -159,8 +147,6 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 
 		/**
 		 * Register the user registered functions
-		 *
-		 * @return array
 		 */
 		public function getFunctions(){ }
 
@@ -168,8 +154,8 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 		/**
 		 * Register a new filter in the compiler
 		 *
-		 * @param string $name
-		 * @param Closure|string $definition
+		 * @param string name
+		 * @param Closure|string definition
 		 * @return \Phalcon\Mvc\View\Engine\Volt\Compiler
 		 */
 		public function addFilter($name, $definition){ }
@@ -177,137 +163,120 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 
 		/**
 		 * Register the user registered filters
-		 *
-		 * @return array
 		 */
 		public function getFilters(){ }
 
 
 		/**
 		 * Set a unique prefix to be used as prefix for compiled variables
-		 *
-		 * @param string $prefix
-		 * @return \Phalcon\Mvc\View\Engine\Volt\Compiler
 		 */
 		public function setUniquePrefix($prefix){ }
 
 
 		/**
 		 * Return a unique prefix to be used as prefix for compiled variables and contexts
-		 *
-		 * @return string
 		 */
 		public function getUniquePrefix(){ }
 
 
 		/**
 		 * Resolves attribute reading
-		 *
-		 * @param array $expr
-		 * @return string
 		 */
 		public function attributeReader($expr){ }
 
 
 		/**
 		 * Resolves function intermediate code into PHP function calls
-		 *
-		 * @param array $expr
-		 * @return string
 		 */
 		public function functionCall($expr){ }
 
 
 		/**
 		 * Resolves filter intermediate code into a valid PHP expression
-		 *
-		 * @param array $test
-		 * @param string $left
-		 * @return string
 		 */
 		public function resolveTest($test, $left){ }
 
 
 		/**
 		 * Resolves filter intermediate code into PHP function calls
-		 *
-		 * @param array $filter
-		 * @param string $left
-		 * @return string
 		 */
-		protected function resolveFilter(){ }
+		final protected function resolveFilter($filter, $left){ }
 
 
 		/**
 		 * Resolves an expression node in an AST volt tree
-		 *
-		 * @param array $expr
-		 * @return string
 		 */
-		public function expression($expr){ }
+		final public function expression($expr){ }
 
 
 		/**
 		 * Compiles a block of statements
 		 *
-		 * @param array $statements
+		 * @param array statements
 		 * @return string|array
 		 */
-		protected function _statementListOrExtends(){ }
+		final protected function _statementListOrExtends($statements){ }
 
 
 		/**
-		 * Compiles a 'foreach' intermediate code representation into plain PHP code
-		 *
-		 * @param array $statement
-		 * @param boolean $extendsMode
-		 * @return string
+		 * Compiles a "foreach" intermediate code representation into plain PHP code
 		 */
 		public function compileForeach($statement, $extendsMode=null){ }
 
 
 		/**
 		 * Generates a 'forelse' PHP code
-		 *
-		 * @return string
 		 */
 		public function compileForElse(){ }
 
 
 		/**
 		 * Compiles a 'if' statement returning PHP code
-		 *
-		 * @param array $statement
-		 * @param boolean $extendsMode
-		 * @return string
 		 */
 		public function compileIf($statement, $extendsMode=null){ }
 
 
 		/**
-		 * Compiles a 'elseif' statement returning PHP code
-		 *
-		 * @param array $statement
-		 * @return string
+		 * Compiles a "elseif" statement returning PHP code
 		 */
 		public function compileElseIf($statement){ }
 
 
 		/**
-		 * Compiles a 'cache' statement returning PHP code
-		 *
-		 * @param array $statement
-		 * @param boolean $extendsMode
-		 * @return string
+		 * Compiles a "cache" statement returning PHP code
 		 */
 		public function compileCache($statement, $extendsMode=null){ }
 
 
 		/**
+		 * Compiles a "set" statement returning PHP code
+		 */
+		public function compileSet($statement){ }
+
+
+		/**
+		 * Compiles a "do" statement returning PHP code
+		 */
+		public function compileDo($statement){ }
+
+
+		/**
+		 * Compiles a "return" statement returning PHP code
+		 */
+		public function compileReturn($statement){ }
+
+
+		/**
+		 * Compiles a "autoescape" statement returning PHP code
+		 */
+		public function compileAutoEscape($statement, $extendsMode){ }
+
+
+		/**
 		 * Compiles a '{{' '}}' statement returning PHP code
 		 *
-		 * @param array $statement
-		 * @param boolean $extendsMode
+		 * @param array   statement
+		 * @param boolean extendsMode
 		 * @return string
 		 */
 		public function compileEcho($statement){ }
@@ -315,58 +284,12 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 
 		/**
 		 * Compiles a 'include' statement returning PHP code
-		 *
-		 * @param array $statement
-		 * @return string
 		 */
 		public function compileInclude($statement){ }
 
 
 		/**
-		 * Compiles a 'set' statement returning PHP code
-		 *
-		 * @param array $statement
-		 * @return string
-		 */
-		public function compileSet($statement){ }
-
-
-		/**
-		 * Compiles a 'do' statement returning PHP code
-		 *
-		 * @param array $statement
-		 * @param boolean $extendsMode
-		 * @return string
-		 */
-		public function compileDo($statement){ }
-
-
-		/**
-		 * Compiles a 'return' statement returning PHP code
-		 *
-		 * @param array $statement
-		 * @param boolean $extendsMode
-		 * @return string
-		 */
-		public function compileReturn($statement){ }
-
-
-		/**
-		 * Compiles a 'autoescape' statement returning PHP code
-		 *
-		 * @param array $statement
-		 * @param boolean $extendsMode
-		 * @return string
-		 */
-		public function compileAutoEscape($statement, $extendsMode){ }
-
-
-		/**
 		 * Compiles macros
-		 *
-		 * @param array $statement
-		 * @param boolean $extendsMode
-		 * @return string
 		 */
 		public function compileMacro($statement, $extendsMode){ }
 
@@ -374,30 +297,23 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 		/**
 		 * Compiles calls to macros
 		 *
-		 * @param array $statement
-		 * @param boolean $extendsMode
+		 * @param array    statement
+		 * @param boolean  extendsMode
 		 * @return string
 		 */
-		public function compileCall(){ }
+		public function compileCall($statement, $extendsMode){ }
 
 
 		/**
 		 * Traverses a statement list compiling each of its nodes
-		 *
-		 * @param array $statement
-		 * @return string
 		 */
-		protected function _statementList(){ }
+		final protected function _statementList($statements, $extendsMode=null){ }
 
 
 		/**
 		 * Compiles a Volt source code returning a PHP plain version
-		 *
-		 * @param string $viewCode
-		 * @param boolean $extendsMode
-		 * @return string
 		 */
-		protected function _compileSource(){ }
+		protected function _compileSource($viewCode, $extendsMode=null){ }
 
 
 		/**
@@ -406,10 +322,6 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 		 *<code>
 		 * echo $compiler->compileString('{{ "hello world" }}');
 		 *</code>
-		 *
-		 * @param string $viewCode
-		 * @param boolean $extendsMode
-		 * @return string
 		 */
 		public function compileString($viewCode, $extendsMode=null){ }
 
@@ -421,9 +333,9 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 		 *	$compiler->compile('views/layouts/main.volt', 'views/layouts/main.volt.php');
 		 *</code>
 		 *
-		 * @param string $path
-		 * @param string $compiledPath
-		 * @param boolean $extendsMode
+		 * @param string path
+		 * @param string compiledPath
+		 * @param boolean extendsMode
 		 * @return string|array
 		 */
 		public function compileFile($path, $compiledPath, $extendsMode=null){ }
@@ -438,8 +350,8 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 		 *	require $compiler->getCompiledTemplatePath();
 		 *</code>
 		 *
-		 * @param string $templatePath
-		 * @param boolean $extendsMode
+		 * @param string templatePath
+		 * @param boolean extendsMode
 		 * @return string|array
 		 */
 		public function compile($templatePath, $extendsMode=null){ }
@@ -447,16 +359,12 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 
 		/**
 		 * Returns the path that is currently being compiled
-		 *
-		 * @return string
 		 */
 		public function getTemplatePath(){ }
 
 
 		/**
 		 * Returns the path to the last compiled template
-		 *
-		 * @return string
 		 */
 		public function getCompiledTemplatePath(){ }
 
@@ -468,7 +376,7 @@ namespace Phalcon\Mvc\View\Engine\Volt {
 		 *	print_r($compiler->parse('{{ 3 + 2 }}'));
 		 *</code>
 		 *
-		 * @param string $viewCode
+		 * @param string viewCode
 		 * @return array
 		 */
 		public function parse($viewCode){ }

@@ -10,13 +10,13 @@ namespace Phalcon\Annotations {
 	 *<code>
 	 * //Parse the annotations in a class
 	 * $reader = new \Phalcon\Annotations\Reader();
-	 * $parsing = $reader->parse('MyComponent');
+	 * $parsing = reader->parse('MyComponent');
 	 *
 	 * //Create the reflection
 	 * $reflection = new \Phalcon\Annotations\Reflection($parsing);
 	 *
 	 * //Get the annotations in the class docblock
-	 * $classAnnotations = $reflection->getClassAnnotations();
+	 * $classAnnotations = reflection->getClassAnnotations();
 	 *</code>
 	 */
 	
@@ -33,15 +33,13 @@ namespace Phalcon\Annotations {
 		/**
 		 * \Phalcon\Annotations\Reflection constructor
 		 *
-		 * @param array $reflectionData
+		 * @param array reflectionData
 		 */
 		public function __construct($reflectionData=null){ }
 
 
 		/**
 		 * Returns the annotations found in the class docblock
-		 *
-		 * @return \Phalcon\Annotations\Collection
 		 */
 		public function getClassAnnotations(){ }
 
@@ -73,7 +71,7 @@ namespace Phalcon\Annotations {
 		/**
 		 * Restores the state of a \Phalcon\Annotations\Reflection variable export
 		 *
-		 * @return array $data
+		 * @return array data
 		 */
 		public static function __set_state($data){ }
 

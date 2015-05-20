@@ -2,26 +2,18 @@
 
 namespace Phalcon\Acl {
 
-	/**
-	 * Phalcon\Acl\ResourceInterface initializer
-	 */
-	
 	interface ResourceInterface {
 
-		/**
-		 * Returns the resource name
-		 *
-		 * @return string
-		 */
+		public function __construct($name, $description=null);
+
+
 		public function getName();
 
 
-		/**
-		 * Returns resource description
-		 *
-		 * @return string
-		 */
 		public function getDescription();
+
+
+		public function __toString();
 
 	}
 }

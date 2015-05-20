@@ -10,7 +10,7 @@ namespace Phalcon\Mvc\Model\Validator {
 	 *<code>
 	 *	use Phalcon\Mvc\Model\Validator\Email as EmailValidator;
 	 *
-	 *	class Subscriptors extends Phalcon\Mvc\Model
+	 *	class Subscriptors extends \Phalcon\Mvc\Model
 	 *	{
 	 *
 	 *		public function validation()
@@ -25,18 +25,14 @@ namespace Phalcon\Mvc\Model\Validator {
 	 *
 	 *	}
 	 *</code>
-	 *
 	 */
 	
 	class Email extends \Phalcon\Mvc\Model\Validator implements \Phalcon\Mvc\Model\ValidatorInterface {
 
 		/**
 		 * Executes the validator
-		 *
-		 * @param \Phalcon\Mvc\ModelInterface $record
-		 * @return boolean
 		 */
-		public function validate($record){ }
+		public function validate(\Phalcon\Mvc\ModelInterface $record){ }
 
 	}
 }

@@ -22,89 +22,87 @@ namespace Phalcon\Db\Profiler {
 		protected $_finalTime;
 
 		/**
-		 * Sets the SQL statement related to the profile
+		 * SQL statement related to the profile
 		 *
-		 * @param string $sqlStatement
+		 * @var string
 		 */
-		public function setSQLStatement($sqlStatement){ }
+		public function setSqlStatement($sqlStatement){ }
 
 
 		/**
-		 * Returns the SQL statement related to the profile
+		 * SQL statement related to the profile
 		 *
-		 * @return string
+		 * @var string
 		 */
-		public function getSQLStatement(){ }
+		public function getSqlStatement(){ }
 
 
 		/**
-		 * Sets the SQL variables related to the profile
+		 * SQL variables related to the profile
 		 *
-		 * @param array $sqlParams
+		 * @var array
 		 */
-		public function setSQLVariables($sqlVariables){ }
+		public function setSqlVariables($sqlVariables){ }
 
 
 		/**
-		 * Returns the SQL variables related to the profile
+		 * SQL variables related to the profile
 		 *
-		 * @return array
+		 * @var array
 		 */
-		public function getSQLVariables(){ }
+		public function getSqlVariables(){ }
 
 
 		/**
-		 * Sets the SQL bind types related to the profile
+		 * SQL bind types related to the profile
 		 *
-		 * @param array $sqlParams
+		 * @var array
 		 */
-		public function setSQLBindTypes($sqlBindTypes){ }
+		public function setSqlBindTypes($sqlBindTypes){ }
 
 
 		/**
-		 * Returns the SQL bind types related to the profile
+		 * SQL bind types related to the profile
 		 *
-		 * @return array
+		 * @var array
 		 */
-		public function getSQLBindTypes(){ }
+		public function getSqlBindTypes(){ }
 
 
 		/**
-		 * Sets the timestamp on when the profile started
+		 * Timestamp when the profile started
 		 *
-		 * @param int $initialTime
+		 * @var double
 		 */
 		public function setInitialTime($initialTime){ }
 
 
 		/**
-		 * Sets the timestamp on when the profile ended
+		 * Timestamp when the profile started
 		 *
-		 * @param int $finalTime
-		 */
-		public function setFinalTime($finalTime){ }
-
-
-		/**
-		 * Returns the initial time in milseconds on when the profile started
-		 *
-		 * @return double
+		 * @var double
 		 */
 		public function getInitialTime(){ }
 
 
 		/**
-		 * Returns the initial time in milseconds on when the profile ended
+		 * Timestamp when the profile ended
 		 *
-		 * @return double
+		 * @var double
+		 */
+		public function setFinalTime($finalTime){ }
+
+
+		/**
+		 * Timestamp when the profile ended
+		 *
+		 * @var double
 		 */
 		public function getFinalTime(){ }
 
 
 		/**
 		 * Returns the total time in seconds spent by the profile
-		 *
-		 * @return double
 		 */
 		public function getTotalElapsedSeconds(){ }
 

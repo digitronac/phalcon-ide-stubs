@@ -8,10 +8,10 @@ namespace Phalcon\Mvc\Router {
 	 * Helper class to create a group of routes with common attributes
 	 *
 	 *<code>
-	 * $router = new Phalcon\Mvc\Router();
+	 * $router = new \Phalcon\Mvc\Router();
 	 *
 	 * //Create a group with a common module and controller
-	 * $blog = new Phalcon\Mvc\Router\Group(array(
+	 * $blog = new Group(array(
 	 * 	'module' => 'blog',
 	 * 	'controller' => 'index'
 	 * ));
@@ -41,7 +41,7 @@ namespace Phalcon\Mvc\Router {
 	 *
 	 */
 	
-	class Group {
+	class Group implements \Phalcon\Mvc\Router\GroupInterface {
 
 		protected $_prefix;
 
@@ -53,116 +53,74 @@ namespace Phalcon\Mvc\Router {
 
 		protected $_beforeMatch;
 
-		protected $_converters;
-
-		protected $_name;
-
 		/**
 		 * \Phalcon\Mvc\Router\Group constructor
-		 *
-		 * @param array $paths
 		 */
 		public function __construct($paths=null){ }
 
 
 		/**
 		 * Set a hostname restriction for all the routes in the group
-		 *
-		 * @param string $hostname
-		 * @return \Phalcon\Mvc\Router\Group
 		 */
 		public function setHostname($hostname){ }
 
 
 		/**
 		 * Returns the hostname restriction
-		 *
-		 * @return string
 		 */
 		public function getHostname(){ }
 
 
 		/**
 		 * Set a common uri prefix for all the routes in this group
-		 *
-		 * @param string $prefix
-		 * @return \Phalcon\Mvc\Router\Group
 		 */
 		public function setPrefix($prefix){ }
 
 
 		/**
 		 * Returns the common prefix for all the routes
-		 *
-		 * @return string
 		 */
 		public function getPrefix(){ }
 
 
 		/**
-		 * Set a before-match condition for the whole group
-		 *
-		 * @param string $prefix
-		 * @return \Phalcon\Mvc\Router\Group
+		 * Sets a callback that is called if the route is matched.
+		 * The developer can implement any arbitrary conditions here
+		 * If the callback returns false the route is treated as not matched
 		 */
 		public function beforeMatch($beforeMatch){ }
 
 
 		/**
-		 * Returns the before-match condition if any
-		 *
-		 * @return string
+		 * Returns the 'before match' callback if any
 		 */
 		public function getBeforeMatch(){ }
 
 
 		/**
 		 * Set common paths for all the routes in the group
-		 *
-		 * @param array $paths
-		 * @return \Phalcon\Mvc\Router\Group
 		 */
 		public function setPaths($paths){ }
 
 
 		/**
 		 * Returns the common paths defined for this group
-		 *
-		 * @return array|string
 		 */
 		public function getPaths(){ }
 
 
 		/**
 		 * Returns the routes added to the group
-		 *
-		 * @return \Phalcon\Mvc\Router\Route[]
 		 */
 		public function getRoutes(){ }
-
-
-		/**
-		 * Adds a route applying the common attributes
-		 *
-		 * @param string $pattern
-		 * @param array $paths
-		 * @param array $httpMethods
-		 * @return \Phalcon\Mvc\Router\Route
-		 */
-		protected function _addRoute(){ }
 
 
 		/**
 		 * Adds a route to the router on any HTTP method
 		 *
 		 *<code>
-		 * $router->add('/about', 'About::index');
+		 * router->add('/about', 'About::index');
 		 *</code>
-		 *
-		 * @param string $pattern
-		 * @param string/array $paths
-		 * @param string $httpMethods
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function add($pattern, $paths=null, $httpMethods=null){ }
 
@@ -170,8 +128,8 @@ namespace Phalcon\Mvc\Router {
 		/**
 		 * Adds a route to the router that only match if the HTTP method is GET
 		 *
-		 * @param string $pattern
-		 * @param string/array $paths
+		 * @param string pattern
+		 * @param string/array paths
 		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addGet($pattern, $paths=null){ }
@@ -180,8 +138,8 @@ namespace Phalcon\Mvc\Router {
 		/**
 		 * Adds a route to the router that only match if the HTTP method is POST
 		 *
-		 * @param string $pattern
-		 * @param string/array $paths
+		 * @param string pattern
+		 * @param string/array paths
 		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addPost($pattern, $paths=null){ }
@@ -190,8 +148,8 @@ namespace Phalcon\Mvc\Router {
 		/**
 		 * Adds a route to the router that only match if the HTTP method is PUT
 		 *
-		 * @param string $pattern
-		 * @param string/array $paths
+		 * @param string pattern
+		 * @param string/array paths
 		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addPut($pattern, $paths=null){ }
@@ -200,8 +158,8 @@ namespace Phalcon\Mvc\Router {
 		/**
 		 * Adds a route to the router that only match if the HTTP method is PATCH
 		 *
-		 * @param string $pattern
-		 * @param string/array $paths
+		 * @param string pattern
+		 * @param string/array paths
 		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addPatch($pattern, $paths=null){ }
@@ -210,8 +168,8 @@ namespace Phalcon\Mvc\Router {
 		/**
 		 * Adds a route to the router that only match if the HTTP method is DELETE
 		 *
-		 * @param string $pattern
-		 * @param string/array $paths
+		 * @param string pattern
+		 * @param string/array paths
 		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addDelete($pattern, $paths=null){ }
@@ -220,8 +178,8 @@ namespace Phalcon\Mvc\Router {
 		/**
 		 * Add a route to the router that only match if the HTTP method is OPTIONS
 		 *
-		 * @param string $pattern
-		 * @param string/array $paths
+		 * @param string pattern
+		 * @param string/array paths
 		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addOptions($pattern, $paths=null){ }
@@ -230,8 +188,8 @@ namespace Phalcon\Mvc\Router {
 		/**
 		 * Adds a route to the router that only match if the HTTP method is HEAD
 		 *
-		 * @param string $pattern
-		 * @param string/array $paths
+		 * @param string pattern
+		 * @param string/array paths
 		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addHead($pattern, $paths=null){ }
@@ -244,38 +202,9 @@ namespace Phalcon\Mvc\Router {
 
 
 		/**
-		 * Adds a converter to perform an additional transformation for certain parameter
-		 *
-		 * @param string $name
-		 * @param callable $converter
-		 * @return \Phalcon\Mvc\Router\Group
+		 * Adds a route applying the common attributes
 		 */
-		public function convert($name, $converter){ }
-
-
-		/**
-		 * Returns the router converter
-		 *
-		 * @return array|null
-		 */
-		public function getConverters(){ }
-
-
-		/**
-		 * Set the name of the group
-		 *
-		 * @param string $hostname
-		 * @return \Phalcon\Mvc\Router\Group
-		 */
-		public function setName($name){ }
-
-
-		/**
-		 * Returns the name of this group
-		 *
-		 * @return string
-		 */
-		public function getName(){ }
+		protected function _addRoute($pattern, $paths=null, $httpMethods=null){ }
 
 	}
 }

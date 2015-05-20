@@ -14,10 +14,22 @@ namespace Phalcon\Annotations\Adapter {
 	
 	class Apc extends \Phalcon\Annotations\Adapter implements \Phalcon\Annotations\AdapterInterface {
 
+		protected $_prefix;
+
+		protected $_ttl;
+
+		/**
+		 * \Phalcon\Annotations\Adapter\Apc constructor
+		 *
+		 * @param array options
+		 */
+		public function __construct($options=null){ }
+
+
 		/**
 		 * Reads parsed annotations from APC
 		 *
-		 * @param string $key
+		 * @param string key
 		 * @return \Phalcon\Annotations\Reflection
 		 */
 		public function read($key){ }
@@ -25,11 +37,8 @@ namespace Phalcon\Annotations\Adapter {
 
 		/**
 		 * Writes parsed annotations to APC
-		 *
-		 * @param string $key
-		 * @param \Phalcon\Annotations\Reflection $data
 		 */
-		public function write($key, $data){ }
+		public function write($key, \Phalcon\Annotations\Reflection $data){ }
 
 	}
 }

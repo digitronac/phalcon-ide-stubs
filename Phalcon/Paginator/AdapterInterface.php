@@ -2,26 +2,21 @@
 
 namespace Phalcon\Paginator {
 
-	/**
-	 * Phalcon\Paginator\AdapterInterface initializer
-	 */
-	
 	interface AdapterInterface {
 
-		/**
-		 * Set the current page number
-		 *
-		 * @param int $page
-		 */
+		public function __construct($config);
+
+
 		public function setCurrentPage($page);
 
 
-		/**
-		 * Returns a slice of the resultset to show in the pagination
-		 *
-		 * @return stdClass
-		 */
 		public function getPaginate();
+
+
+		public function setLimit($limit);
+
+
+		public function getLimit();
 
 	}
 }

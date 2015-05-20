@@ -9,11 +9,11 @@ namespace Phalcon\Cache\Backend {
 	 *
 	 *<code>
 	 *	//Cache data for 2 days
-	 *	$frontCache = new Phalcon\Cache\Frontend\Data(array(
+	 *	$frontCache = new \Phalcon\Cache\Frontend\Data(array(
 	 *		'lifetime' => 172800
 	 *	));
 	 *
-	 *  $cache = new Phalcon\Cache\Backend\Apc($frontCache, array(
+	 *  $cache = new \Phalcon\Cache\Backend\Apc($frontCache, array(
 	 *      'prefix' => 'app-data'
 	 *  ));
 	 *
@@ -31,8 +31,8 @@ namespace Phalcon\Cache\Backend {
 		/**
 		 * Returns a cached content
 		 *
-		 * @param 	string $keyName
-		 * @param   long $lifetime
+		 * @param 	string|long keyName
+		 * @param   long lifetime
 		 * @return  mixed
 		 */
 		public function get($keyName, $lifetime=null){ }
@@ -41,19 +41,36 @@ namespace Phalcon\Cache\Backend {
 		/**
 		 * Stores cached content into the APC backend and stops the frontend
 		 *
-		 * @param string $keyName
-		 * @param string $content
-		 * @param long $lifetime
-		 * @param boolean $stopBuffer
+		 * @param string|long keyName
+		 * @param string content
+		 * @param long lifetime
+		 * @param boolean stopBuffer
 		 */
 		public function save($keyName=null, $content=null, $lifetime=null, $stopBuffer=null){ }
 
 
 		/**
-		 * Deletes a value from the cache by its key
+		 * Increment of a given key, by number $value
 		 *
-		 * @param string $keyName
-		 * @return boolean
+		 * @param  string keyName
+		 * @param  long value
+		 * @return mixed
+		 */
+		public function increment($keyName=null, $value=null){ }
+
+
+		/**
+		 * Decrement of a given key, by number $value
+		 *
+		 * @param  string keyName
+		 * @param  long value
+		 * @return mixed
+		 */
+		public function decrement($keyName=null, $value=null){ }
+
+
+		/**
+		 * Deletes a value from the cache by its key
 		 */
 		public function delete($keyName){ }
 
@@ -61,7 +78,7 @@ namespace Phalcon\Cache\Backend {
 		/**
 		 * Query the existing cached keys
 		 *
-		 * @param string $prefix
+		 * @param string prefix
 		 * @return array
 		 */
 		public function queryKeys($prefix=null){ }
@@ -70,37 +87,15 @@ namespace Phalcon\Cache\Backend {
 		/**
 		 * Checks if cache exists and it hasn't expired
 		 *
-		 * @param  string $keyName
-		 * @param  long $lifetime
+		 * @param  string|long keyName
+		 * @param  long lifetime
 		 * @return boolean
 		 */
 		public function exists($keyName=null, $lifetime=null){ }
 
 
 		/**
-		 * Increment of a given key, by number $value
-		 * 
-		 * @param  string $keyName
-		 * @param  long $value
-		 * @return mixed
-		 */
-		public function increment($key_name=null, $value=null){ }
-
-
-		/**
-		 * Decrement of a given key, by number $value
-		 * 
-		 * @param  string $keyName
-		 * @param  long $value
-		 * @return mixed
-		 */
-		public function decrement($key_name=null, $value=null){ }
-
-
-		/**
 		 * Immediately invalidates all existing items.
-		 * 
-		 * @return boolean
 		 */
 		public function flush(){ }
 

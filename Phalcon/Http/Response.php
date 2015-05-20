@@ -10,14 +10,14 @@ namespace Phalcon\Http {
 	 * HTTP responses are usually composed by headers and body.
 	 *
 	 *<code>
-	 *	$response = new Phalcon\Http\Response();
+	 *	$response = new \Phalcon\Http\Response();
 	 *	$response->setStatusCode(200, "OK");
 	 *	$response->setContent("<html><body>Hello</body></html>");
 	 *	$response->send();
 	 *</code>
 	 */
 	
-	class Response implements \Phalcon\Http\ResponseInterface, \Phalcon\DI\InjectionAwareInterface {
+	class Response implements \Phalcon\Http\ResponseInterface, \Phalcon\Di\InjectionAwareInterface {
 
 		protected $_sent;
 
@@ -31,28 +31,26 @@ namespace Phalcon\Http {
 
 		protected $_dependencyInjector;
 
+		protected $_statusCodes;
+
 		/**
 		 * \Phalcon\Http\Response constructor
 		 *
-		 * @param string $content
-		 * @param int $code
-		 * @param string $status
+		 * @param string content
+		 * @param int code
+		 * @param string status
 		 */
 		public function __construct($content=null, $code=null, $status=null){ }
 
 
 		/**
 		 * Sets the dependency injector
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
 		 */
-		public function setDI($dependencyInjector){ }
+		public function setDI(\Phalcon\DiInterface $dependencyInjector){ }
 
 
 		/**
 		 * Returns the internal dependency injector
-		 *
-		 * @return \Phalcon\DiInterface
 		 */
 		public function getDI(){ }
 
@@ -63,38 +61,36 @@ namespace Phalcon\Http {
 		 *<code>
 		 *	$response->setStatusCode(404, "Not Found");
 		 *</code>
-		 *
-		 * @param int $code
-		 * @param string $message
-		 * @return \Phalcon\Http\ResponseInterface
 		 */
-		public function setStatusCode($code, $message){ }
+		public function setStatusCode($code, $message=null){ }
+
+
+		/**
+		 * Returns the status code
+		 *
+		 *<code>
+		 *	print_r($response->getStatusCode());
+		 *</code>
+		 */
+		public function getStatusCode(){ }
 
 
 		/**
 		 * Sets a headers bag for the response externally
-		 *
-		 * @param \Phalcon\Http\Response\HeadersInterface $headers
-		 * @return \Phalcon\Http\ResponseInterface
 		 */
-		public function setHeaders($headers){ }
+		public function setHeaders(\Phalcon\Http\Response\HeadersInterface $headers){ }
 
 
 		/**
 		 * Returns headers set by the user
-		 *
-		 * @return \Phalcon\Http\Response\HeadersInterface
 		 */
 		public function getHeaders(){ }
 
 
 		/**
 		 * Sets a cookies bag for the response externally
-		 *
-		 * @param \Phalcon\Http\Response\CookiesInterface $cookies
-		 * @return \Phalcon\Http\ResponseInterface
 		 */
-		public function setCookies($cookies){ }
+		public function setCookies(\Phalcon\Http\Response\CookiesInterface $cookies){ }
 
 
 		/**
@@ -112,9 +108,9 @@ namespace Phalcon\Http {
 		 *	$response->setHeader("Content-Type", "text/plain");
 		 *</code>
 		 *
-		 * @param string $name
-		 * @param string $value
-		 * @return \Phalcon\Http\ResponseInterface
+		 * @param string name
+		 * @param string value
+		 * @return \Phalcon\Http\Response
 		 */
 		public function setHeader($name, $value){ }
 
@@ -125,17 +121,12 @@ namespace Phalcon\Http {
 		 *<code>
 		 *	$response->setRawHeader("HTTP/1.1 404 Not Found");
 		 *</code>
-		 *
-		 * @param string $header
-		 * @return \Phalcon\Http\ResponseInterface
 		 */
 		public function setRawHeader($header){ }
 
 
 		/**
 		 * Resets all the stablished headers
-		 *
-		 * @return \Phalcon\Http\ResponseInterface
 		 */
 		public function resetHeaders(){ }
 
@@ -146,17 +137,12 @@ namespace Phalcon\Http {
 		 *<code>
 		 *	$this->response->setExpires(new DateTime());
 		 *</code>
-		 *
-		 * @param \DateTime $datetime
-		 * @return \Phalcon\Http\ResponseInterface
 		 */
-		public function setExpires($datetime){ }
+		public function setExpires(\DateTime $datetime){ }
 
 
 		/**
 		 * Sends a Not-Modified response
-		 *
-		 * @return \Phalcon\Http\ResponseInterface
 		 */
 		public function setNotModified(){ }
 
@@ -169,9 +155,9 @@ namespace Phalcon\Http {
 		 *	$response->setContentType('text/plain', 'UTF-8');
 		 *</code>
 		 *
-		 * @param string $contentType
-		 * @param string $charset
-		 * @return \Phalcon\Http\ResponseInterface
+		 * @param string contentType
+		 * @param string charset
+		 * @return \Phalcon\Http\Response
 		 */
 		public function setContentType($contentType, $charset=null){ }
 
@@ -182,8 +168,6 @@ namespace Phalcon\Http {
 		 *<code>
 		 *	$response->setEtag(md5(time()));
 		 *</code>
-		 *
-		 * @param string $etag
 		 */
 		public function setEtag($etag){ }
 
@@ -205,10 +189,10 @@ namespace Phalcon\Http {
 		 *	));
 		 *</code>
 		 *
-		 * @param string|array $location
-		 * @param boolean $externalRedirect
-		 * @param int $statusCode
-		 * @return \Phalcon\Http\ResponseInterface
+		 * @param string|array location
+		 * @param boolean externalRedirect
+		 * @param int statusCode
+		 * @return \Phalcon\Http\Response
 		 */
 		public function redirect($location=null, $externalRedirect=null, $statusCode=null){ }
 
@@ -217,11 +201,8 @@ namespace Phalcon\Http {
 		 * Sets HTTP response body
 		 *
 		 *<code>
-		 *	$response->setContent("<h1>Hello!</h1>");
+		 *	response->setContent("<h1>Hello!</h1>");
 		 *</code>
-		 *
-		 * @param string $content
-		 * @return \Phalcon\Http\ResponseInterface
 		 */
 		public function setContent($content){ }
 
@@ -231,61 +212,50 @@ namespace Phalcon\Http {
 		 *
 		 *<code>
 		 *	$response->setJsonContent(array("status" => "OK"));
-		 *	$response->setJsonContent(array("status" => "OK"), JSON_NUMERIC_CHECK);
-		*</code>
+		 *</code>
 		 *
-		 * @param string $content
-		 * @param int $jsonOptions bitmask consisting on http://www.php.net/manual/en/json.constants.php
-		 * @return \Phalcon\Http\ResponseInterface
+		 * @param mixed content
+		 * @param int jsonOptions
+		 * @return \Phalcon\Http\Response
 		 */
-		public function setJsonContent($content){ }
+		public function setJsonContent($content, $jsonOptions=null){ }
 
 
 		/**
 		 * Appends a string to the HTTP response body
 		 *
-		 * @param string $content
-		 * @return \Phalcon\Http\ResponseInterface
+		 * @param string content
+		 * @return \Phalcon\Http\Response
 		 */
 		public function appendContent($content){ }
 
 
 		/**
 		 * Gets the HTTP response body
-		 *
-		 * @return string
 		 */
 		public function getContent(){ }
 
 
 		/**
 		 * Check if the response is already sent
-		 *
-		 * @return boolean
 		 */
 		public function isSent(){ }
 
 
 		/**
 		 * Sends headers to the client
-		 *
-		 * @return \Phalcon\Http\ResponseInterface
 		 */
 		public function sendHeaders(){ }
 
 
 		/**
 		 * Sends cookies to the client
-		 *
-		 * @return \Phalcon\Http\ResponseInterface
 		 */
 		public function sendCookies(){ }
 
 
 		/**
 		 * Prints out HTTP response to the client
-		 *
-		 * @return \Phalcon\Http\ResponseInterface
 		 */
 		public function send(){ }
 
@@ -293,10 +263,11 @@ namespace Phalcon\Http {
 		/**
 		 * Sets an attached file to be sent at the end of the request
 		 *
-		 * @param string $filePath
-		 * @param string $attachmentName
+		 * @param string filePath
+		 * @param string attachmentName
+		 * @return \Phalcon\Http\Response
 		 */
-		public function setFileToSend($filePath, $attachmentName=null){ }
+		public function setFileToSend($filePath, $attachmentName=null, $attachment=null){ }
 
 	}
 }

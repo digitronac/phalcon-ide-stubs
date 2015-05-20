@@ -16,7 +16,7 @@ namespace Phalcon\Db\Result {
 	 * </code>
 	 */
 	
-	class Pdo {
+	class Pdo implements \Phalcon\Db\ResultInterface {
 
 		protected $_connection;
 
@@ -37,20 +37,18 @@ namespace Phalcon\Db\Result {
 		/**
 		 * \Phalcon\Db\Result\Pdo constructor
 		 *
-		 * @param \Phalcon\Db\AdapterInterface $connection
-		 * @param string $sqlStatement
-		 * @param array $bindParams
-		 * @param array $bindTypes
-		 * @param \PDOStatement $result
+		 * @param \Phalcon\Db\AdapterInterface connection
+		 * @param \PDOStatement result
+		 * @param string sqlStatement
+		 * @param array bindParams
+		 * @param array bindTypes
 		 */
-		public function __construct($connection, $result, $sqlStatement=null, $bindParams=null, $bindTypes=null){ }
+		public function __construct(\Phalcon\Db\AdapterInterface $connection, \PDOStatement $result, $sqlStatement=null, $bindParams=null, $bindTypes=null){ }
 
 
 		/**
-		 * Allows to executes the statement again. Some database systems don't support scrollable cursors,
+		 * Allows to execute the statement again. Some database systems don't support scrollable cursors,
 		 * So, as cursors are forward only, we need to execute the cursor again to fetch rows from the begining
-		 *
-		 * @return boolean
 		 */
 		public function execute(){ }
 
@@ -63,7 +61,7 @@ namespace Phalcon\Db\Result {
 		 *	$result = $connection->query("SELECT * FROM robots ORDER BY name");
 		 *	$result->setFetchMode(Phalcon\Db::FETCH_OBJ);
 		 *	while ($robot = $result->fetch()) {
-		 *		echo $robot->name;
+		 *		echo robot->name;
 		 *	}
 		 *</code>
 		 *
@@ -79,7 +77,7 @@ namespace Phalcon\Db\Result {
 		 *<code>
 		 *	$result = $connection->query("SELECT * FROM robots ORDER BY name");
 		 *	$result->setFetchMode(Phalcon\Db::FETCH_NUM);
-		 *	while ($robot = $result->fetchArray()) {
+		 *	while ($robot = result->fetchArray()) {
 		 *		print_r($robot);
 		 *	}
 		 *</code>
@@ -110,8 +108,6 @@ namespace Phalcon\Db\Result {
 		 *	$result = $connection->query("SELECT * FROM robots ORDER BY name");
 		 *	echo 'There are ', $result->numRows(), ' rows in the resulset';
 		 *</code>
-		 *
-		 * @return int
 		 */
 		public function numRows(){ }
 
@@ -124,8 +120,6 @@ namespace Phalcon\Db\Result {
 		 *	$result->dataSeek(2); // Move to third row on result
 		 *	$row = $result->fetch(); // Fetch third row
 		 *</code>
-		 *
-		 * @param int $number
 		 */
 		public function dataSeek($number){ }
 
@@ -146,16 +140,12 @@ namespace Phalcon\Db\Result {
 		 *	//Return an object
 		 *	$result->setFetchMode(Phalcon\Db::FETCH_OBJ);
 		 *</code>
-		 *
-		 * @param int $fetchMode
 		 */
 		public function setFetchMode($fetchMode){ }
 
 
 		/**
 		 * Gets the internal PDO result object
-		 *
-		 * @return \PDOStatement
 		 */
 		public function getInternalResult(){ }
 

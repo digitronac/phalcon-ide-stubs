@@ -15,9 +15,9 @@ namespace Phalcon\Forms\Element {
 		/**
 		 * \Phalcon\Forms\Element constructor
 		 *
-		 * @param string $name
-		 * @param object|array $options
-		 * @param array $attributes
+		 * @param string name
+		 * @param object|array options
+		 * @param array attributes
 		 */
 		public function __construct($name, $options=null, $attributes=null){ }
 
@@ -25,7 +25,7 @@ namespace Phalcon\Forms\Element {
 		/**
 		 * Set the choice's options
 		 *
-		 * @param array|object $options
+		 * @param array|object options
 		 * @return \Phalcon\Forms\Element
 		 */
 		public function setOptions($options){ }
@@ -42,8 +42,8 @@ namespace Phalcon\Forms\Element {
 		/**
 		 * Adds an option to the current options
 		 *
-		 * @param array $option
-		 * @return $this
+		 * @param array option
+		 * @return this
 		 */
 		public function addOption($option){ }
 
@@ -51,7 +51,7 @@ namespace Phalcon\Forms\Element {
 		/**
 		 * Renders the element widget returning html
 		 *
-		 * @param array $attributes
+		 * @param array attributes
 		 * @return string
 		 */
 		public function render($attributes=null){ }

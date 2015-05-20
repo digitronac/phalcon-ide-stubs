@@ -8,16 +8,17 @@ namespace Phalcon\Cache\Frontend {
 	 * Allows to cache output fragments captured with ob_* functions
 	 *
 	 *<code>
-	 * 
+	 * <?php
+	 *
 	 * //Create an Output frontend. Cache the files for 2 days
-	 * $frontCache = new Phalcon\Cache\Frontend\Output(array(
+	 * $frontCache = new \Phalcon\Cache\Frontend\Output(array(
 	 *   "lifetime" => 172800
 	 * ));
 	 *
 	 * // Create the component that will cache from the "Output" to a "File" backend
 	 * // Set the cache file directory - it's important to keep the "/" at the end of
 	 * // the value for the folder
-	 * $cache = new Phalcon\Cache\Backend\File($frontCache, array(
+	 * $cache = new \Phalcon\Cache\Backend\File($frontCache, array(
 	 *     "cacheDir" => "../app/cache/"
 	 * ));
 	 *
@@ -59,29 +60,25 @@ namespace Phalcon\Cache\Frontend {
 		/**
 		 * \Phalcon\Cache\Frontend\Output constructor
 		 *
-		 * @param array $frontendOptions
+		 * @param array frontendOptions
 		 */
 		public function __construct($frontendOptions=null){ }
 
 
 		/**
-		 * Returns cache lifetime
-		 *
-		 * @return integer
+		 * Returns the cache lifetime
 		 */
 		public function getLifetime(){ }
 
 
 		/**
 		 * Check whether if frontend is buffering output
-		 *
-		 * @return boolean
 		 */
 		public function isBuffering(){ }
 
 
 		/**
-		 * Starts output frontend
+		 * Starts output frontend. Currently, does nothing
 		 */
 		public function start(){ }
 
@@ -101,18 +98,18 @@ namespace Phalcon\Cache\Frontend {
 
 
 		/**
-		 * Prepare data to be stored
+		 * Serializes data before storing them
 		 *
-		 * @param mixed $data
-		 * @return mixed
+		 * @param mixed data
+		 * @return string
 		 */
 		public function beforeStore($data){ }
 
 
 		/**
-		 * Prepares data to be retrieved to user
+		 * Unserializes data after retrieval
 		 *
-		 * @param mixed $data
+		 * @param mixed data
 		 * @return mixed
 		 */
 		public function afterRetrieve($data){ }

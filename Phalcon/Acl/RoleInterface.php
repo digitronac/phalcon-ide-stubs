@@ -2,26 +2,18 @@
 
 namespace Phalcon\Acl {
 
-	/**
-	 * Phalcon\Acl\RoleInterface initializer
-	 */
-	
 	interface RoleInterface {
 
-		/**
-		 * Returns the role name
-		 *
-		 * @return string
-		 */
+		public function __construct($name, $description=null);
+
+
 		public function getName();
 
 
-		/**
-		 * Returns role description
-		 *
-		 * @return string
-		 */
 		public function getDescription();
+
+
+		public function __toString();
 
 	}
 }

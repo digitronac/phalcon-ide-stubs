@@ -17,7 +17,7 @@ namespace Phalcon\Annotations\Adapter {
 		/**
 		 * Reads parsed annotations from XCache
 		 *
-		 * @param string $key
+		 * @param string key
 		 * @return \Phalcon\Annotations\Reflection
 		 */
 		public function read($key){ }
@@ -25,11 +25,8 @@ namespace Phalcon\Annotations\Adapter {
 
 		/**
 		 * Writes parsed annotations to XCache
-		 *
-		 * @param string $key
-		 * @param \Phalcon\Annotations\Reflection $data
 		 */
-		public function write($key, $data){ }
+		public function write($key, \Phalcon\Annotations\Reflection $data){ }
 
 	}
 }

@@ -25,34 +25,18 @@ namespace Phalcon\Paginator\Adapter {
 	 *
 	 */
 	
-	class NativeArray implements \Phalcon\Paginator\AdapterInterface {
+	class NativeArray extends \Phalcon\Paginator\Adapter implements \Phalcon\Paginator\AdapterInterface {
 
-		protected $_limitRows;
-
-		protected $_data;
-
-		protected $_page;
+		protected $_config;
 
 		/**
 		 * \Phalcon\Paginator\Adapter\NativeArray constructor
-		 *
-		 * @param array $config
 		 */
 		public function __construct($config){ }
 
 
 		/**
-		 * Set the current page number
-		 *
-		 * @param int $page
-		 */
-		public function setCurrentPage($page){ }
-
-
-		/**
 		 * Returns a slice of the resultset to show in the pagination
-		 *
-		 * @return stdClass
 		 */
 		public function getPaginate(){ }
 

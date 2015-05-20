@@ -16,8 +16,6 @@ namespace Phalcon\Mvc\Micro {
 
 		/**
 		 * \Phalcon\Mvc\Micro\LazyLoader constructor
-		 *
-		 * @param string $definition
 		 */
 		public function __construct($definition){ }
 
@@ -25,8 +23,8 @@ namespace Phalcon\Mvc\Micro {
 		/**
 		 * Initializes the internal handler, calling functions on it
 		 *
-		 * @param string $method
-		 * @param array $arguments
+		 * @param  string method
+		 * @param  array arguments
 		 * @return mixed
 		 */
 		public function __call($method, $arguments){ }

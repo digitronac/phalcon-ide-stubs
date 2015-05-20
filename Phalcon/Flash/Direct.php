@@ -13,9 +13,7 @@ namespace Phalcon\Flash {
 		/**
 		 * Outputs a message
 		 *
-		 * @param  string $type
-		 * @param  string $message
-		 * @return string
+		 * @param  string|array message
 		 */
 		public function message($type, $message){ }
 

@@ -9,21 +9,21 @@ namespace Phalcon\Acl\Adapter {
 	 *
 	 *<code>
 	 *
-	 *	$acl = new Phalcon\Acl\Adapter\Memory();
+	 *	$acl = new \Phalcon\Acl\Adapter\Memory();
 	 *
 	 *	$acl->setDefaultAction(Phalcon\Acl::DENY);
 	 *
 	 *	//Register roles
 	 *	$roles = array(
-	 *		'users' => new Phalcon\Acl\Role('Users'),
-	 *		'guests' => new Phalcon\Acl\Role('Guests')
+	 *		'users' => new \Phalcon\Acl\Role('Users'),
+	 *		'guests' => new \Phalcon\Acl\Role('Guests')
 	 *	);
 	 *	foreach ($roles as $role) {
 	 *		$acl->addRole($role);
 	 *	}
 	 *
 	 *	//Private area resources
-	 *  $privateResources = array(
+	 *	$privateResources = array(
 	 *		'companies' => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
 	 *		'products' => array('index', 'search', 'new', 'edit', 'save', 'create', 'delete'),
 	 *		'invoices' => array('index', 'profile')
@@ -39,11 +39,11 @@ namespace Phalcon\Acl\Adapter {
 	 *		'session' => array('index', 'register', 'start', 'end'),
 	 *		'contact' => array('index', 'send')
 	 *	);
-	 *  foreach ($publicResources as $resource => $actions) {
+	 *	foreach ($publicResources as $resource => $actions) {
 	 *		$acl->addResource(new Phalcon\Acl\Resource($resource), $actions);
 	 *	}
 	 *
-	 *  //Grant access to public areas to both users and guests
+	 *	//Grant access to public areas to both users and guests
 	 *	foreach ($roles as $role){
 	 *		foreach ($publicResources as $resource => $actions) {
 	 *			$acl->allow($role->getName(), $resource, '*');
@@ -51,7 +51,7 @@ namespace Phalcon\Acl\Adapter {
 	 *	}
 	 *
 	 *	//Grant access to private area to role Users
-	 *  foreach ($privateResources as $resource => $actions) {
+	 *	foreach ($privateResources as $resource => $actions) {
 	 * 		foreach ($actions as $action) {
 	 *			$acl->allow('Users', $resource, $action);
 	 *		}
@@ -60,7 +60,7 @@ namespace Phalcon\Acl\Adapter {
 	 *</code>
 	 */
 	
-	class Memory extends \Phalcon\Acl\Adapter implements \Phalcon\Acl\AdapterInterface, \Phalcon\Events\EventsAwareInterface {
+	class Memory extends \Phalcon\Acl\Adapter implements \Phalcon\Events\EventsAwareInterface, \Phalcon\Acl\AdapterInterface {
 
 		protected $_rolesNames;
 
@@ -78,7 +78,6 @@ namespace Phalcon\Acl\Adapter {
 
 		/**
 		 * \Phalcon\Acl\Adapter\Memory constructor
-		 *
 		 */
 		public function __construct(){ }
 
@@ -92,36 +91,25 @@ namespace Phalcon\Acl\Adapter {
 		 * 	$acl->addRole('administrator', 'consultant');
 		 * </code>
 		 *
-		 * @param  \Phalcon\Acl\RoleInterface $role
-		 * @param  array|string $accessInherits
-		 * @return boolean
+		 * @param  array|string accessInherits
 		 */
 		public function addRole($role, $accessInherits=null){ }
 
 
 		/**
 		 * Do a role inherit from another existing role
-		 *
-		 * @param string $roleName
-		 * @param string $roleToInherit
 		 */
 		public function addInherit($roleName, $roleToInherit){ }
 
 
 		/**
 		 * Check whether role exist in the roles list
-		 *
-		 * @param  string $roleName
-		 * @return boolean
 		 */
 		public function isRole($roleName){ }
 
 
 		/**
 		 * Check whether resource exist in the resources list
-		 *
-		 * @param  string $resourceName
-		 * @return boolean
 		 */
 		public function isResource($resourceName){ }
 
@@ -143,18 +131,16 @@ namespace Phalcon\Acl\Adapter {
 		 * $acl->addResource('customers', array('create', 'search'));
 		 * </code>
 		 *
-		 * @param   \Phalcon\Acl\Resource $resource
-		 * @param   array $accessList
-		 * @return  boolean
+		 * @param   \Phalcon\Acl\Resource|string resourceValue
+		 * @param   array|string accessList
 		 */
-		public function addResource($resource, $accessList=null){ }
+		public function addResource($resourceValue, $accessList){ }
 
 
 		/**
 		 * Adds access to resources
 		 *
-		 * @param string $resourceName
-		 * @param mixed $accessList
+		 * @param array|string accessList
 		 */
 		public function addResourceAccess($resourceName, $accessList){ }
 
@@ -162,21 +148,15 @@ namespace Phalcon\Acl\Adapter {
 		/**
 		 * Removes an access from a resource
 		 *
-		 * @param string $resourceName
-		 * @param mixed $accessList
+		 * @param array|string accessList
 		 */
 		public function dropResourceAccess($resourceName, $accessList){ }
 
 
 		/**
 		 * Checks if a role has access to a resource
-		 *
-		 * @param string $roleName
-		 * @param string $resourceName
-		 * @param string $access
-		 * @param string $action
 		 */
-		protected function _allowOrDeny(){ }
+		protected function _allowOrDeny($roleName, $resourceName, $access, $action){ }
 
 
 		/**
@@ -198,10 +178,6 @@ namespace Phalcon\Acl\Adapter {
 		 * //Allow access to any role to browse on any resource
 		 * $acl->allow('*', '*', 'browse');
 		 * </code>
-		 *
-		 * @param string $roleName
-		 * @param string $resourceName
-		 * @param mixed $access
 		 */
 		public function allow($roleName, $resourceName, $access){ }
 
@@ -225,11 +201,6 @@ namespace Phalcon\Acl\Adapter {
 		 * //Deny access to any role to browse on any resource
 		 * $acl->deny('*', '*', 'browse');
 		 * </code>
-		 *
-		 * @param string $roleName
-		 * @param string $resourceName
-		 * @param mixed $access
-		 * @return boolean
 		 */
 		public function deny($roleName, $resourceName, $access){ }
 
@@ -244,27 +215,18 @@ namespace Phalcon\Acl\Adapter {
 		 * //Do guests have access to any resource to edit?
 		 * $acl->isAllowed('guests', '*', 'edit');
 		 * </code>
-		 *
-		 * @param  string $role
-		 * @param  string $resource
-		 * @param  string $access
-		 * @return boolean
 		 */
-		public function isAllowed($role, $resource, $access){ }
+		public function isAllowed($roleName, $resourceName, $access){ }
 
 
 		/**
 		 * Return an array with every role registered in the list
-		 *
-		 * @return \Phalcon\Acl\Role[]
 		 */
 		public function getRoles(){ }
 
 
 		/**
 		 * Return an array with every resource registered in the list
-		 *
-		 * @return \Phalcon\Acl\Resource[]
 		 */
 		public function getResources(){ }
 

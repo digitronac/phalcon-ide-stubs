@@ -8,13 +8,14 @@ namespace Phalcon\Cache\Frontend {
 	 * Discards any kind of frontend data input. This frontend does not have expiration time or any other options
 	 *
 	 *<code>
+	 *<?php
 	 *
 	 *	//Create a None Cache
-	 *	$frontCache = new Phalcon\Cache\Frontend\None();
+	 *	$frontCache = new \Phalcon\Cache\Frontend\None();
 	 *
 	 *	// Create the component that will cache "Data" to a "Memcached" backend
 	 *	// Memcached connection settings
-	 *	$cache = new Phalcon\Cache\Backend\Memcache($frontCache, array(
+	 *	$cache = new \Phalcon\Cache\Backend\Memcache($frontCache, array(
 	 *		"host" => "localhost",
 	 *		"port" => "11211"
 	 *	));
@@ -38,14 +39,38 @@ namespace Phalcon\Cache\Frontend {
 	 *</code>
 	 */
 	
-	class None extends \Phalcon\Cache\Frontend\Data implements \Phalcon\Cache\FrontendInterface {
+	class None implements \Phalcon\Cache\FrontendInterface {
 
 		/**
 		 * Returns cache lifetime, always one second expiring content
-		 *
-		 * @return int
 		 */
 		public function getLifetime(){ }
+
+
+		/**
+		 * Check whether if frontend is buffering output, always false
+		 */
+		public function isBuffering(){ }
+
+
+		/**
+		 * Starts output frontend
+		 */
+		public function start(){ }
+
+
+		/**
+		 * Returns output cached content
+		 *
+		 * @return string
+		 */
+		public function getContent(){ }
+
+
+		/**
+		 * Stops output frontend
+		 */
+		public function stop(){ }
 
 
 		/**

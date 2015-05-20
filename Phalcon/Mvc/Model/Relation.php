@@ -45,11 +45,11 @@ namespace Phalcon\Mvc\Model {
 		/**
 		 * \Phalcon\Mvc\Model\Relation constructor
 		 *
-		 * @param int $type
-		 * @param string $referencedModel
-		 * @param string|array $fields
-		 * @param string|array $referencedFields
-		 * @param array $options
+		 * @param int type
+		 * @param string referencedModel
+		 * @param string|array fields
+		 * @param string|array referencedFields
+		 * @param array options
 		 */
 		public function __construct($type, $referencedModel, $fields, $referencedFields, $options=null){ }
 
@@ -57,25 +57,21 @@ namespace Phalcon\Mvc\Model {
 		/**
 		 * Sets the intermediate model data for has-*-through relations
 		 *
-		 * @param string|array $intermediateFields
-		 * @param string $intermediateModel
-		 * @param string $intermediateReferencedFields
+		 * @param string|array intermediateFields
+		 * @param string intermediateModel
+		 * @param string intermediateReferencedFields
 		 */
 		public function setIntermediateRelation($intermediateFields, $intermediateModel, $intermediateReferencedFields){ }
 
 
 		/**
 		 * Returns the relation type
-		 *
-		 * @return int
 		 */
 		public function getType(){ }
 
 
 		/**
 		 * Returns the referenced model
-		 *
-		 * @return string
 		 */
 		public function getReferencedModel(){ }
 
@@ -106,8 +102,6 @@ namespace Phalcon\Mvc\Model {
 
 		/**
 		 * Check whether the relation act as a foreign key
-		 *
-		 * @return string|array
 		 */
 		public function isForeignKey(){ }
 
@@ -121,17 +115,21 @@ namespace Phalcon\Mvc\Model {
 
 
 		/**
-		 * Check whether the relation is a 'many-to-many' relation or not
+		 * Returns parameters that must be always used when the related records are obtained
 		 *
-		 * @return boolean
+		 * @return array
+		 */
+		public function getParams(){ }
+
+
+		/**
+		 * Check whether the relation is a 'many-to-many' relation or not
 		 */
 		public function isThrough(){ }
 
 
 		/**
 		 * Check if records returned by getting belongs-to/has-many are implicitly cached during the current request
-		 *
-		 * @return boolean
 		 */
 		public function isReusable(){ }
 
@@ -146,8 +144,6 @@ namespace Phalcon\Mvc\Model {
 
 		/**
 		 * Gets the intermediate model for has-*-through relations
-		 *
-		 * @return string
 		 */
 		public function getIntermediateModel(){ }
 

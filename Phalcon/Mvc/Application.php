@@ -13,7 +13,7 @@ namespace Phalcon\Mvc {
 	 * class Application extends \Phalcon\Mvc\Application
 	 * {
 	 *
-	 *		/\**
+	 *		/**
 	 *		 * Register the services here to make them general or register
 	 *		 * in the ModuleDefinition to make them module-specific
 	 *		 *\/
@@ -22,7 +22,7 @@ namespace Phalcon\Mvc {
 	 *
 	 *		}
 	 *
-	 *		/\**
+	 *		/**
 	 *		 * This method registers all the modules in the application
 	 *		 *\/
 	 *		public function main()
@@ -46,30 +46,23 @@ namespace Phalcon\Mvc {
 	 *</code>
 	 */
 	
-	class Application extends \Phalcon\DI\Injectable implements \Phalcon\Events\EventsAwareInterface, \Phalcon\DI\InjectionAwareInterface {
+	class Application extends \Phalcon\Di\Injectable implements \Phalcon\Events\EventsAwareInterface, \Phalcon\Di\InjectionAwareInterface {
 
 		protected $_defaultModule;
 
 		protected $_modules;
 
-		protected $_moduleObject;
-
 		protected $_implicitView;
 
 		/**
 		 * \Phalcon\Mvc\Application
-		 *
-		 * @param \Phalcon\DI $dependencyInjector
 		 */
-		public function __construct($dependencyInjector=null){ }
+		public function __construct(\Phalcon\DiInterface $dependencyInjector=null){ }
 
 
 		/**
 		 * By default. The view is implicitly buffering all the output
 		 * You can full disable the view component using this method
-		 *
-		 * @param boolean $implicitView
-		 * @return \Phalcon\Mvc\Application
 		 */
 		public function useImplicitView($implicitView){ }
 
@@ -89,10 +82,6 @@ namespace Phalcon\Mvc {
 		 *		)
 		 *	));
 		 *</code>
-		 *
-		 * @param array $modules
-		 * @param boolean $merge
-		 * @param \Phalcon\Mvc\Application
 		 */
 		public function registerModules($modules, $merge=null){ }
 
@@ -106,18 +95,22 @@ namespace Phalcon\Mvc {
 
 
 		/**
-		 * Sets the module name to be used if the router doesn't return a valid module
+		 * Gets the module definition registered in the application via module name
 		 *
-		 * @param string $defaultModule
-		 * @return \Phalcon\Mvc\Application
+		 * @param string name
+		 * @return array|object
+		 */
+		public function getModule($name){ }
+
+
+		/**
+		 * Sets the module name to be used if the router doesn't return a valid module
 		 */
 		public function setDefaultModule($defaultModule){ }
 
 
 		/**
 		 * Returns the default module name
-		 *
-		 * @return string
 		 */
 		public function getDefaultModule(){ }
 
@@ -125,8 +118,8 @@ namespace Phalcon\Mvc {
 		/**
 		 * Handles a MVC request
 		 *
-		 * @param string $uri
-		 * @return \Phalcon\Http\ResponseInterface
+		 * @param string uri
+		 * @return \Phalcon\Http\ResponseInterface|boolean
 		 */
 		public function handle($uri=null){ }
 

@@ -17,7 +17,7 @@ namespace Phalcon\Db\Adapter\Pdo {
 	 *		"password" => "secret"
 	 *	);
 	 *
-	 *	$connection = new Phalcon\Db\Adapter\Pdo\Mysql($config);
+	 *	$connection = new \Phalcon\Db\Adapter\Pdo\Mysql($config);
 	 *
 	 *</code>
 	 */
@@ -31,7 +31,7 @@ namespace Phalcon\Db\Adapter\Pdo {
 		/**
 		 * Escapes a column/table/schema name
 		 *
-		 * @param string $identifier
+		 * @param string|array identifier
 		 * @return string
 		 */
 		public function escapeIdentifier($identifier){ }
@@ -41,12 +41,8 @@ namespace Phalcon\Db\Adapter\Pdo {
 		 * Returns an array of \Phalcon\Db\Column objects describing a table
 		 *
 		 * <code>
-		 * print_r($connection->describeColumns("posts")); ?>
+		 * print_r($connection->describeColumns("posts"));
 		 * </code>
-		 *
-		 * @param string $table
-		 * @param string $schema
-		 * @return \Phalcon\Db\Column[]
 		 */
 		public function describeColumns($table, $schema=null){ }
 

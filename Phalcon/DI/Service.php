@@ -1,51 +1,55 @@
 <?php 
 
-namespace Phalcon\DI {
+namespace Phalcon\Di {
 
 	/**
-	 * Phalcon\DI\Service
+	 * Phalcon\Di\Service
 	 *
 	 * Represents individually a service in the services container
 	 *
 	 *<code>
-	 * $service = new Phalcon\DI\Service('request', 'Phalcon\Http\Request');
-	 * $request = $service->resolve();
+	 * $service = new \Phalcon\Di\Service('request', 'Phalcon\Http\Request');
+	 * $request = service->resolve();
 	 *<code>
 	 *
 	 */
 	
-	class Service implements \Phalcon\DI\ServiceInterface {
+	class Service implements \Phalcon\Di\ServiceInterface {
+
+		protected $_name;
+
+		protected $_definition;
+
+		protected $_shared;
+
+		protected $_resolved;
+
+		protected $_sharedInstance;
 
 		/**
-		 * \Phalcon\DI\Service
+		 * \Phalcon\Di\Service
 		 *
-		 * @param string $name
-		 * @param mixed $definition
-		 * @param boolean $shared
+		 * @param string name
+		 * @param mixed definition
+		 * @param boolean shared
 		 */
-		public function __construct($name, $definition, $shared=null){ }
+		final public function __construct($name, $definition, $shared=null){ }
 
 
 		/**
 		 * Returns the service's name
-		 *
-		 * @param string
 		 */
 		public function getName(){ }
 
 
 		/**
 		 * Sets if the service is shared or not
-		 *
-		 * @param boolean $shared
 		 */
 		public function setShared($shared){ }
 
 
 		/**
 		 * Check whether the service is shared or not
-		 *
-		 * @return boolean
 		 */
 		public function isShared(){ }
 
@@ -53,7 +57,7 @@ namespace Phalcon\DI {
 		/**
 		 * Sets/Resets the shared instance related to the service
 		 *
-		 * @param mixed $sharedInstance
+		 * @param mixed sharedInstance
 		 */
 		public function setSharedInstance($sharedInstance){ }
 
@@ -61,7 +65,7 @@ namespace Phalcon\DI {
 		/**
 		 * Set the service definition
 		 *
-		 * @param mixed $definition
+		 * @param mixed definition
 		 */
 		public function setDefinition($definition){ }
 
@@ -77,19 +81,15 @@ namespace Phalcon\DI {
 		/**
 		 * Resolves the service
 		 *
-		 * @param array $parameters
-		 * @param \Phalcon\DiInterface $dependencyInjector
-		 * @return object
+		 * @param array parameters
+		 * @param \Phalcon\DiInterface dependencyInjector
+		 * @return mixed
 		 */
-		public function resolve($parameters=null, $dependencyInjector=null){ }
+		public function resolve($parameters=null, \Phalcon\DiInterface $dependencyInjector=null){ }
 
 
 		/**
 		 * Changes a parameter in the definition without resolve the service
-		 *
-		 * @param long $position
-		 * @param array $parameter
-		 * @return \Phalcon\DI\Service
 		 */
 		public function setParameter($position, $parameter){ }
 
@@ -97,7 +97,7 @@ namespace Phalcon\DI {
 		/**
 		 * Returns a parameter in a specific position
 		 *
-		 * @param int $position
+		 * @param int position
 		 * @return array
 		 */
 		public function getParameter($position){ }
@@ -105,19 +105,14 @@ namespace Phalcon\DI {
 
 		/**
 		 * Returns true if the service was resolved
-		 *
-		 * @return bool
 		 */
 		public function isResolved(){ }
 
 
 		/**
 		 * Restore the internal state of a service
-		 *
-		 * @param array $attributes
-		 * @return \Phalcon\DI\Service
 		 */
-		public static function __set_state($properties=null){ }
+		public static function __set_state($attributes){ }
 
 	}
 }

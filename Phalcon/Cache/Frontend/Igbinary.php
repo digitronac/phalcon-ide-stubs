@@ -10,14 +10,14 @@ namespace Phalcon\Cache\Frontend {
 	 *<code>
 	 *
 	 *	// Cache the files for 2 days using Igbinary frontend
-	 *	$frontCache = new Phalcon\Cache\Frontend\Igbinary(array(
+	 *	$frontCache = new \Phalcon\Cache\Frontend\Igbinary(array(
 	 *		"lifetime" => 172800
 	 *	));
 	 *
 	 *	// Create the component that will cache "Igbinary" to a "File" backend
 	 *	// Set the cache file directory - important to keep the "/" at the end of
 	 *	// of the value for the folder
-	 *	$cache = new Phalcon\Cache\Backend\File($frontCache, array(
+	 *	$cache = new \Phalcon\Cache\Backend\File($frontCache, array(
 	 *		"cacheDir" => "../app/cache/"
 	 *	));
 	 *
@@ -44,9 +44,49 @@ namespace Phalcon\Cache\Frontend {
 	class Igbinary extends \Phalcon\Cache\Frontend\Data implements \Phalcon\Cache\FrontendInterface {
 
 		/**
+		 * \Phalcon\Cache\Frontend\Data constructor
+		 *
+		 * @param array frontendOptions
+		 */
+		public function __construct($frontendOptions=null){ }
+
+
+		/**
+		 * Returns the cache lifetime
+		 */
+		public function getLifetime(){ }
+
+
+		/**
+		 * Check whether if frontend is buffering output
+		 */
+		public function isBuffering(){ }
+
+
+		/**
+		 * Starts output frontend. Actually, does nothing
+		 */
+		public function start(){ }
+
+
+		/**
+		 * Returns output cached content
+		 *
+		 * @return string
+		 */
+		public function getContent(){ }
+
+
+		/**
+		 * Stops output frontend
+		 */
+		public function stop(){ }
+
+
+		/**
 		 * Serializes data before storing them
 		 *
-		 * @param mixed $data
+		 * @param mixed data
 		 * @return string
 		 */
 		public function beforeStore($data){ }
@@ -55,7 +95,7 @@ namespace Phalcon\Cache\Frontend {
 		/**
 		 * Unserializes data after retrieval
 		 *
-		 * @param mixed $data
+		 * @param mixed data
 		 * @return mixed
 		 */
 		public function afterRetrieve($data){ }

@@ -8,7 +8,7 @@ namespace Phalcon\Forms {
 	 * This component allows to build forms using an object-oriented interface
 	 */
 	
-	class Form extends \Phalcon\DI\Injectable implements \Phalcon\Events\EventsAwareInterface, \Phalcon\DI\InjectionAwareInterface, \Countable, \Iterator, \Traversable {
+	class Form extends \Phalcon\Di\Injectable implements \Phalcon\Events\EventsAwareInterface, \Phalcon\Di\InjectionAwareInterface, \Countable, \Iterator, \Traversable {
 
 		protected $_position;
 
@@ -26,11 +26,19 @@ namespace Phalcon\Forms {
 
 		protected $_action;
 
+		protected $_validation;
+
+		public function setValidation($validation){ }
+
+
+		public function getValidation(){ }
+
+
 		/**
 		 * \Phalcon\Forms\Form constructor
 		 *
-		 * @param object $entity
-		 * @param array $userOptions
+		 * @param object entity
+		 * @param array userOptions
 		 */
 		public function __construct($entity=null, $userOptions=null){ }
 
@@ -38,7 +46,7 @@ namespace Phalcon\Forms {
 		/**
 		 * Sets the form's action
 		 *
-		 * @param string $action
+		 * @param string action
 		 * @return \Phalcon\Forms\Form
 		 */
 		public function setAction($action){ }
@@ -46,8 +54,6 @@ namespace Phalcon\Forms {
 
 		/**
 		 * Returns the form's action
-		 *
-		 * @return string
 		 */
 		public function getAction(){ }
 
@@ -55,8 +61,8 @@ namespace Phalcon\Forms {
 		/**
 		 * Sets an option for the form
 		 *
-		 * @param string $option
-		 * @param mixed $value
+		 * @param string option
+		 * @param mixed value
 		 * @return \Phalcon\Forms\Form
 		 */
 		public function setUserOption($option, $value){ }
@@ -65,8 +71,8 @@ namespace Phalcon\Forms {
 		/**
 		 * Returns the value of an option if present
 		 *
-		 * @param string $option
-		 * @param mixed $defaultValue
+		 * @param string option
+		 * @param mixed defaultValue
 		 * @return mixed
 		 */
 		public function getUserOption($option, $defaultValue=null){ }
@@ -74,9 +80,6 @@ namespace Phalcon\Forms {
 
 		/**
 		 * Sets options for the element
-		 *
-		 * @param array $options
-		 * @return \Phalcon\Forms\ElementInterface
 		 */
 		public function setUserOptions($options){ }
 
@@ -92,7 +95,7 @@ namespace Phalcon\Forms {
 		/**
 		 * Sets the entity related to the model
 		 *
-		 * @param object $entity
+		 * @param object entity
 		 * @return \Phalcon\Forms\Form
 		 */
 		public function setEntity($entity){ }
@@ -108,8 +111,6 @@ namespace Phalcon\Forms {
 
 		/**
 		 * Returns the form elements added to the form
-		 *
-		 * @return \Phalcon\Forms\ElementInterface[]
 		 */
 		public function getElements(){ }
 
@@ -117,9 +118,9 @@ namespace Phalcon\Forms {
 		/**
 		 * Binds data to the entity
 		 *
-		 * @param array $data
-		 * @param object $entity
-		 * @param array $whitelist
+		 * @param array data
+		 * @param object entity
+		 * @param array whitelist
 		 * @return \Phalcon\Forms\Form
 		 */
 		public function bind($data, $entity, $whitelist=null){ }
@@ -128,8 +129,8 @@ namespace Phalcon\Forms {
 		/**
 		 * Validates the form
 		 *
-		 * @param array $data
-		 * @param object $entity
+		 * @param array data
+		 * @param object entity
 		 * @return boolean
 		 */
 		public function isValid($data=null, $entity=null){ }
@@ -137,9 +138,6 @@ namespace Phalcon\Forms {
 
 		/**
 		 * Returns the messages generated in the validation
-		 *
-		 * @param boolean $byItemName
-		 * @return \Phalcon\Validation\Message\Group
 		 */
 		public function getMessages($byItemName=null){ }
 
@@ -147,7 +145,8 @@ namespace Phalcon\Forms {
 		/**
 		 * Returns the messages generated for a specific element
 		 *
-		 * @return \Phalcon\Validation\Message\Group[]
+		 * @param string name
+		 * @return \Phalcon\Validation\Message\Group
 		 */
 		public function getMessagesFor($name){ }
 
@@ -155,6 +154,7 @@ namespace Phalcon\Forms {
 		/**
 		 * Check if messages were generated for a specific element
 		 *
+		 * @param string name
 		 * @return boolean
 		 */
 		public function hasMessagesFor($name){ }
@@ -163,19 +163,19 @@ namespace Phalcon\Forms {
 		/**
 		 * Adds an element to the form
 		 *
-		 * @param \Phalcon\Forms\ElementInterface $element
+		 * @param \Phalcon\Forms\ElementInterface element
 		 * @param string $postion
 		 * @param bool $type If $type is TRUE, the element wile add before $postion, else is after
 		 * @return \Phalcon\Forms\Form
 		 */
-		public function add($element, $postion=null, $type=null){ }
+		public function add(\Phalcon\Forms\ElementInterface $element, $postion=null, $type=null){ }
 
 
 		/**
 		 * Renders a specific item in the form
 		 *
-		 * @param string $name
-		 * @param array $attributes
+		 * @param string name
+		 * @param array attributes
 		 * @return string
 		 */
 		public function render($name, $attributes=null){ }
@@ -183,27 +183,18 @@ namespace Phalcon\Forms {
 
 		/**
 		 * Returns an element added to the form by its name
-		 *
-		 * @param string $name
-		 * @return \Phalcon\Forms\ElementInterface
 		 */
 		public function get($name){ }
 
 
 		/**
 		 * Generate the label of a element added to the form including HTML
-		 *
-		 * @param string $name
-		 * @return string
 		 */
 		public function label($name, $attributes=null){ }
 
 
 		/**
 		 * Returns a label for an element
-		 *
-		 * @param string $name
-		 * @return string
 		 */
 		public function getLabel($name){ }
 
@@ -211,7 +202,7 @@ namespace Phalcon\Forms {
 		/**
 		 * Gets a value from the internal related entity or from the default value
 		 *
-		 * @param string $name
+		 * @param string name
 		 * @return mixed
 		 */
 		public function getValue($name){ }
@@ -219,18 +210,12 @@ namespace Phalcon\Forms {
 
 		/**
 		 * Check if the form contains an element
-		 *
-		 * @param string $name
-		 * @return boolean
 		 */
 		public function has($name){ }
 
 
 		/**
 		 * Removes an element from the form
-		 *
-		 * @param string $name
-		 * @return boolean
 		 */
 		public function remove($name){ }
 
@@ -238,7 +223,7 @@ namespace Phalcon\Forms {
 		/**
 		 * Clears every element in the form to its default value
 		 *
-		 * @param array $fields
+		 * @param array fields
 		 * @return \Phalcon\Forms\Form
 		 */
 		public function clear($fields=null){ }
@@ -246,8 +231,6 @@ namespace Phalcon\Forms {
 
 		/**
 		 * Returns the number of elements in the form
-		 *
-		 * @return int
 		 */
 		public function count(){ }
 
@@ -260,31 +243,24 @@ namespace Phalcon\Forms {
 
 		/**
 		 * Returns the current element in the iterator
-		 *
-		 * @return \Phalcon\Validation\Message
 		 */
 		public function current(){ }
 
 
 		/**
 		 * Returns the current position/key in the iterator
-		 *
-		 * @return int
 		 */
 		public function key(){ }
 
 
 		/**
 		 * Moves the internal iteration pointer to the next position
-		 *
 		 */
 		public function next(){ }
 
 
 		/**
 		 * Check if the current element in the iterator is valid
-		 *
-		 * @return boolean
 		 */
 		public function valid(){ }
 

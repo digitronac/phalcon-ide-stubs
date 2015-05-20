@@ -5,7 +5,7 @@ namespace Phalcon\Cache {
 	/**
 	 * Phalcon\Cache\Multiple
 	 *
-	 * Allows to read to chained backends writing to multiple backends
+	 * Allows to read to chained backend adapters writing to multiple backends
 	 *
 	 *<code>
 	 *   use Phalcon\Cache\Frontend\Data as DataFrontend,
@@ -54,25 +54,22 @@ namespace Phalcon\Cache {
 		/**
 		 * \Phalcon\Cache\Multiple constructor
 		 *
-		 * @param \Phalcon\Cache\BackendInterface[] $backends
+		 * @param	Phalcon\Cache\BackendInterface[] backends
 		 */
 		public function __construct($backends=null){ }
 
 
 		/**
 		 * Adds a backend
-		 *
-		 * @param \Phalcon\Cache\BackendInterface $backend
-		 * @return \Phalcon\Cache\Multiple
 		 */
-		public function push($backend){ }
+		public function push(\Phalcon\Cache\BackendInterface $backend){ }
 
 
 		/**
 		 * Returns a cached content reading the internal backends
 		 *
-		 * @param 	string $keyName
-		 * @param   long $lifetime
+		 * @param 	string|int keyName
+		 * @param   long lifetime
 		 * @return  mixed
 		 */
 		public function get($keyName, $lifetime=null){ }
@@ -81,9 +78,8 @@ namespace Phalcon\Cache {
 		/**
 		 * Starts every backend
 		 *
-		 * @param int|string $keyName
-		 * @param   long $lifetime
-		 * @return  mixed
+		 * @param string|int keyName
+		 * @param long lifetime
 		 */
 		public function start($keyName, $lifetime=null){ }
 
@@ -91,10 +87,10 @@ namespace Phalcon\Cache {
 		/**
 		 * Stores cached content into all backends and stops the frontend
 		 *
-		 * @param string $keyName
-		 * @param string $content
-		 * @param long $lifetime
-		 * @param boolean $stopBuffer
+		 * @param string keyName
+		 * @param string content
+		 * @param long lifetime
+		 * @param boolean stopBuffer
 		 */
 		public function save($keyName=null, $content=null, $lifetime=null, $stopBuffer=null){ }
 
@@ -102,7 +98,7 @@ namespace Phalcon\Cache {
 		/**
 		 * Deletes a value from each backend
 		 *
-		 * @param int|string $keyName
+		 * @param string|int keyName
 		 * @return boolean
 		 */
 		public function delete($keyName){ }
@@ -111,8 +107,8 @@ namespace Phalcon\Cache {
 		/**
 		 * Checks if cache exists in at least one backend
 		 *
-		 * @param  string $keyName
-		 * @param  long $lifetime
+		 * @param  string|int keyName
+		 * @param  long lifetime
 		 * @return boolean
 		 */
 		public function exists($keyName=null, $lifetime=null){ }

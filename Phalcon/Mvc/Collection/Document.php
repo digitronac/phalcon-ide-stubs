@@ -14,7 +14,7 @@ namespace Phalcon\Mvc\Collection {
 		/**
 		 * Checks whether an offset exists in the document
 		 *
-		 * @param int $index
+		 * @param int index
 		 * @return boolean
 		 */
 		public function offsetExists($index){ }
@@ -23,7 +23,7 @@ namespace Phalcon\Mvc\Collection {
 		/**
 		 * Returns the value of a field using the ArrayAccess interfase
 		 *
-		 * @param string $index
+		 * @param string index
 		 * @return mixed
 		 */
 		public function offsetGet($index){ }
@@ -32,9 +32,9 @@ namespace Phalcon\Mvc\Collection {
 		/**
 		 * Change a value using the ArrayAccess interface
 		 *
-		 * @param string $index
-		 * @param mixed $value
-		 * @param \Phalcon\Mvc\ModelInterface $value
+		 * @param string index
+		 * @param mixed value
+		 * @param \Phalcon\Mvc\ModelInterface value
 		 */
 		public function offsetSet($index, $value){ }
 
@@ -42,7 +42,7 @@ namespace Phalcon\Mvc\Collection {
 		/**
 		 * Rows cannot be changed. It has only been implemented to meet the definition of the ArrayAccess interface
 		 *
-		 * @param string $offset
+		 * @param string offset
 		 */
 		public function offsetUnset($offset){ }
 
@@ -51,10 +51,10 @@ namespace Phalcon\Mvc\Collection {
 		 * Reads an attribute value by its name
 		 *
 		 *<code>
-		 *	echo $robot->readAttribute('name');
+		 *        echo robot->readAttribute('name');
 		 *</code>
 		 *
-		 * @param string $attribute
+		 * @param string attribute
 		 * @return mixed
 		 */
 		public function readAttribute($attribute){ }
@@ -64,11 +64,11 @@ namespace Phalcon\Mvc\Collection {
 		 * Writes an attribute value by its name
 		 *
 		 *<code>
-		 *	$robot->writeAttribute('name', 'Rosey');
+		 *        robot->writeAttribute('name', 'Rosey');
 		 *</code>
 		 *
-		 * @param string $attribute
-		 * @param mixed $value
+		 * @param string attribute
+		 * @param mixed value
 		 */
 		public function writeAttribute($attribute, $value){ }
 

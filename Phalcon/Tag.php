@@ -53,49 +53,46 @@ namespace Phalcon {
 		protected static $_autoEscape;
 
 		/**
-		 * Sets the dependency injector container.
+		 * Obtains the 'escaper' service if required
 		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
+		 * @param array params
+		 * @return EscaperInterface
 		 */
-		public static function setDI($dependencyInjector){ }
+		public static function getEscaper($params){ }
 
 
 		/**
-		 * Internally gets the dependency injector
-		 *
-		 * @return \Phalcon\DiInterface
+		 * Renders parameters keeping order in their HTML attributes
+		 */
+		public static function renderAttributes($code, $attributes){ }
+
+
+		/**
+		 * Sets the dependency injector container.
+		 */
+		public static function setDI(\Phalcon\DiInterface $dependencyInjector){ }
+
+
+		/**
+		 * Internally gets the request dispatcher
 		 */
 		public static function getDI(){ }
 
 
 		/**
-		 * Return a URL service from the default DI
-		 *
-		 * @return \Phalcon\Mvc\UrlInterface
+		 * Returns a URL service from the default DI
 		 */
 		public static function getUrlService(){ }
 
 
 		/**
 		 * Returns an Escaper service from the default DI
-		 *
-		 * @return \Phalcon\EscaperInterface
 		 */
 		public static function getEscaperService(){ }
 
 
 		/**
-		 * Get current autoescape mode
-		 *
-		 * @return bool
-		 */
-		public static function getAutoescape(){ }
-
-
-		/**
 		 * Set autoescape mode in generated html
-		 *
-		 * @param boolean $autoescape
 		 */
 		public static function setAutoescape($autoescape){ }
 
@@ -111,8 +108,8 @@ namespace Phalcon {
 		 * echo \Phalcon\Tag::textField("name"); //Will have the value "peter" by default
 		 * </code>
 		 *
-		 * @param string $id
-		 * @param string $value
+		 * @param string id
+		 * @param string value
 		 */
 		public static function setDefault($id, $value){ }
 
@@ -127,25 +124,23 @@ namespace Phalcon {
 		 * //Later in the view
 		 * echo \Phalcon\Tag::textField("name"); //Will have the value "peter" by default
 		 * </code>
-		 *
-		 * @param array $values
 		 */
-		public static function setDefaults($values){ }
+		public static function setDefaults($values, $merge=null){ }
 
 
 		/**
 		 * Alias of \Phalcon\Tag::setDefault
 		 *
-		 * @param string $id
-		 * @param string $value
+		 * @param string id
+		 * @param string value
 		 */
 		public static function displayTo($id, $value){ }
 
 
 		/**
-		 * Check if a helper has a default value set using \Phalcon\Tag::setDefault or value from $_POST
+		 * Check if a helper has a default value set using \Phalcon\Tag::setDefault or value from _POST
 		 *
-		 * @param string $name
+		 * @param string name
 		 * @return boolean
 		 */
 		public static function hasValue($name){ }
@@ -153,10 +148,10 @@ namespace Phalcon {
 
 		/**
 		 * Every helper calls this function to check whether a component has a predefined
-		 * value using \Phalcon\Tag::setDefault or value from $_POST
+		 * value using \Phalcon\Tag::setDefault or value from _POST
 		 *
-		 * @param string $name
-		 * @param array $params
+		 * @param string name
+		 * @param array params
 		 * @return mixed
 		 */
 		public static function getValue($name, $params=null){ }
@@ -172,47 +167,47 @@ namespace Phalcon {
 		 * Builds a HTML A tag using framework conventions
 		 *
 		 *<code>
-		 *	echo \Phalcon\Tag::linkTo('signup/register', 'Register Here!');
-		 *	echo \Phalcon\Tag::linkTo(array('signup/register', 'Register Here!'));
-		 *	echo \Phalcon\Tag::linkTo(array('signup/register', 'Register Here!', 'class' => 'btn-primary'));
-		 *	echo \Phalcon\Tag::linkTo('http://phalconphp.com/', 'Google', FALSE);
-		 *	echo \Phalcon\Tag::linkTo(array('http://phalconphp.com/', 'Phalcon Home', FALSE));
-		 *	echo \Phalcon\Tag::linkTo(array('http://phalconphp.com/', 'Phalcon Home', 'local' =>FALSE));
+		 *	echo \Phalcon\Tag::linkTo("signup/register", "Register Here!");
+		 *	echo \Phalcon\Tag::linkTo(array("signup/register", "Register Here!"));
+		 *	echo \Phalcon\Tag::linkTo(array("signup/register", "Register Here!", "class" => "btn-primary"));
+		 *	echo \Phalcon\Tag::linkTo("http://phalconphp.com/", "Phalcon", FALSE);
+		 *	echo \Phalcon\Tag::linkTo(array("http://phalconphp.com/", "Phalcon Home", FALSE));
+		 *	echo \Phalcon\Tag::linkTo(array("http://phalconphp.com/", "Phalcon Home", "local" =>FALSE));
 		 *</code>
 		 *
-		 * @param array|string $parameters
-		 * @param string $text
-		 * @param boolean $local
+		 * @param array|string parameters
+		 * @param string text
+		 * @param boolean local
 		 * @return string
 		 */
-		public static function linkTo($parameters, $text=null){ }
+		public static function linkTo($parameters, $text=null, $local=null){ }
 
 
 		/**
 		 * Builds generic INPUT tags
 		 *
-		 * @param   string $type
-		 * @param array $parameters
-		 * @param 	boolean $asValue
-		 * @return string
+		 * @param   string type
+		 * @param	array parameters
+		 * @param 	boolean asValue
+		 * @return	string
 		 */
-		protected static function _inputField(){ }
+		final protected static function _inputField($type, $parameters, $asValue=null){ }
 
 
 		/**
 		 * Builds INPUT tags that implements the checked attribute
 		 *
-		 * @param   string $type
-		 * @param array $parameters
-		 * @return string
+		 * @param   string type
+		 * @param	array parameters
+		 * @return	string
 		 */
-		protected static function _inputFieldChecked(){ }
+		final protected static function _inputFieldChecked($type, $parameters){ }
 
 
 		/**
 		 * Builds a HTML input[type="color"] tag
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return string
 		 */
 		public static function colorField($parameters){ }
@@ -225,8 +220,8 @@ namespace Phalcon {
 		 *	echo \Phalcon\Tag::textField(array("name", "size" => 30));
 		 * </code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function textField($parameters){ }
 
@@ -238,8 +233,8 @@ namespace Phalcon {
 		 *	echo \Phalcon\Tag::numericField(array("price", "min" => "1", "max" => "5"));
 		 * </code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function numericField($parameters){ }
 
@@ -247,7 +242,7 @@ namespace Phalcon {
 		/**
 		 * Builds a HTML input[type="range"] tag
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return string
 		 */
 		public static function rangeField($parameters){ }
@@ -260,8 +255,8 @@ namespace Phalcon {
 		 *	echo \Phalcon\Tag::emailField("email");
 		 * </code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function emailField($parameters){ }
 
@@ -273,8 +268,8 @@ namespace Phalcon {
 		 *	echo \Phalcon\Tag::dateField(array("born", "value" => "14-12-1980"))
 		 * </code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function dateField($parameters){ }
 
@@ -282,7 +277,7 @@ namespace Phalcon {
 		/**
 		 * Builds a HTML input[type="datetime"] tag
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return string
 		 */
 		public static function dateTimeField($parameters){ }
@@ -291,7 +286,7 @@ namespace Phalcon {
 		/**
 		 * Builds a HTML input[type="datetime-local"] tag
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return string
 		 */
 		public static function dateTimeLocalField($parameters){ }
@@ -300,7 +295,7 @@ namespace Phalcon {
 		/**
 		 * Builds a HTML input[type="month"] tag
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return string
 		 */
 		public static function monthField($parameters){ }
@@ -309,7 +304,7 @@ namespace Phalcon {
 		/**
 		 * Builds a HTML input[type="time"] tag
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return string
 		 */
 		public static function timeField($parameters){ }
@@ -318,7 +313,7 @@ namespace Phalcon {
 		/**
 		 * Builds a HTML input[type="week"] tag
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return string
 		 */
 		public static function weekField($parameters){ }
@@ -331,8 +326,8 @@ namespace Phalcon {
 		 * echo \Phalcon\Tag::passwordField(array("name", "size" => 30));
 		 *</code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function passwordField($parameters){ }
 
@@ -344,37 +339,10 @@ namespace Phalcon {
 		 * echo \Phalcon\Tag::hiddenField(array("name", "value" => "mike"));
 		 *</code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function hiddenField($parameters){ }
-
-
-		/**
-		 * Builds a HTML input[type="search"] tag
-		 *
-		 * @param array $parameters
-		 * @return string
-		 */
-		public static function searchField($parameters){ }
-
-
-		/**
-		 * Builds a HTML input[type="tel"] tag
-		 *
-		 * @param array $parameters
-		 * @return string
-		 */
-		public static function telField($parameters){ }
-
-
-		/**
-		 * Builds a HTML input[type="url"] tag
-		 *
-		 * @param array $parameters
-		 * @return string
-		 */
-		public static function urlField($parameters){ }
 
 
 		/**
@@ -384,10 +352,37 @@ namespace Phalcon {
 		 * echo \Phalcon\Tag::fileField("file");
 		 *</code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function fileField($parameters){ }
+
+
+		/**
+		 * Builds a HTML input[type="search"] tag
+		 *
+		 * @param array parameters
+		 * @return string
+		 */
+		public static function searchField($parameters){ }
+
+
+		/**
+		 * Builds a HTML input[type="tel"] tag
+		 *
+		 * @param array parameters
+		 * @return string
+		 */
+		public static function telField($parameters){ }
+
+
+		/**
+		 * Builds a HTML input[type="url"] tag
+		 *
+		 * @param array parameters
+		 * @return string
+		 */
+		public static function urlField($parameters){ }
 
 
 		/**
@@ -397,8 +392,8 @@ namespace Phalcon {
 		 * echo \Phalcon\Tag::checkField(array("terms", "value" => "Y"));
 		 *</code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function checkField($parameters){ }
 
@@ -407,16 +402,16 @@ namespace Phalcon {
 		 * Builds a HTML input[type="radio"] tag
 		 *
 		 *<code>
-		 * echo \Phalcon\Tag::radioField(array("wheather", "value" => "hot"))
+		 * echo \Phalcon\Tag::radioField(array("weather", "value" => "hot"))
 		 *</code>
 		 *
 		 * Volt syntax:
 		 *<code>
-		 * {{ radio_field('Save') }}
+		 * {{ radio_field("Save") }}
 		 *</code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function radioField($parameters){ }
 
@@ -430,11 +425,11 @@ namespace Phalcon {
 		 *
 		 * Volt syntax:
 		 *<code>
-		 * {{ image_input('src': '/img/button.png') }}
+		 * {{ image_input("src": "/img/button.png") }}
 		 *</code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function imageInput($parameters){ }
 
@@ -448,11 +443,11 @@ namespace Phalcon {
 		 *
 		 * Volt syntax:
 		 *<code>
-		 * {{ submit_button('Save') }}
+		 * {{ submit_button("Save") }}
 		 *</code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function submitButton($parameters){ }
 
@@ -464,9 +459,9 @@ namespace Phalcon {
 		 *	echo \Phalcon\Tag::selectStatic("status", array("A" => "Active", "I" => "Inactive"))
 		 *</code>
 		 *
-		 * @param array $parameters
-		 * @param   array $data
-		 * @return string
+		 * @param	array parameters
+		 * @param   array data
+		 * @return	string
 		 */
 		public static function selectStatic($parameters, $data=null){ }
 
@@ -477,7 +472,7 @@ namespace Phalcon {
 		 *<code>
 		 *	echo \Phalcon\Tag::select(array(
 		 *		"robotId",
-		 *		Robots::find("type = 'mechanical'"),
+		 *		Robots::find("type = "mechanical""),
 		 *		"using" => array("id", "name")
 		 * 	));
 		 *</code>
@@ -487,9 +482,9 @@ namespace Phalcon {
 		 * {{ select("robotId", robots, "using": ["id", "name"]) }}
 		 *</code>
 		 *
-		 * @param array $parameters
-		 * @param   array $data
-		 * @return string
+		 * @param	array parameters
+		 * @param   array data
+		 * @return	string
 		 */
 		public static function select($parameters, $data=null){ }
 
@@ -506,8 +501,8 @@ namespace Phalcon {
 		 * {{ text_area("comments", "cols": 10, "rows": 4) }}
 		 *</code>
 		 *
-		 * @param array $parameters
-		 * @return string
+		 * @param	array parameters
+		 * @return	string
 		 */
 		public static function textArea($parameters){ }
 
@@ -526,16 +521,14 @@ namespace Phalcon {
 		 * {{ form("posts/save", "method": "post") }}
 		 * </code>
 		 *
-		 * @param array $parameters
+		 * @param array parameters
 		 * @return string
 		 */
-		public static function form($parameters=null){ }
+		public static function form($parameters){ }
 
 
 		/**
 		 * Builds a HTML close FORM tag
-		 *
-		 * @return string
 		 */
 		public static function endForm(){ }
 
@@ -544,10 +537,8 @@ namespace Phalcon {
 		 * Set the title of view content
 		 *
 		 *<code>
-		 * \Phalcon\Tag::setTitle('Welcome to my Page');
+		 * \Phalcon\Tag::setTitle("Welcome to my Page");
 		 *</code>
-		 *
-		 * @param string $title
 		 */
 		public static function setTitle($title){ }
 
@@ -556,26 +547,20 @@ namespace Phalcon {
 		 * Set the title separator of view content
 		 *
 		 *<code>
-		 * \Phalcon\Tag::setTitleSeparator('-');
+		 * \Phalcon\Tag::setTitleSeparator("-");
 		 *</code>
-		 *
-		 * @param string $titleSeparator
 		 */
-		public static function setTitleSeparator($separator){ }
+		public static function setTitleSeparator($titleSeparator){ }
 
 
 		/**
 		 * Appends a text to current document title
-		 *
-		 * @param string $title
 		 */
 		public static function appendTitle($title){ }
 
 
 		/**
 		 * Prepends a text to current document title
-		 *
-		 * @param string $title
 		 */
 		public static function prependTitle($title){ }
 
@@ -590,8 +575,6 @@ namespace Phalcon {
 		 * <code>
 		 * 	{{ get_title() }}
 		 * </code>
-		 *
-		 * @return string
 		 */
 		public static function getTitle($tags=null){ }
 
@@ -600,14 +583,12 @@ namespace Phalcon {
 		 * Gets the current document title separator
 		 *
 		 * <code>
-		 * 	echo \Phalcon\Tag::getTitleSeparator();
+		 *         echo \Phalcon\Tag::getTitleSeparator();
 		 * </code>
 		 *
 		 * <code>
-		 * 	{{ get_title_separator() }}
+		 *         {{ get_title_separator() }}
 		 * </code>
-		 *
-		 * @return string
 		 */
 		public static function getTitleSeparator(){ }
 
@@ -626,9 +607,9 @@ namespace Phalcon {
 		 * 	{{ stylesheet_link("css/style.css") }}
 		 *</code>
 		 *
-		 * @param array $parameters
-		 * @param   boolean $local
-		 * @return string
+		 * @param	array parameters
+		 * @param   boolean local
+		 * @return	string
 		 */
 		public static function stylesheetLink($parameters=null, $local=null){ }
 
@@ -637,8 +618,8 @@ namespace Phalcon {
 		 * Builds a SCRIPT[type="javascript"] tag
 		 *
 		 * <code>
-		 * 	echo \Phalcon\Tag::javascriptInclude("http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", false);
-		 * 	echo \Phalcon\Tag::javascriptInclude("javascript/jquery.js");
+		 *         echo \Phalcon\Tag::javascriptInclude("http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", false);
+		 *         echo \Phalcon\Tag::javascriptInclude("javascript/jquery.js");
 		 * </code>
 		 *
 		 * Volt syntax:
@@ -647,8 +628,8 @@ namespace Phalcon {
 		 * {{ javascript_include("javascript/jquery.js") }}
 		 * </code>
 		 *
-		 * @param array $parameters
-		 * @param   boolean $local
+		 * @param array parameters
+		 * @param   boolean local
 		 * @return string
 		 */
 		public static function javascriptInclude($parameters=null, $local=null){ }
@@ -658,19 +639,19 @@ namespace Phalcon {
 		 * Builds HTML IMG tags
 		 *
 		 * <code>
-		 * 	echo \Phalcon\Tag::image("img/bg.png");
-		 * 	echo \Phalcon\Tag::image(array("img/photo.jpg", "alt" => "Some Photo"));
+		 *         echo \Phalcon\Tag::image("img/bg.png");
+		 *         echo \Phalcon\Tag::image(array("img/photo.jpg", "alt" => "Some Photo"));
 		 * </code>
 		 *
 		 * Volt Syntax:
 		 * <code>
-		 * 	{{ image("img/bg.png") }}
-		 * 	{{ image("img/photo.jpg", "alt": "Some Photo") }}
-		 * 	{{ image("http://static.mywebsite.com/img/bg.png", false) }}
+		 *         {{ image("img/bg.png") }}
+		 *         {{ image("img/photo.jpg", "alt": "Some Photo") }}
+		 *         {{ image("http://static.mywebsite.com/img/bg.png", false) }}
 		 * </code>
 		 *
-		 * @param  array $parameters
-		 * @param  boolean $local
+		 * @param  array parameters
+		 * @param  boolean local
 		 * @return string
 		 */
 		public static function image($parameters=null, $local=null){ }
@@ -680,29 +661,26 @@ namespace Phalcon {
 		 * Converts texts into URL-friendly titles
 		 *
 		 *<code>
-		 * echo \Phalcon\Tag::friendlyTitle('These are big important news', '-')
+		 * echo \Phalcon\Tag::friendlyTitle("These are big important news", "-")
 		 *</code>
 		 *
-		 * @param string $text
-		 * @param string $separator
-		 * @param boolean $lowercase
+		 * @param string text
+		 * @param string separator
+		 * @param boolean lowercase
+		 * @param mixed replace
 		 * @return text
 		 */
-		public static function friendlyTitle($text, $separator=null, $lowercase=null){ }
+		public static function friendlyTitle($text, $separator=null, $lowercase=null, $replace=null){ }
 
 
 		/**
 		 * Set the document type of content
-		 *
-		 * @param string $doctype
 		 */
 		public static function setDocType($doctype){ }
 
 
 		/**
 		 * Get the document type declaration of content
-		 *
-		 * @return string
 		 */
 		public static function getDocType(){ }
 
@@ -711,14 +689,14 @@ namespace Phalcon {
 		 * Builds a HTML tag
 		 *
 		 *<code>
-		 *	echo \Phalcon\Tag::tagHtml($name, $parameters, $selfClose, $onlyStart, $eol);
+		 *        echo \Phalcon\Tag::tagHtml(name, parameters, selfClose, onlyStart, eol);
 		 *</code>
 		 *
-		 * @param string $tagName
-		 * @param array $parameters
-		 * @param boolean $selfClose
-		 * @param boolean $onlyStart
-		 * @param boolean $useEol
+		 * @param string tagName
+		 * @param array parameters
+		 * @param boolean selfClose
+		 * @param boolean onlyStart
+		 * @param boolean useEol
 		 * @return string
 		 */
 		public static function tagHtml($tagName, $parameters=null, $selfClose=null, $onlyStart=null, $useEol=null){ }
@@ -728,12 +706,8 @@ namespace Phalcon {
 		 * Builds a HTML tag closing tag
 		 *
 		 *<code>
-		 *	echo \Phalcon\Tag::tagHtmlClose('script', true)
+		 *        echo \Phalcon\Tag::tagHtmlClose("script", true)
 		 *</code>
-		 *
-		 * @param string $tagName
-		 * @param boolean $useEol
-		 * @return string
 		 */
 		public static function tagHtmlClose($tagName, $useEol=null){ }
 

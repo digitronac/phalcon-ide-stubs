@@ -12,9 +12,9 @@ namespace Phalcon\Mvc {
 	 *
 	 *<code>
 	 *
-	 *	$router = new Phalcon\Mvc\Router();
+	 *	$router = new Router();
 	 *
-	 *  $router->add(
+	 *	$router->add(
 	 *		"/documentation/{chapter}/{name}.{type:[a-z]+}",
 	 *		array(
 	 *			"controller" => "documentation",
@@ -26,10 +26,9 @@ namespace Phalcon\Mvc {
 	 *
 	 *	echo $router->getControllerName();
 	 *</code>
-	 *
 	 */
 	
-	class Router implements \Phalcon\Mvc\RouterInterface, \Phalcon\DI\InjectionAwareInterface {
+	class Router implements \Phalcon\Di\InjectionAwareInterface, \Phalcon\Mvc\RouterInterface {
 
 		const URI_SOURCE_GET_URL = 0;
 
@@ -51,8 +50,6 @@ namespace Phalcon\Mvc {
 
 		protected $_routes;
 
-		protected $_routesNameLookup;
-
 		protected $_matchedRoute;
 
 		protected $_matches;
@@ -73,36 +70,26 @@ namespace Phalcon\Mvc {
 
 		protected $_notFoundPaths;
 
-		protected $_isExactControllerName;
-
 		/**
 		 * \Phalcon\Mvc\Router constructor
-		 *
-		 * @param boolean $defaultRoutes
 		 */
 		public function __construct($defaultRoutes=null){ }
 
 
 		/**
 		 * Sets the dependency injector
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
 		 */
-		public function setDI($dependencyInjector){ }
+		public function setDI(\Phalcon\DiInterface $dependencyInjector){ }
 
 
 		/**
 		 * Returns the internal dependency injector
-		 *
-		 * @return \Phalcon\DiInterface
 		 */
 		public function getDI(){ }
 
 
 		/**
 		 * Get rewrite info. This info is read from $_GET['_url']. This returns '/' if the rewrite information cannot be read
-		 *
-		 * @return string
 		 */
 		public function getRewriteUri(){ }
 
@@ -113,88 +100,38 @@ namespace Phalcon\Mvc {
 		 *<code>
 		 *	$router->setUriSource(Router::URI_SOURCE_SERVER_REQUEST_URI);
 		 *</code>
-		 *
-		 * @param int $uriSource
-		 * @return \Phalcon\Mvc\Router
 		 */
 		public function setUriSource($uriSource){ }
 
 
 		/**
 		 * Set whether router must remove the extra slashes in the handled routes
-		 *
-		 * @param boolean $remove
-		 * @return \Phalcon\Mvc\Router
 		 */
 		public function removeExtraSlashes($remove){ }
 
 
 		/**
 		 * Sets the name of the default namespace
-		 *
-		 * @param string $namespaceName
-		 * @return \Phalcon\Mvc\Router
 		 */
 		public function setDefaultNamespace($namespaceName){ }
 
 
 		/**
-		 * Returns the name of the default namespace
-		 *
-		 * @return string
-		 */
-		public function getDefaultNamespace(){ }
-
-
-		/**
 		 * Sets the name of the default module
-		 *
-		 * @param string $moduleName
-		 * @return \Phalcon\Mvc\Router
 		 */
 		public function setDefaultModule($moduleName){ }
 
 
 		/**
-		 * Returns the name of the default module
-		 *
-		 * @return string
-		 */
-		public function getDefaultModule(){ }
-
-
-		/**
 		 * Sets the default controller name
-		 *
-		 * @param string $controllerName
-		 * @return \Phalcon\Mvc\Router
 		 */
 		public function setDefaultController($controllerName){ }
 
 
 		/**
-		 * Returns the default controller name
-		 *
-		 * @return string
-		 */
-		public function getDefaultController(){ }
-
-
-		/**
 		 * Sets the default action name
-		 *
-		 * @param string $actionName
-		 * @return \Phalcon\Mvc\Router
 		 */
 		public function setDefaultAction($actionName){ }
-
-
-		/**
-		 * Returns the default action name
-		 *
-		 * @return string
-		 */
-		public function getDefaultAction(){ }
 
 
 		/**
@@ -207,17 +144,12 @@ namespace Phalcon\Mvc {
 		 *		'action' => 'index'
 		 * ));
 		 *</code>
-		 *
-		 * @param array $defaults
-		 * @return \Phalcon\Mvc\Router
 		 */
 		public function setDefaults($defaults){ }
 
 
 		/**
 		 * Returns an array of default parameters
-		 *
-		 * @return array
 		 */
 		public function getDefaults(){ }
 
@@ -232,8 +164,6 @@ namespace Phalcon\Mvc {
 		 * //Manually passing an URL
 		 * $router->handle('/posts/edit/1');
 		 *</code>
-		 *
-		 * @param string $uri
 		 */
 		public function handle($uri=null){ }
 
@@ -244,99 +174,60 @@ namespace Phalcon\Mvc {
 		 *<code>
 		 * $router->add('/about', 'About::index');
 		 *</code>
-		 *
-		 * @param string $pattern
-		 * @param string/array $paths
-		 * @param string $httpMethods
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function add($pattern, $paths=null, $httpMethods=null){ }
 
 
 		/**
 		 * Adds a route to the router that only match if the HTTP method is GET
-		 *
-		 * @param string $pattern
-		 * @param string/array $paths
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addGet($pattern, $paths=null){ }
 
 
 		/**
 		 * Adds a route to the router that only match if the HTTP method is POST
-		 *
-		 * @param string $pattern
-		 * @param string/array $paths
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addPost($pattern, $paths=null){ }
 
 
 		/**
 		 * Adds a route to the router that only match if the HTTP method is PUT
-		 *
-		 * @param string $pattern
-		 * @param string/array $paths
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addPut($pattern, $paths=null){ }
 
 
 		/**
 		 * Adds a route to the router that only match if the HTTP method is PATCH
-		 *
-		 * @param string $pattern
-		 * @param string/array $paths
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addPatch($pattern, $paths=null){ }
 
 
 		/**
 		 * Adds a route to the router that only match if the HTTP method is DELETE
-		 *
-		 * @param string $pattern
-		 * @param string/array $paths
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addDelete($pattern, $paths=null){ }
 
 
 		/**
 		 * Add a route to the router that only match if the HTTP method is OPTIONS
-		 *
-		 * @param string $pattern
-		 * @param string/array $paths
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addOptions($pattern, $paths=null){ }
 
 
 		/**
 		 * Adds a route to the router that only match if the HTTP method is HEAD
-		 *
-		 * @param string $pattern
-		 * @param string/array $paths
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function addHead($pattern, $paths=null){ }
 
 
 		/**
 		 * Mounts a group of routes in the router
-		 *
-		 * @param \Phalcon\Mvc\Router\Group $route
-		 * @return \Phalcon\Mvc\Router
 		 */
-		public function mount($group){ }
+		public function mount(\Phalcon\Mvc\Router\GroupInterface $group){ }
 
 
 		/**
 		 * Set a group of paths to be returned when none of the defined routes are matched
-		 *
-		 * @param array|string $paths
-		 * @return \Phalcon\Mvc\Router
 		 */
 		public function notFound($paths){ }
 
@@ -349,90 +240,66 @@ namespace Phalcon\Mvc {
 
 		/**
 		 * Returns the processed namespace name
-		 *
-		 * @return string
 		 */
 		public function getNamespaceName(){ }
 
 
 		/**
 		 * Returns the processed module name
-		 *
-		 * @return string
 		 */
 		public function getModuleName(){ }
 
 
 		/**
 		 * Returns the processed controller name
-		 *
-		 * @return string
 		 */
 		public function getControllerName(){ }
 
 
 		/**
 		 * Returns the processed action name
-		 *
-		 * @return string
 		 */
 		public function getActionName(){ }
 
 
 		/**
 		 * Returns the processed parameters
-		 *
-		 * @return array
 		 */
 		public function getParams(){ }
 
 
 		/**
 		 * Returns the route that matchs the handled URI
-		 *
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function getMatchedRoute(){ }
 
 
 		/**
 		 * Returns the sub expressions in the regular expression matched
-		 *
-		 * @return array
 		 */
 		public function getMatches(){ }
 
 
 		/**
 		 * Checks if the router macthes any of the defined routes
-		 *
-		 * @return bool
 		 */
 		public function wasMatched(){ }
 
 
 		/**
 		 * Returns all the routes defined in the router
-		 *
-		 * @return \Phalcon\Mvc\Router\Route[]
 		 */
 		public function getRoutes(){ }
 
 
 		/**
 		 * Returns a route object by its id
-		 *
-		 * @param string $id
-		 * @return \Phalcon\Mvc\Router\Route | false
 		 */
 		public function getRouteById($id){ }
 
 
 		/**
 		 * Returns a route object by its name
-		 *
-		 * @param string $name
-		 * @return \Phalcon\Mvc\Router\Route
 		 */
 		public function getRouteByName($name){ }
 

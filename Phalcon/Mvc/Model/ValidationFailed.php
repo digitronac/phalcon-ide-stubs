@@ -18,26 +18,22 @@ namespace Phalcon\Mvc\Model {
 		/**
 		 * \Phalcon\Mvc\Model\ValidationFailed constructor
 		 *
-		 * @param \Phalcon\Mvc\Model $model
-		 * @param \Phalcon\Mvc\Model\Message[] $validationMessages
+		 * @param Model model
+		 * @param Message[] validationMessages
 		 */
-		public function __construct($model, $validationMessages){ }
-
-
-		/**
-		 * Returns the complete group of messages produced in the validation
-		 *
-		 * @return \Phalcon\Mvc\Model\Message[]
-		 */
-		public function getMessages(){ }
+		public function __construct(\Phalcon\Mvc\Model $model, $validationMessages){ }
 
 
 		/**
 		 * Returns the model that generated the messages
-		 *
-		 * @return \Phalcon\Mvc\Model
 		 */
 		public function getModel(){ }
+
+
+		/**
+		 * Returns the complete group of messages produced in the validation
+		 */
+		public function getMessages(){ }
 
 	}
 }

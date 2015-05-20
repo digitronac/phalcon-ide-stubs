@@ -11,7 +11,7 @@ namespace Phalcon\Validation\Validator {
 	 *use Phalcon\Validation\Validator\Identical;
 	 *
 	 *$validator->add('terms', new Identical(array(
-	 *   'value'   => 'yes',
+	 *   'accepted' => 'yes',
 	 *   'message' => 'Terms and conditions must be accepted'
 	 *)));
 	 *</code>
@@ -22,12 +22,8 @@ namespace Phalcon\Validation\Validator {
 
 		/**
 		 * Executes the validation
-		 *
-		 * @param \Phalcon\Validation $validator
-		 * @param string $attribute
-		 * @return boolean
 		 */
-		public function validate($validator, $attribute){ }
+		public function validate(\Phalcon\Validation $validation, $field){ }
 
 	}
 }

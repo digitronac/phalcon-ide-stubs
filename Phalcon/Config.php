@@ -10,7 +10,7 @@ namespace Phalcon {
 	 * application code.
 	 *
 	 *<code>
-	 *	$config = new Phalcon\Config(array(
+	 *	$config = new \Phalcon\Config(array(
 	 *		"database" => array(
 	 *			"adapter" => "Mysql",
 	 *			"host" => "localhost",
@@ -32,8 +32,6 @@ namespace Phalcon {
 
 		/**
 		 * \Phalcon\Config constructor
-		 *
-		 * @param array $arrayConfig
 		 */
 		public function __construct($arrayConfig=null){ }
 
@@ -44,11 +42,8 @@ namespace Phalcon {
 		 *<code>
 		 * var_dump(isset($config['database']));
 		 *</code>
-		 *
-		 * @param string $index
-		 * @return boolean
 		 */
-		public function offsetExists($property){ }
+		public function offsetExists($index){ }
 
 
 		/**
@@ -58,10 +53,6 @@ namespace Phalcon {
 		 *<code>
 		 * echo $config->get('controllersDir', '../app/controllers/');
 		 *</code>
-		 *
-		 * @param string $index
-		 * @param mixed $defaultValue
-		 * @return mixed
 		 */
 		public function get($index, $defaultValue=null){ }
 
@@ -72,11 +63,8 @@ namespace Phalcon {
 		 *<code>
 		 * print_r($config['database']);
 		 *</code>
-		 *
-		 * @param string $index
-		 * @return string
 		 */
-		public function offsetGet($property){ }
+		public function offsetGet($index){ }
 
 
 		/**
@@ -85,11 +73,8 @@ namespace Phalcon {
 		 *<code>
 		 * $config['database'] = array('type' => 'Sqlite');
 		 *</code>
-		 *
-		 * @param string $index
-		 * @param mixed $value
 		 */
-		public function offsetSet($property, $value){ }
+		public function offsetSet($index, $value){ }
 
 
 		/**
@@ -98,66 +83,62 @@ namespace Phalcon {
 		 *<code>
 		 * unset($config['database']);
 		 *</code>
-		 *
-		 * @param string $index
 		 */
-		public function offsetUnset($property){ }
+		public function offsetUnset($index){ }
 
 
 		/**
 		 * Merges a configuration into the current one
 		 *
-		 * @brief void \Phalcon\Config::merge(array|object $with)
-		 *
 		 *<code>
-		 *	$appConfig = new \Phalcon\Config(array('database' => array('host' => 'localhost')));
-		 *	$globalConfig->merge($config2);
+		 * $appConfig = new \Phalcon\Config(array('database' => array('host' => 'localhost')));
+		 * $globalConfig->merge($config2);
 		 *</code>
-		 *
-		 * @param \Phalcon\Config $config
 		 */
-		public function merge($config){ }
+		public function merge(\Phalcon\Config $config){ }
 
 
 		/**
 		 * Converts recursively the object to an array
 		 *
-		 * @brief array \Phalcon\Config::toArray(bool $recursive = true);
-		 *
 		 *<code>
 		 *	print_r($config->toArray());
 		 *</code>
-		 *
-		 * @return array
 		 */
 		public function toArray(){ }
 
 
+		/**
+		 * Returns the count of properties set in the config
+		 *
+		 *<code>
+		 * print count($config);
+		 *</code>
+		 *
+		 * or
+		 *
+		 *<code>
+		 * print $config->count();
+		 *</code>
+		 */
 		public function count(){ }
-
-
-		public function __wakeup(){ }
 
 
 		/**
 		 * Restores the state of a \Phalcon\Config object
-		 *
-		 * @param array $data
-		 * @return \Phalcon\Config
 		 */
-		public static function __set_state($properties=null){ }
+		public static function __set_state($data){ }
 
 
-		public function __get($property){ }
-
-
-		public function __set($property, $value){ }
-
-
-		public function __isset($property){ }
-
-
-		public function __unset($property){ }
+		/**
+		 * Helper method for merge configs (forwarding nested config instance)
+		 *
+		 * @param Config config
+		 * @param Config instance = null
+		 *
+		 * @return Config merged config
+		 */
+		final protected function _merge(\Phalcon\Config $config, $instance=null){ }
 
 	}
 }

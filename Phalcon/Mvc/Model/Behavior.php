@@ -8,52 +8,47 @@ namespace Phalcon\Mvc\Model {
 	 * This is an optional base class for ORM behaviors
 	 */
 	
-	abstract class Behavior implements \Phalcon\Mvc\Model\BehaviorInterface {
+	abstract class Behavior {
 
 		protected $_options;
 
 		/**
 		 * \Phalcon\Mvc\Model\Behavior
 		 *
-		 * @param array $options
+		 * @param array options
 		 */
 		public function __construct($options=null){ }
 
 
 		/**
 		 * Checks whether the behavior must take action on certain event
-		 *
-		 * @param string $eventName
 		 */
-		protected function mustTakeAction(){ }
+		protected function mustTakeAction($eventName){ }
 
 
 		/**
 		 * Returns the behavior options related to an event
 		 *
-		 * @param string $eventName
+		 * @param string eventName
 		 * @return array
 		 */
-		protected function getOptions(){ }
+		protected function getOptions($eventName=null){ }
 
 
 		/**
 		 * This method receives the notifications from the EventsManager
-		 *
-		 * @param string $type
-		 * @param \Phalcon\Mvc\ModelInterface $model
 		 */
-		public function notify($type, $model){ }
+		public function notify($type, \Phalcon\Mvc\ModelInterface $model){ }
 
 
 		/**
 		 * Acts as fallbacks when a missing method is called on the model
 		 *
-		 * @param \Phalcon\Mvc\ModelInterface $model
-		 * @param string $method
-		 * @param array $arguments
+		 * @param \Phalcon\Mvc\ModelInterface model
+		 * @param string method
+		 * @param array arguments
 		 */
-		public function missingMethod($model, $method, $arguments=null){ }
+		public function missingMethod(\Phalcon\Mvc\ModelInterface $model, $method, $arguments=null){ }
 
 	}
 }

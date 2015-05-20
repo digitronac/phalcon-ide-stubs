@@ -18,7 +18,7 @@ namespace Phalcon {
 	 *
 	 *try {
 	 *
-	 *  $connection = new Phalcon\Db\Adapter\Pdo\Mysql(array(
+	 *  $connection = new \Phalcon\Db\Adapter\Pdo\Mysql(array(
 	 *     'host' => '192.168.0.11',
 	 *     'username' => 'sigma',
 	 *     'password' => 'secret',
@@ -41,11 +41,11 @@ namespace Phalcon {
 	
 	abstract class Db {
 
-		const FETCH_USE_DEFAULT = 0;
-
 		const FETCH_LAZY = 1;
 
 		const FETCH_ASSOC = 2;
+
+		const FETCH_NAMED = 11;
 
 		const FETCH_NUM = 3;
 
@@ -63,13 +63,11 @@ namespace Phalcon {
 
 		const FETCH_FUNC = 10;
 
-		const FETCH_NAMED = 11;
-
-		const FETCH_KEY_PAIR = 12;
-
 		const FETCH_GROUP = 65536;
 
 		const FETCH_UNIQUE = 196608;
+
+		const FETCH_KEY_PAIR = 12;
 
 		const FETCH_CLASSTYPE = 262144;
 
@@ -79,8 +77,6 @@ namespace Phalcon {
 
 		/**
 		 * Enables/disables options in the Database component
-		 *
-		 * @param array $options
 		 */
 		public static function setup($options){ }
 

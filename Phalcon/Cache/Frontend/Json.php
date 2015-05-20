@@ -7,20 +7,21 @@ namespace Phalcon\Cache\Frontend {
 	 *
 	 * Allows to cache data converting/deconverting them to JSON.
 	 *
-	 * This adapters uses the json_encode/json_decode PHP's functions
+	 * This adapter uses the json_encode/json_decode PHP's functions
 	 *
 	 * As the data is encoded in JSON other systems accessing the same backend could
 	 * process them
 	 *
 	 *<code>
+	 *<?php
 	 *
 	 * // Cache the data for 2 days
-	 * $frontCache = new Phalcon\Cache\Frontend\Json(array(
+	 * $frontCache = new \Phalcon\Cache\Frontend\Json(array(
 	 *    "lifetime" => 172800
 	 * ));
 	 *
 	 * //Create the Cache setting memcached connection options
-	 * $cache = new Phalcon\Cache\Backend\Memcache($frontCache, array(
+	 * $cache = new \Phalcon\Cache\Backend\Memcache($frontCache, array(
 	 *		'host' => 'localhost',
 	 *		'port' => 11211,
 	 *  	'persistent' => false
@@ -34,21 +35,63 @@ namespace Phalcon\Cache\Frontend {
 	 *</code>
 	 */
 	
-	class Json extends \Phalcon\Cache\Frontend\Data implements \Phalcon\Cache\FrontendInterface {
+	class Json implements \Phalcon\Cache\FrontendInterface {
+
+		protected $_frontendOptions;
 
 		/**
-		 * Serializes data before storing it
+		 * \Phalcon\Cache\Frontend\Base64 constructor
 		 *
-		 * @param mixed $data
+		 * @param array frontendOptions
+		 */
+		public function __construct($frontendOptions=null){ }
+
+
+		/**
+		 * Returns the cache lifetime
+		 */
+		public function getLifetime(){ }
+
+
+		/**
+		 * Check whether if frontend is buffering output
+		 */
+		public function isBuffering(){ }
+
+
+		/**
+		 * Starts output frontend. Actually, does nothing
+		 */
+		public function start(){ }
+
+
+		/**
+		 * Returns output cached content
+		 *
+		 * @return string
+		 */
+		public function getContent(){ }
+
+
+		/**
+		 * Stops output frontend
+		 */
+		public function stop(){ }
+
+
+		/**
+		 * Serializes data before storing them
+		 *
+		 * @param mixed data
 		 * @return string
 		 */
 		public function beforeStore($data){ }
 
 
 		/**
-		 * Unserializes data after retrieving it
+		 * Unserializes data after retrieval
 		 *
-		 * @param mixed $data
+		 * @param mixed data
 		 * @return mixed
 		 */
 		public function afterRetrieve($data){ }

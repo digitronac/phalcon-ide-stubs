@@ -46,8 +46,6 @@ namespace Phalcon\Db {
 
 		const TYPE_BOOLEAN = 8;
 
-		const TYPE_DOUBLE = 9;
-
 		const BIND_PARAM_NULL = 0;
 
 		const BIND_PARAM_INT = 1;
@@ -60,17 +58,23 @@ namespace Phalcon\Db {
 
 		const BIND_SKIP = 1024;
 
-		protected $_columnName;
+		protected $_name;
 
 		protected $_schemaName;
 
 		protected $_type;
+
+		protected $_typeReference;
+
+		protected $_typeValues;
 
 		protected $_isNumeric;
 
 		protected $_size;
 
 		protected $_scale;
+
+		protected $_default;
 
 		protected $_unsigned;
 
@@ -87,98 +91,105 @@ namespace Phalcon\Db {
 		protected $_bindType;
 
 		/**
-		 * \Phalcon\Db\Column constructor
+		 * Column's name
 		 *
-		 * @param string $columnName
-		 * @param array $definition
-		 */
-		public function __construct($columnName, $definition){ }
-
-
-		/**
-		 * Returns schema's table related to column
-		 *
-		 * @return string
-		 */
-		public function getSchemaName(){ }
-
-
-		/**
-		 * Returns column name
-		 *
-		 * @return string
+		 * @var string
 		 */
 		public function getName(){ }
 
 
 		/**
-		 * Returns column type
+		 * Schema which table related is
 		 *
-		 * @return int
+		 * @var string
+		 */
+		public function getSchemaName(){ }
+
+
+		/**
+		 * Column data type
+		 *
+		 * @var int|string
 		 */
 		public function getType(){ }
 
 
 		/**
-		 * Returns column size
+		 * Column data type reference
 		 *
-		 * @return int
+		 * @var int
+		 */
+		public function getTypeReference(){ }
+
+
+		/**
+		 * Column data type values
+		 *
+		 * @var array|string
+		 */
+		public function getTypeValues(){ }
+
+
+		/**
+		 * Integer column size
+		 *
+		 * @var int
 		 */
 		public function getSize(){ }
 
 
 		/**
-		 * Returns column scale
+		 * Integer column number scale
 		 *
-		 * @return int
+		 * @var int
 		 */
 		public function getScale(){ }
 
 
 		/**
+		 * Default column value
+		 */
+		public function getDefault(){ }
+
+
+		/**
+		 * \Phalcon\Db\Column constructor
+		 */
+		public function __construct($name, $definition){ }
+
+
+		/**
 		 * Returns true if number column is unsigned
-		 *
-		 * @return boolean
 		 */
 		public function isUnsigned(){ }
 
 
 		/**
 		 * Not null
-		 *
-		 * @return boolean
 		 */
 		public function isNotNull(){ }
 
 
 		/**
 		 * Column is part of the primary key?
-		 *
-		 * @return boolean
 		 */
 		public function isPrimary(){ }
 
 
 		/**
 		 * Auto-Increment
-		 *
-		 * @return boolean
 		 */
 		public function isAutoIncrement(){ }
 
 
 		/**
 		 * Check whether column have an numeric type
-		 *
-		 * @return boolean
 		 */
 		public function isNumeric(){ }
 
 
 		/**
 		 * Check whether column have first position in table
-		 *
-		 * @return boolean
 		 */
 		public function isFirst(){ }
 
@@ -193,19 +204,14 @@ namespace Phalcon\Db {
 
 		/**
 		 * Returns the type of bind handling
-		 *
-		 * @return int
 		 */
 		public function getBindType(){ }
 
 
 		/**
 		 * Restores the internal state of a \Phalcon\Db\Column object
-		 *
-		 * @param array $data
-		 * @return \Phalcon\Db\Column
 		 */
-		public static function __set_state($properties=null){ }
+		public static function __set_state($data){ }
 
 	}
 }

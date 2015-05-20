@@ -12,8 +12,8 @@ namespace Phalcon\Mvc\Model {
 	 * $phql = "SELECT c.price*0.16 AS taxes, c.* FROM Cars AS c JOIN Brands AS b
 	 *          WHERE b.name = :name: ORDER BY c.name";
 	 *
-	 * $result = $manager->executeQuery($phql, array(
-	 *   'name' => 'Lamborghini'
+	 * $result = manager->executeQuery($phql, array(
+	 *   "name": "Lamborghini"
 	 * ));
 	 *
 	 * foreach ($result as $row) {
@@ -25,7 +25,7 @@ namespace Phalcon\Mvc\Model {
 	 *</code>
 	 */
 	
-	class Query implements \Phalcon\Mvc\Model\QueryInterface, \Phalcon\DI\InjectionAwareInterface {
+	class Query implements \Phalcon\Mvc\Model\QueryInterface, \Phalcon\Di\InjectionAwareInterface {
 
 		const TYPE_SELECT = 309;
 
@@ -78,239 +78,198 @@ namespace Phalcon\Mvc\Model {
 		/**
 		 * \Phalcon\Mvc\Model\Query constructor
 		 *
-		 * @param string $phql
-		 * @param \Phalcon\DiInterface $dependencyInjector
+		 * @param string phql
+		 * @param \Phalcon\DiInterface dependencyInjector
 		 */
-		public function __construct($phql){ }
+		public function __construct($phql=null, \Phalcon\DiInterface $dependencyInjector=null){ }
 
 
 		/**
 		 * Sets the dependency injection container
-		 *
-		 * @param \Phalcon\DiInterface $dependencyInjector
 		 */
-		public function setDI($dependencyInjector){ }
+		public function setDI(\Phalcon\DiInterface $dependencyInjector){ }
 
 
 		/**
 		 * Returns the dependency injection container
-		 *
-		 * @return \Phalcon\DiInterface
 		 */
 		public function getDI(){ }
 
 
 		/**
 		 * Tells to the query if only the first row in the resultset must be returned
-		 *
-		 * @param boolean $uniqueRow
-		 * @return \Phalcon\Mvc\Model\Query
 		 */
 		public function setUniqueRow($uniqueRow){ }
 
 
 		/**
 		 * Check if the query is programmed to get only the first row in the resultset
-		 *
-		 * @return boolean
 		 */
 		public function getUniqueRow(){ }
 
 
 		/**
 		 * Replaces the model's name to its source name in a qualifed-name expression
-		 *
-		 * @param array $expr
-		 * @return string
 		 */
-		protected function _getQualified(){ }
+		final protected function _getQualified($expr){ }
 
 
 		/**
 		 * Resolves a expression in a single call argument
-		 *
-		 * @param array $argument
-		 * @return string
 		 */
-		protected function _getCallArgument(){ }
+		final protected function _getCallArgument($argument){ }
 
 
 		/**
 		 * Resolves a expression in a single call argument
-		 *
-		 * @param array $expr
-		 * @return string
 		 */
-		protected function _getFunctionCall(){ }
+		final protected function _getFunctionCall($expr){ }
 
 
 		/**
 		 * Resolves an expression from its intermediate code into a string
 		 *
-		 * @param array $expr
-		 * @param boolean $quoting
+		 * @param array expr
+		 * @param boolean quoting
 		 * @return string
 		 */
-		protected function _getExpression(){ }
+		final protected function _getExpression($expr, $quoting=null){ }
 
 
 		/**
 		 * Resolves a column from its intermediate representation into an array used to determine
 		 * if the resulset produced is simple or complex
 		 *
-		 * @param array $column
+		 * @param array column
 		 * @return array
 		 */
-		protected function _getSelectColumn(){ }
+		final protected function _getSelectColumn($column){ }
 
 
 		/**
 		 * Resolves a table in a SELECT statement checking if the model exists
 		 *
-		 * @param \Phalcon\Mvc\Model\ManagerInterface $manager
-		 * @param array $qualifiedName
+		 * @param \Phalcon\Mvc\Model\ManagerInterface manager
+		 * @param array qualifiedName
 		 * @return string
 		 */
-		protected function _getTable(){ }
+		final protected function _getTable(\Phalcon\Mvc\Model\ManagerInterface $manager, $qualifiedName){ }
 
 
 		/**
 		 * Resolves a JOIN clause checking if the associated models exist
 		 *
-		 * @param \Phalcon\Mvc\Model\ManagerInterface $manager
-		 * @param array $join
+		 * @param \Phalcon\Mvc\Model\ManagerInterface manager
+		 * @param array join
 		 * @return array
 		 */
-		protected function _getJoin(){ }
+		final protected function _getJoin(\Phalcon\Mvc\Model\ManagerInterface $manager, $join){ }
 
 
 		/**
 		 * Resolves a JOIN type
 		 *
-		 * @param array $join
+		 * @param array join
 		 * @return string
 		 */
-		protected function _getJoinType(){ }
+		final protected function _getJoinType($join){ }
 
 
 		/**
 		 * Resolves joins involving has-one/belongs-to/has-many relations
 		 *
-		 * @param string $joinType
-		 * @param string $joinSource
-		 * @param string $modelAlias
-		 * @param string $joinAlias
-		 * @param \Phalcon\Mvc\Model\RelationInterface $relation
+		 * @param string joinType
+		 * @param string joinSource
+		 * @param string modelAlias
+		 * @param string joinAlias
+		 * @param \Phalcon\Mvc\Model\RelationInterface relation
 		 * @return array
 		 */
-		protected function _getSingleJoin(){ }
+		final protected function _getSingleJoin($joinType, $joinSource, $modelAlias, $joinAlias, \Phalcon\Mvc\Model\RelationInterface $relation){ }
 
 
 		/**
 		 * Resolves joins involving many-to-many relations
 		 *
-		 * @param string $joinType
-		 * @param string $joinSource
-		 * @param string $modelAlias
-		 * @param string $joinAlias
-		 * @param \Phalcon\Mvc\Model\RelationInterface $relation
+		 * @param string joinType
+		 * @param string joinSource
+		 * @param string modelAlias
+		 * @param string joinAlias
+		 * @param \Phalcon\Mvc\Model\RelationInterface relation
 		 * @return array
 		 */
-		protected function _getMultiJoin(){ }
+		final protected function _getMultiJoin($joinType, $joinSource, $modelAlias, $joinAlias, \Phalcon\Mvc\Model\RelationInterface $relation){ }
 
 
 		/**
 		 * Processes the JOINs in the query returning an internal representation for the database dialect
 		 *
-		 * @param array $select
+		 * @param array select
 		 * @return array
 		 */
-		protected function _getJoins(){ }
+		final protected function _getJoins($select){ }
 
 
 		/**
 		 * Returns a processed order clause for a SELECT statement
 		 *
-		 * @param array $order
-		 * @return string
+		 * @param array|string $order
+		 * @return array
 		 */
-		protected function _getOrderClause(){ }
+		final protected function _getOrderClause($order){ }
 
 
 		/**
 		 * Returns a processed group clause for a SELECT statement
 		 *
 		 * @param array $group
-		 * @return string
+		 * @return array
 		 */
-		protected function _getGroupClause(){ }
+		final protected function _getGroupClause($group){ }
 
 
-		protected function _getLimitClause(){ }
+		/**
+		 * Returns a processed limit clause for a SELECT statement
+		 *
+		 * @param array $limit
+		 * @return array
+		 */
+		final protected function _getLimitClause($limitClause){ }
 
 
 		/**
 		 * Analyzes a SELECT intermediate code and produces an array to be executed later
-		 *
-		 * @return array
 		 */
-		protected function _prepareSelect(){ }
+		final protected function _prepareSelect(){ }
 
 
 		/**
 		 * Analyzes an INSERT intermediate code and produces an array to be executed later
-		 *
-		 * @return array
 		 */
-		protected function _prepareInsert(){ }
+		final protected function _prepareInsert(){ }
 
 
 		/**
 		 * Analyzes an UPDATE intermediate code and produces an array to be executed later
-		 *
-		 * @return array
 		 */
-		protected function _prepareUpdate(){ }
+		final protected function _prepareUpdate(){ }
 
 
 		/**
 		 * Analyzes a DELETE intermediate code and produces an array to be executed later
-		 *
-		 * @return array
 		 */
-		protected function _prepareDelete(){ }
+		final protected function _prepareDelete(){ }
 
 
 		/**
 		 * Parses the intermediate code produced by \Phalcon\Mvc\Model\Query\Lang generating another
 		 * intermediate representation that could be executed by \Phalcon\Mvc\Model\Query
-		 *
-		 * @return array
 		 */
 		public function parse(){ }
 
 
 		/**
-		 * Sets the cache parameters of the query
-		 *
-		 * @param array $cacheOptions
-		 * @return \Phalcon\Mvc\Model\Query
-		 */
-		public function cache($cacheOptions){ }
-
-
-		/**
-		 * Returns the current cache options
-		 *
-		 * @param array
-		 */
-		public function getCacheOptions(){ }
-
-
-		/**
 		 * Returns the current cache backend instance
-		 *
-		 * @return \Phalcon\Cache\BackendInterface
 		 */
 		public function getCache(){ }
 
@@ -318,64 +277,65 @@ namespace Phalcon\Mvc\Model {
 		/**
 		 * Executes the SELECT intermediate representation producing a \Phalcon\Mvc\Model\Resultset
 		 *
-		 * @param array $intermediate
-		 * @param array $bindParams
-		 * @param array $bindTypes
+		 * @param array intermediate
+		 * @param array bindParams
+		 * @param array bindTypes
+		 * @throws \Phalcon\Mvc\Model\Exception
 		 * @return \Phalcon\Mvc\Model\ResultsetInterface
 		 */
-		protected function _executeSelect(){ }
+		final protected function _executeSelect($intermediate, $bindParams, $bindTypes){ }
 
 
 		/**
 		 * Executes the INSERT intermediate representation producing a \Phalcon\Mvc\Model\Query\Status
 		 *
-		 * @param array $intermediate
-		 * @param array $bindParams
-		 * @param array $bindTypes
+		 * @param array intermediate
+		 * @param array bindParams
+		 * @param array bindTypes
 		 * @return \Phalcon\Mvc\Model\Query\StatusInterface
 		 */
-		protected function _executeInsert(){ }
-
-
-		/**
-		 * Query the records on which the UPDATE/DELETE operation well be done
-		 *
-		 * @param \Phalcon\Mvc\Model $model
-		 * @param array $intermediate
-		 * @param array $bindParams
-		 * @param array $bindTypes
-		 * @return \Phalcon\Mvc\Model\ResultsetInterface
-		 */
-		protected function _getRelatedRecords(){ }
+		final protected function _executeInsert($intermediate, $bindParams, $bindTypes){ }
 
 
 		/**
 		 * Executes the UPDATE intermediate representation producing a \Phalcon\Mvc\Model\Query\Status
 		 *
-		 * @param array $intermediate
-		 * @param array $bindParams
-		 * @param array $bindTypes
+		 * @param array intermediate
+		 * @param array bindParams
+		 * @param array bindTypes
 		 * @return \Phalcon\Mvc\Model\Query\StatusInterface
 		 */
-		protected function _executeUpdate(){ }
+		final protected function _executeUpdate($intermediate, $bindParams, $bindTypes){ }
 
 
 		/**
 		 * Executes the DELETE intermediate representation producing a \Phalcon\Mvc\Model\Query\Status
 		 *
-		 * @param array $intermediate
-		 * @param array $bindParams
-		 * @param array $bindTypes
+		 * @param array intermediate
+		 * @param array bindParams
+		 * @param array bindTypes
 		 * @return \Phalcon\Mvc\Model\Query\StatusInterface
 		 */
-		protected function _executeDelete(){ }
+		final protected function _executeDelete($intermediate, $bindParams, $bindTypes){ }
+
+
+		/**
+		 * Query the records on which the UPDATE/DELETE operation well be done
+		 *
+		 * @param \Phalcon\Mvc\ModelInterface model
+		 * @param array intermediate
+		 * @param array bindParams
+		 * @param array bindTypes
+		 * @return \Phalcon\Mvc\Model\ResultsetInterface
+		 */
+		final protected function _getRelatedRecords(\Phalcon\Mvc\ModelInterface $model, $intermediate, $bindParams, $bindTypes){ }
 
 
 		/**
 		 * Executes a parsed PHQL statement
 		 *
-		 * @param array $bindParams
-		 * @param array $bindTypes
+		 * @param array bindParams
+		 * @param array bindTypes
 		 * @return mixed
 		 */
 		public function execute($bindParams=null, $bindTypes=null){ }
@@ -384,8 +344,8 @@ namespace Phalcon\Mvc\Model {
 		/**
 		 * Executes the query returning the first result
 		 *
-		 * @param array $bindParams
-		 * @param array $bindTypes
+		 * @param array bindParams
+		 * @param array bindTypes
 		 * @return Ṕhalcon\Mvc\ModelInterface
 		 */
 		public function getSingleResult($bindParams=null, $bindTypes=null){ }
@@ -393,26 +353,18 @@ namespace Phalcon\Mvc\Model {
 
 		/**
 		 * Sets the type of PHQL statement to be executed
-		 *
-		 * @param int $type
-		 * @return \Phalcon\Mvc\Model\Query
 		 */
 		public function setType($type){ }
 
 
 		/**
 		 * Gets the type of PHQL statement executed
-		 *
-		 * @return int
 		 */
 		public function getType(){ }
 
 
 		/**
 		 * Set default bind parameters
-		 *
-		 * @param array $bindParams
-		 * @return \Phalcon\Mvc\Model\Query
 		 */
 		public function setBindParams($bindParams){ }
 
@@ -427,9 +379,6 @@ namespace Phalcon\Mvc\Model {
 
 		/**
 		 * Set default bind parameters
-		 *
-		 * @param array $bindTypes
-		 * @return \Phalcon\Mvc\Model\Query
 		 */
 		public function setBindTypes($bindTypes){ }
 
@@ -444,9 +393,6 @@ namespace Phalcon\Mvc\Model {
 
 		/**
 		 * Allows to set the IR to be executed
-		 *
-		 * @param array $intermediate
-		 * @return \Phalcon\Mvc\Model\Query
 		 */
 		public function setIntermediate($intermediate){ }
 
@@ -457,6 +403,23 @@ namespace Phalcon\Mvc\Model {
 		 * @return array
 		 */
 		public function getIntermediate(){ }
+
+
+		/**
+		 * Sets the cache parameters of the query
+		 *
+		 * @param array cacheOptions
+		 * @return \Phalcon\Mvc\Model\Query
+		 */
+		public function cache($cacheOptions){ }
+
+
+		/**
+		 * Returns the current cache options
+		 *
+		 * @param array
+		 */
+		public function getCacheOptions(){ }
 
 	}
 }

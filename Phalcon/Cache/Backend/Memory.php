@@ -9,9 +9,9 @@ namespace Phalcon\Cache\Backend {
 	 *
 	 *<code>
 	 *	//Cache data
-	 *	$frontCache = new Phalcon\Cache\Frontend\Data();
+	 *	$frontCache = new \Phalcon\Cache\Frontend\Data();
 	 *
-	 *  $cache = new Phalcon\Cache\Backend\Memory($frontCache);
+	 *  $cache = new \Phalcon\Cache\Backend\Memory($frontCache);
 	 *
 	 *	//Cache arbitrary data
 	 *	$cache->save('my-data', array(1, 2, 3, 4, 5));
@@ -22,15 +22,15 @@ namespace Phalcon\Cache\Backend {
 	 *</code>
 	 */
 	
-	class Memory extends \Phalcon\Cache\Backend implements \Phalcon\Cache\BackendInterface {
+	class Memory extends \Phalcon\Cache\Backend implements \Phalcon\Cache\BackendInterface, \Serializable {
 
 		protected $_data;
 
 		/**
 		 * Returns a cached content
 		 *
-		 * @param 	string $keyName
-		 * @param   long $lifetime
+		 * @param 	string keyName
+		 * @param   long lifetime
 		 * @return  mixed
 		 */
 		public function get($keyName, $lifetime=null){ }
@@ -39,10 +39,10 @@ namespace Phalcon\Cache\Backend {
 		/**
 		 * Stores cached content into the backend and stops the frontend
 		 *
-		 * @param string $keyName
-		 * @param string $content
-		 * @param long $lifetime
-		 * @param boolean $stopBuffer
+		 * @param string keyName
+		 * @param string content
+		 * @param long lifetime
+		 * @param boolean stopBuffer
 		 */
 		public function save($keyName=null, $content=null, $lifetime=null, $stopBuffer=null){ }
 
@@ -50,7 +50,7 @@ namespace Phalcon\Cache\Backend {
 		/**
 		 * Deletes a value from the cache by its key
 		 *
-		 * @param string $keyName
+		 * @param string keyName
 		 * @return boolean
 		 */
 		public function delete($keyName){ }
@@ -59,7 +59,7 @@ namespace Phalcon\Cache\Backend {
 		/**
 		 * Query the existing cached keys
 		 *
-		 * @param string $prefix
+		 * @param string|int prefix
 		 * @return array
 		 */
 		public function queryKeys($prefix=null){ }
@@ -68,8 +68,8 @@ namespace Phalcon\Cache\Backend {
 		/**
 		 * Checks if cache exists and it hasn't expired
 		 *
-		 * @param  string $keyName
-		 * @param  long $lifetime
+		 * @param  string|int keyName
+		 * @param  long lifetime
 		 * @return boolean
 		 */
 		public function exists($keyName=null, $lifetime=null){ }
@@ -78,29 +78,39 @@ namespace Phalcon\Cache\Backend {
 		/**
 		 * Increment of given $keyName by $value
 		 *
-		 * @param  string $keyName
-		 * @param  long $lifetime
-		 * @return mixed
+		 * @param  string keyName
+		 * @param  long lifetime
+		 * @return long
 		 */
-		public function increment($key_name=null, $value=null){ }
+		public function increment($keyName=null, $value=null){ }
 
 
 		/**
 		 * Decrement of $keyName by given $value
 		 *
-		 * @param  string $keyName
-		 * @param  long $value
+		 * @param  string keyName
+		 * @param  long value
 		 * @return long
 		 */
-		public function decrement($key_name=null, $value=null){ }
+		public function decrement($keyName=null, $value=null){ }
 
 
 		/**
 		 * Immediately invalidates all existing items.
-		 * 
-		 * @return boolean
 		 */
 		public function flush(){ }
+
+
+		/**
+		 * Required for interface \Serializable
+		 */
+		public function serialize(){ }
+
+
+		/**
+		 * Required for interface \Serializable
+		 */
+		public function unserialize($data){ }
 
 	}
 }

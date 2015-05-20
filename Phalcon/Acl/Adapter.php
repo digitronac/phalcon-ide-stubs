@@ -3,10 +3,12 @@
 namespace Phalcon\Acl {
 
 	/**
-	 * Phalcon\Acl\Adapter initializer
+	 * Phalcon\Acl\Adapter
+	 *
+	 * Adapter for Phalcon\Acl adapters
 	 */
 	
-	abstract class Adapter implements \Phalcon\Events\EventsAwareInterface, \Phalcon\Acl\AdapterInterface {
+	abstract class Adapter implements \Phalcon\Acl\AdapterInterface, \Phalcon\Events\EventsAwareInterface {
 
 		protected $_eventsManager;
 
@@ -21,59 +23,48 @@ namespace Phalcon\Acl {
 		protected $_activeAccess;
 
 		/**
-		 * Sets the events manager
-		 *
-		 * @param \Phalcon\Events\ManagerInterface $eventsManager
+		 * Role which the list is checking if it's allowed to certain resource/access
+		 * @var mixed
 		 */
-		public function setEventsManager($eventsManager){ }
+		public function getActiveRole(){ }
+
+
+		/**
+		 * Resource which the list is checking if some role can access it
+		 * @var mixed
+		 */
+		public function getActiveResource(){ }
+
+
+		/**
+		 * Active access which the list is checking if some role can access it
+		 * @var mixed
+		 */
+		public function getActiveAccess(){ }
+
+
+		/**
+		 * Sets the events manager
+		 */
+		public function setEventsManager(\Phalcon\Events\ManagerInterface $eventsManager){ }
 
 
 		/**
 		 * Returns the internal event manager
-		 *
-		 * @return \Phalcon\Events\ManagerInterface
 		 */
 		public function getEventsManager(){ }
 
 
 		/**
 		 * Sets the default access level (Phalcon\Acl::ALLOW or \Phalcon\Acl::DENY)
-		 *
-		 * @param int $defaultAccess
 		 */
 		public function setDefaultAction($defaultAccess){ }
 
 
 		/**
 		 * Returns the default ACL access level
-		 *
-		 * @return int
 		 */
 		public function getDefaultAction(){ }
-
-
-		/**
-		 * Returns the role which the list is checking if it's allowed to certain resource/access
-		 *
-		 * @return string
-		 */
-		public function getActiveRole(){ }
-
-
-		/**
-		 * Returns the resource which the list is checking if some role can access it
-		 *
-		 * @return string
-		 */
-		public function getActiveResource(){ }
-
-
-		/**
-		 * Returns the access which the list is checking if some role can access it
-		 *
-		 * @return string
-		 */
-		public function getActiveAccess(){ }
 
 	}
 }

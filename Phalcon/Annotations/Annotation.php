@@ -18,16 +18,12 @@ namespace Phalcon\Annotations {
 
 		/**
 		 * \Phalcon\Annotations\Annotation constructor
-		 *
-		 * @param array $reflectionData
 		 */
 		public function __construct($reflectionData){ }
 
 
 		/**
 		 * Returns the annotation's name
-		 *
-		 * @return string
 		 */
 		public function getName(){ }
 
@@ -35,7 +31,7 @@ namespace Phalcon\Annotations {
 		/**
 		 * Resolves an annotation expression
 		 *
-		 * @param array $expr
+		 * @param array expr
 		 * @return mixed
 		 */
 		public function getExpression($expr){ }
@@ -59,8 +55,6 @@ namespace Phalcon\Annotations {
 
 		/**
 		 * Returns the number of arguments that the annotation has
-		 *
-		 * @return int
 		 */
 		public function numberArguments(){ }
 
@@ -68,15 +62,17 @@ namespace Phalcon\Annotations {
 		/**
 		 * Returns an argument in a specific position
 		 *
+		 * @param int|string position
 		 * @return mixed
 		 */
 		public function getArgument($position){ }
 
 
 		/**
-		 * Checks if the annotation has a specific argument
+		 * Returns an argument in a specific position
 		 *
-		 * @return bool
+		 * @param int|string position
+		 * @return boolean
 		 */
 		public function hasArgument($position){ }
 
@@ -84,28 +80,19 @@ namespace Phalcon\Annotations {
 		/**
 		 * Returns a named argument
 		 *
-		 * @param string $name
+		 * @param string name
 		 * @return mixed
 		 */
-		public function getNamedArgument($position){ }
+		public function getNamedArgument($name){ }
 
 
 		/**
-		 * Returns a named argument (deprecated)
+		 * Returns a named parameter
 		 *
-		 * @deprecated
-		 * @param string $name
+		 * @param string name
 		 * @return mixed
 		 */
-		public function getNamedParameter($position){ }
-
-
-		/**
-		 * Checks if the annotation has a specific named argument
-		 *
-		 * @return boolean
-		 */
-		public function hasNamedArgument($position){ }
+		public function getNamedParameter($name){ }
 
 	}
 }
